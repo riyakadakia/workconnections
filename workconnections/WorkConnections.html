@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<!--
+ageResult
+stateResult
+CSselected
+reasonUmemployedResult
+-->
+
+<html>
+	<head>
+		<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+		<script src="WorkConnections.js"></script>
+		<title>
+			Work Connections
+		</title>
+	</head>
+	<body>
+		<div id="stateForm">
+			<p>
+				Choose your state
+			</p>
+		    <select id="state">
+				<option selected>-- Select --</option>
+				<option>Louisiana</option>
+			</select>
+			<button type="button" onclick="hideShow('stateForm');hideShow('reasonUnemployedForm'); GetSelectedText()">Next</button>
+			<!-- document.getElementById("country").innerHTML = GetSelectedText('country')-->
+		</div>
+		<div id="reasonUnemployedForm" style="display:none">
+			<p>
+				Choose your reason for unemployment
+			</p>
+		    <select id="reasonUnemployed">
+				<option value="1" selected="selected">-- Select --</option>
+				<option value="2">Laid Off due to COVID 19</option>
+				<option value="3">Laid Off not due to COVID 19</option>
+				<option value="4">Reduced work hours</option>
+
+			</select>
+			<button type="button" onclick="hideShow('ageForm');hideShow('reasonUnemployedForm'); GetSelectedText1()">Next</button>
+			<!-- document.getElementById("country").innerHTML = GetSelectedText('country')-->
+		</div>
+
+
+		<div id="ageForm" style="display:none">	
+			<p>
+				Enter your age
+			</p>
+			<form>
+				<input id="ageResult" type="text">
+				<button type="button" onclick="hideShow('ageForm');hideShow('currentServicesForm'); ageSaveInput();">Next</button>
+			</form> 
+		</div>
+		<div id="currentServicesForm" style="display:none">
+			<h4>
+				Are you currently enrolled in any services?
+			</h4>
+			<form>
+				<table id="tblCurrentServices">
+				    <tr>
+				        <td><input id="chkLACAP" type="checkbox" value="1"/><label for="chkLACAP">Food Stamps LACAP</label></td>
+				    </tr>
+				    <tr>
+				        <td><input id="chkSNAP" type="checkbox" value="2"/><label for="chkSNAP">Food Stamps Regular SNAP</label></td>
+				    </tr>
+				    <tr>
+				        <td><input id="chkFITAP" type="checkbox" value="3"/><label for="chkFITAP">Family Independence Temporary Assistance Program(FITAP)</label></td>
+				    </tr>
+				    <tr>
+				        <td><input id="chkSSI" type="checkbox" value="4"/><label for="chkSSI">Supplemental Security Income(SSI)</label></td>
+				    </tr>
+				    <tr>
+				        <td><input id="chkNoServices" type="checkbox" value="5"/><label for="chkNoServices">No Services</label></td>
+				    </tr>
+				</table>
+				<br/>
+			<input type = "button" value = "Next" onclick = "GetCheckboxValues();hideShow('kidsForm');" />
+   			</form>
+			
+		</div>
+		<div id="kidsForm" style="display:none">
+			<p> 
+	        Do you have any kids?
+		    </p> 
+		    <input type="radio" name="kids" value="0">Yes 
+		    <br> 
+		    <input type="radio" name="kids" value="1">No 
+		    <br>
+		    <button type="button" onclick="displayRadioValue()"> Next </button> 
+		</div>
+		<div id="kidAgeForm" style="display:none">	
+			<p>
+				Enter your oldest kids age
+			</p>
+			<form>
+				<input id="kidAgeResult" type="text">
+				<button type="button" onclick="kidAgeSaveInput();">Next</button>
+			</form> 
+			<br>
+			<p>
+				Enter your youngest kids age
+			</p>
+			<form>
+				<input id="ykidAgeResult" type="text">
+				<button type="button" onclick="hideShow('kidAgeForm');ykidAgeSaveInput();">Next</button>
+			</form> 
+			
+		</div>
+		<div id="multipleKidsForm" style="display:none">
+			<p> 
+	        Do you have more than one kid?
+		    </p> 
+		    <input type="radio" name="multipleKids" value="0">Yes 
+		    <br> 
+		    <input type="radio" name="multipleKids" value="1">No 
+		    <br>
+		    <button type="button" onclick="displayRadioValue2()"> Next </button>
+		</div>
+		<div id="kidHousingForm" style="display:none">
+			<p> 
+	        Do your kid(s) live with you?
+		    </p> 
+		    <input type="radio" name="kidHousingForm" value="0">Yes 
+		    <br> 
+		    <input type="radio" name="kidHousingForm" value="1">No 
+		    <br>
+		    <button type="button" onclick="displayRadioValue3()"> Next </button> 
+		</div>
+		<div id="skidAgeForm" style="display:none">	
+			<p>
+				Enter your kids age
+			</p>
+			<form>
+				<input id="skidAgeResult" type="text">
+				<button type="button" onclick="skidAgeSaveInput();hideShow('skidAgeForm');">Next</button>
+			</form> 
+	
+	</body>
+</html>
