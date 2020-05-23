@@ -10,6 +10,7 @@ reasonUmemployedResult
 	<head>
 		<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 		<script src="WorkConnections.js"></script>
+		<link rel="stylesheet" type="text/css" href="WorkConnections.css">
 		<title>
 			Work Connections
 		</title>
@@ -23,7 +24,7 @@ reasonUmemployedResult
 				<option selected>-- Select --</option>
 				<option>Louisiana</option>
 			</select>
-			<button type="button" onclick="hideShow('stateForm');hideShow('reasonUnemployedForm'); GetSelectedText()">Next</button>
+			<button type="button" onclick="hideShow('stateForm'); hideShow('reasonUnemployedForm'); GetSelectedText();">Next</button>
 			<!-- document.getElementById("country").innerHTML = GetSelectedText('country')-->
 		</div>
 		<div id="reasonUnemployedForm" style="display:none">
@@ -37,10 +38,25 @@ reasonUmemployedResult
 				<option value="4">Reduced work hours</option>
 
 			</select>
-			<button type="button" onclick="hideShow('ageForm');hideShow('reasonUnemployedForm'); GetSelectedText1()">Next</button>
+			<button type="button" onclick="GetSelectedText1()">Next</button>
 			<!-- document.getElementById("country").innerHTML = GetSelectedText('country')-->
 		</div>
+		<div id="kidRelationForm" style="display:none">
+			<p>
+				How is you kid(s) related to you?
+			</p>
+		    <select id="kidRelation">
+				<option value="1" selected="selectcard">-- Select --</option>
+				<option value="2">By blood</option>
+				<option value="3">By marriage</option>
+				<option value="4">By adoption</option>
+				<option value="5" id="5">Other</option>
 
+			</select>
+			<div id="kidRelationResult">
+				<button type="button" onclick="GetSelectedText2()">Next</button>
+			</div>
+		</div>
 
 		<div id="ageForm" style="display:none">	
 			<p>
@@ -58,23 +74,25 @@ reasonUmemployedResult
 			<form>
 				<table id="tblCurrentServices">
 				    <tr>
-				        <td><input id="chkLACAP" type="checkbox" value="1"/><label for="chkLACAP">Food Stamps LACAP</label></td>
+				        <td><input id="chkLACAP" type="checkbox" name= "CS" value="1"/><label for="chkLACAP">Food Stamps LACAP</label></td>
 				    </tr>
 				    <tr>
-				        <td><input id="chkSNAP" type="checkbox" value="2"/><label for="chkSNAP">Food Stamps Regular SNAP</label></td>
+				        <td><input id="chkSNAP" type="checkbox" name= "CS" value="2"/><label for="chkSNAP">Food Stamps Regular SNAP</label></td>
 				    </tr>
 				    <tr>
-				        <td><input id="chkFITAP" type="checkbox" value="3"/><label for="chkFITAP">Family Independence Temporary Assistance Program(FITAP)</label></td>
+				        <td><input id="chkFITAP" type="checkbox" name= "CS" value="3"/><label for="chkFITAP">Family Independence Temporary Assistance Program(FITAP)</label></td>
 				    </tr>
 				    <tr>
-				        <td><input id="chkSSI" type="checkbox" value="4"/><label for="chkSSI">Supplemental Security Income(SSI)</label></td>
+				        <td><input id="chkSSI" type="checkbox" name= "CS" value="4"/><label for="chkSSI">Supplemental Security Income(SSI)</label></td>
 				    </tr>
 				    <tr>
-				        <td><input id="chkNoServices" type="checkbox" value="5"/><label for="chkNoServices">No Services</label></td>
+				        <td><input id="chkNoServices" type="checkbox" name= "CS" value="5"/><label for="chkNoServices">No Services</label></td>
 				    </tr>
 				</table>
 				<br/>
-			<input type = "button" value = "Next" onclick = "GetCheckboxValues();hideShow('kidsForm');" />
+			<div id="CSResult">
+				<input type = "button" value = "Next" onclick = "GetCheckboxValues(); hideShow('kidsForm');" />
+			</div>
    			</form>
 			
 		</div>
@@ -86,7 +104,9 @@ reasonUmemployedResult
 		    <br> 
 		    <input type="radio" name="kids" value="1">No 
 		    <br>
-		    <button type="button" onclick="displayRadioValue()"> Next </button> 
+		    <div id="kidsResult">
+		    	<button type="button" onclick="displayRadioValue();"> Next </button> 
+		    <div>
 		</div>
 		<div id="kidAgeForm" style="display:none">	
 			<p>
@@ -94,7 +114,6 @@ reasonUmemployedResult
 			</p>
 			<form>
 				<input id="kidAgeResult" type="text">
-				<button type="button" onclick="kidAgeSaveInput();">Next</button>
 			</form> 
 			<br>
 			<p>
@@ -102,7 +121,7 @@ reasonUmemployedResult
 			</p>
 			<form>
 				<input id="ykidAgeResult" type="text">
-				<button type="button" onclick="hideShow('kidAgeForm');ykidAgeSaveInput();">Next</button>
+				<button type="button" onclick="hideShow('kidAgeForm'); hideShow('schoolingForm'); ykidAgeSaveInput();kidAgeSaveInput();">Next</button>
 			</form> 
 			
 		</div>
@@ -114,26 +133,185 @@ reasonUmemployedResult
 		    <br> 
 		    <input type="radio" name="multipleKids" value="1">No 
 		    <br>
-		    <button type="button" onclick="displayRadioValue2()"> Next </button>
+		    <div id="multipleKidsResult">
+		    	<button type="button" onclick="displayRadioValue2()"> Next </button>
+		    </div>
 		</div>
 		<div id="kidHousingForm" style="display:none">
 			<p> 
 	        Do your kid(s) live with you?
 		    </p> 
-		    <input type="radio" name="kidHousingForm" value="0">Yes 
+		    <input type="radio" name="kidHousing" value="0">Yes 
 		    <br> 
-		    <input type="radio" name="kidHousingForm" value="1">No 
+		    <input type="radio" name="kidHousing" value="1">No 
 		    <br>
-		    <button type="button" onclick="displayRadioValue3()"> Next </button> 
+		    <div id="kidHousingResult">
+		    	<button type="button" onclick="displayRadioValue3()"> Next </button> 
+			</div>
 		</div>
 		<div id="skidAgeForm" style="display:none">	
 			<p>
 				Enter your kids age
 			</p>
 			<form>
-				<input id="skidAgeResult" type="text">
-				<button type="button" onclick="skidAgeSaveInput();hideShow('skidAgeForm');">Next</button>
+				<input id="skidAgeResult" name="sKid"type="text">
+				<button type="button" onclick="skidAgeSaveInput();hideShow('skidAgeForm'); hideShow('schoolingForm');">Next</button>
 			</form> 
+		</div>
+		<div id="citizenForm" style="display:none">
+			<p>
+				Are you a: 
+			</p>
+		    <select id="citizen">
+				<option selected="selected">-- Select --</option>
+				<option value="1">U.S. Citizen</option>
+				<option value="2">Qualified alien</option>
+				<option value="3">Non-citizen national</option>
+				<option value="4" id="4"> None of the above</option>
+
+			</select>
+			<div id="citizenResult">
+				<button type="button" onclick="hideShow('citizenForm');hideShow('disabledForm')	;GetSelectedText3()">Next</button>
+			</div>
+		</div>
+		<div id="disabledForm" style="display:none">
+			<p>
+				Are you disabled or blind?
+			</p>
+		    <select id="disabled">
+				<option selected="selectcard">-- Select --</option>
+				<option value="1">Disabled</option>
+				<option value="2">Blind</option>
+				<option value="3" id="3"> None of the above</option>
+
+			</select>
+			<div id="disabledResult">
+				<button type="button" onclick="GetSelectedText4()">Next</button>
+			</div>
+			<!-- document.getElementById("country").innerHTML = GetSelectedText('country')-->
+		</div>
+		<div id="limitedForm" style="display:block">
+			<p> 
+	        Do you have a limited income and resources?
+		    </p> 
+		    <input type="radio" name="limited" value="0">Yes 
+		    <br> 
+		    <input type="radio" name="limited" value="1">No 
+		    <br>
+			<div id="limitedResult">
+		    	<button type="button" onclick="displayRadioValue4()"> Next </button> 
+		    </div>
+		</div>
+		<div id="schoolingForm" style="display:none">
+			<p> 
+	        Is your kid(s) enrolled in full time school  or the equivalent level of vocational or technical training?
+		    </p> 
+		    <input type="radio" name="schooling" value="0">Yes 
+		    <br> 
+		    <input type="radio" name="schooling" value="1">No 
+		    <br>
+			<div id="schoolingResult">
+		    	<button type="button" onclick="schoolingRadio(); 
+		    	hideShow('medicalRightsForm')"> Next </button> 
+		    </div>
+		</div>
+		<div id="medicalRightsForm" style="display:none">
+			<p> 
+	        Would you be willing to assign any child support and medical support rights to the state, and to cooperate with the agency's Child Support Enforcement Services in establishing paternity and obtaining child support and medical support from the absent parent(s), unless good cause has been established?
+		    </p> 
+		    <input type="radio" name="medicalRights" value="0">Yes 
+		    <br> 
+		    <input type="radio" name="medicalRights" value="1">No 
+		    <br>
+			<div id="medicalRightsResult">
+		    	<button type="button" onclick="medicalRightsRadio(); hideShow('medicalRightsForm'); hideShow('ImmunizationForm')"> Next </button> 
+		    </div>
+		</div>
+		<div id="ImmunizationForm" style="display:none">
+			<p> 
+				Do your kid(s) have immunity or immunization against vaccine preventable diseases according to the Office of Public Health schedule, or is such an immunization program is in progress?
+			</p> 
+		    <input type="radio" name="Immunization" value="0">Yes 
+		    <br> 
+		    <input type="radio" name="Immunization" value="1">No 
+		    <br>
+			<div id="ImmunizationResult">
+		    	<button type="button" onclick="ImmunizationRadio(); hideShow('ImmunizationForm'); hideShow('drugForm')"> Next </button> 
+		    </div>
+		</div>
+		<div id="drugForm" style="display:none">
+			<p> 
+				Would you or any Applicants/recipients age 18 or over cooperate in screening for the use of illegal drugs and if necessary drug testing, education and rehabilitation?
+			</p> 
+		    <input type="radio" name="drug" value="0">Yes 
+		    <br> 
+		    <input type="radio" name="drug" value="1">No 
+		    <br>
+			<div id="drugResult">
+		    	<button type="button" onclick="drugRadio(); hideShow('drugForm'); hideShow('liveAloneForm')"> Next </button> 
+		    </div>
+		</div>
+		<div id="liveAloneForm" style="display:none">
+			<p> 
+				Do you live alone?
+			</p> 
+		    <input type="radio" name="LA" value="0">Yes 
+		    <br> 
+		    <input type="radio" name="LA" value="1">No 
+		    <br>
+			<div id="LAResult">
+		    	<button type="button" onclick="liveAloneRadio(); hideShow('liveAloneForm');"> Next </button> 
+		    </div>
+		</div>
+		<div id="foodSepForm" style="display:none">
+			<p> 
+				Do you buy and prepare your food separately than the others who live with you?
+			</p> 
+		    <input type="radio" name="foodSep" value="0">Yes 
+		    <br> 
+		    <input type="radio" name="foodSep" value="1">No 
+		    <br>
+			<div id="foodSepResult">
+		    	<button type="button" onclick="foodSepRadio(); hideShow('foodSepForm');"> Next </button> 
+		    </div>
+		</div>
+		<div id="WfoodSepForm" style="display:none">
+			<p> 
+				Would you be willing to buy and prepare your food separately than the others who live with you?
+			</p> 
+		    <input type="radio" name="WfoodSep" value="0">Yes 
+		    <br> 
+		    <input type="radio" name="WfoodSep" value="1">No 
+		    <br>
+			<div id="WfoodSepResult">
+		    	<button type="button" onclick="WfoodSepRadio(); hideShow('WfoodSepForm');"> Next </button> 
+		    </div>
+		</div>
+		<div id="spouseForm" style="display:none">
+			<p> 
+				Do you have a spouse?
+			</p> 
+		    <input type="radio" name="spouse" value="0">Yes 
+		    <br> 
+		    <input type="radio" name="spouse" value="1">No 
+		    <br>
+			<div id="spouseResult">
+		    	<button type="button" onclick="spouseRadio(); hideShow('spouseForm');"> Next </button> 
+		    </div>
+		</div>
+		<div id="spouseLiveForm" style="display:none">
+			<p> 
+				Do you have a spouse?
+			</p> 
+		    <input type="radio" name="spouseLive" value="0">Yes 
+		    <br> 
+		    <input type="radio" name="spouseLive" value="1">No 
+		    <br>
+			<div id="spouseResult">
+		    	<button type="button" onclick="spouseLiveRadio(); hideShow('spouseLiveForm'); SSI(); LaCap()"> Next </button> 
+		    	<!-- FITAP();-->
+		    </div>
+		</div>
 	
 	</body>
 </html>
