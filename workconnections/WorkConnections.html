@@ -6,7 +6,7 @@ CSselected
 reasonUmemployedResult
 -->
 
-<html>
+<html lang="en">
 	<head>
 		<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 		<script src="WorkConnections.js"></script>
@@ -33,13 +33,16 @@ reasonUmemployedResult
 			</p>
 		    <select id="reasonUnemployed">
 				<option value="1" selected="selected">-- Select --</option>
-				<option value="2">Laid Off due to COVID 19</option>
-				<option value="3">Laid Off not due to COVID 19</option>
-				<option value="4">Reduced work hours</option>
+				<option value="2">Laid Off not due to COVID 19</option>
+				<option value="3">Laid Off due to COVID 19</option>
+				<option value="4">Reduced work hours due to COVID 19</option>
+				<option value="5">Other reason for no fault of your own</option>
+				<option value="6">Other</option>
 
 			</select>
-			<button type="button" onclick="GetSelectedText1()">Next</button>
-			<!-- document.getElementById("country").innerHTML = GetSelectedText('country')-->
+			<div id="reasonUnemployedResult">
+				<button type="button" onclick="GetSelectedText1()">Next</button>
+			</div>
 		</div>
 		<div id="kidRelationForm" style="display:none">
 			<p>
@@ -106,7 +109,7 @@ reasonUmemployedResult
 		    <br>
 		    <div id="kidsResult">
 		    	<button type="button" onclick="displayRadioValue();"> Next </button> 
-		    <div>
+		    </div>
 		</div>
 		<div id="kidAgeForm" style="display:none">	
 			<p>
@@ -131,7 +134,7 @@ reasonUmemployedResult
 		    </p> 
 		    <input type="radio" name="multipleKids" value="0">Yes 
 		    <br> 
-		    <input type="radio" name="multipleKids" value="1">No 
+		    <input type="radio" name="multipleKids" value="1" checked >No 
 		    <br>
 		    <div id="multipleKidsResult">
 		    	<button type="button" onclick="displayRadioValue2()"> Next </button>
@@ -143,7 +146,7 @@ reasonUmemployedResult
 		    </p> 
 		    <input type="radio" name="kidHousing" value="0">Yes 
 		    <br> 
-		    <input type="radio" name="kidHousing" value="1">No 
+		    <input type="radio" name="kidHousing" value="1" checked>No 
 		    <br>
 		    <div id="kidHousingResult">
 		    	<button type="button" onclick="displayRadioValue3()"> Next </button> 
@@ -154,7 +157,7 @@ reasonUmemployedResult
 				Enter your kids age
 			</p>
 			<form>
-				<input id="skidAgeResult" name="sKid"type="text">
+				<input id="skidAgeResult" name="sKid" type="text">
 				<button type="button" onclick="skidAgeSaveInput();hideShow('skidAgeForm'); hideShow('schoolingForm');">Next</button>
 			</form> 
 		</div>
@@ -190,7 +193,7 @@ reasonUmemployedResult
 			</div>
 			<!-- document.getElementById("country").innerHTML = GetSelectedText('country')-->
 		</div>
-		<div id="limitedForm" style="display:block">
+		<div id="limitedForm" style="display:none">
 			<p> 
 	        Do you have a limited income and resources?
 		    </p> 
@@ -208,7 +211,7 @@ reasonUmemployedResult
 		    </p> 
 		    <input type="radio" name="schooling" value="0">Yes 
 		    <br> 
-		    <input type="radio" name="schooling" value="1">No 
+		    <input type="radio" name="schooling" value="1" checked>No 
 		    <br>
 			<div id="schoolingResult">
 		    	<button type="button" onclick="schoolingRadio(); 
@@ -221,7 +224,7 @@ reasonUmemployedResult
 		    </p> 
 		    <input type="radio" name="medicalRights" value="0">Yes 
 		    <br> 
-		    <input type="radio" name="medicalRights" value="1">No 
+		    <input type="radio" name="medicalRights" value="1" checked>No 
 		    <br>
 			<div id="medicalRightsResult">
 		    	<button type="button" onclick="medicalRightsRadio(); hideShow('medicalRightsForm'); hideShow('ImmunizationForm')"> Next </button> 
@@ -233,7 +236,7 @@ reasonUmemployedResult
 			</p> 
 		    <input type="radio" name="Immunization" value="0">Yes 
 		    <br> 
-		    <input type="radio" name="Immunization" value="1">No 
+		    <input type="radio" name="Immunization" value="1" checked>No 
 		    <br>
 			<div id="ImmunizationResult">
 		    	<button type="button" onclick="ImmunizationRadio(); hideShow('ImmunizationForm'); hideShow('drugForm')"> Next </button> 
@@ -245,7 +248,7 @@ reasonUmemployedResult
 			</p> 
 		    <input type="radio" name="drug" value="0">Yes 
 		    <br> 
-		    <input type="radio" name="drug" value="1">No 
+		    <input type="radio" name="drug" value="1" checked>No 
 		    <br>
 			<div id="drugResult">
 		    	<button type="button" onclick="drugRadio(); hideShow('drugForm'); hideShow('liveAloneForm')"> Next </button> 
@@ -269,7 +272,7 @@ reasonUmemployedResult
 			</p> 
 		    <input type="radio" name="foodSep" value="0">Yes 
 		    <br> 
-		    <input type="radio" name="foodSep" value="1">No 
+		    <input type="radio" name="foodSep" value="1" checked>No 
 		    <br>
 			<div id="foodSepResult">
 		    	<button type="button" onclick="foodSepRadio(); hideShow('foodSepForm');"> Next </button> 
@@ -279,7 +282,7 @@ reasonUmemployedResult
 			<p> 
 				Would you be willing to buy and prepare your food separately than the others who live with you?
 			</p> 
-		    <input type="radio" name="WfoodSep" value="0">Yes 
+		    <input type="radio" name="WfoodSep" value="0" checked>Yes 
 		    <br> 
 		    <input type="radio" name="WfoodSep" value="1">No 
 		    <br>
@@ -301,16 +304,359 @@ reasonUmemployedResult
 		</div>
 		<div id="spouseLiveForm" style="display:none">
 			<p> 
-				Do you have a spouse?
+				Does your spouse live with you?
 			</p> 
 		    <input type="radio" name="spouseLive" value="0">Yes 
 		    <br> 
-		    <input type="radio" name="spouseLive" value="1">No 
+		    <input type="radio" name="spouseLive" value="1" checked >No 
 		    <br>
-			<div id="spouseResult">
-		    	<button type="button" onclick="spouseLiveRadio(); hideShow('spouseLiveForm'); SSI(); LaCap()"> Next </button> 
-		    	<!-- FITAP();-->
+			<div id="spouseLiveResult">
+		    	<button type="button" onclick="spouseLiveRadio(); hideShow('spouseLiveForm');"> Next </button> 
 		    </div>
+		</div>
+		<div id="familyCitizenForm" style="display:none">
+			<p> 
+				Is everyone in your family a U.S. citizen, a Qualified alien, or a Non-citizen national?
+			</p> 
+		    <input type="radio" name="familyCitizen" value="0">Yes 
+		    <br> 
+		    <input type="radio" name="familyCitizen" value="1" checked >No 
+		    <br>
+			<div id="familyCitizenResult">
+		    	<button type="button" onclick="familyCitizenRadio(); hideShow('familyCitizenForm');"> Next </button> 
+		    </div>
+		</div>
+		<div id="EnumerationForm" style="display:none">
+			<p> 
+				Does everyone in your household have a Social Security number or is willing to apply for a Social Security number?
+			</p> 
+		    <input type="radio" name="Enumeration" value="0">Yes 
+		    <br> 
+		    <input type="radio" name="Enumeration" value="1" checked >No 
+		    <br>
+			<div id="	">
+		    	<button type="button" onclick="EnumerationRadio(); hideShow('EnumerationForm');"> Next </button> 
+		    </div>
+		</div>
+		<div id="ableWorkForm" style="display:none">
+			<p> 
+				Are you able to work?
+			</p>
+		    <input type="radio" name="ableWork" value="0">Yes 
+		    <br> 
+		    <input type="radio" name="ableWork" value="1" checked >No 
+		    <br>
+			<div id="ableWorkResult">
+		    	<button type="button" onclick="ableWorkRadio(); hideShow('ableWorkForm');"> Next </button> 
+		    </div>
+		</div>
+		<div id="WorkRegistrationForm" style="display:none">
+			<p> 
+				Will you and all able-bodied adults in your household register for work and accept suitable employment?
+			</p>
+		    <input type="radio" name="WorkRegistration" value="0">Yes 
+		    <br> 
+		    <input type="radio" name="WorkRegistration" value="1" checked >No 
+		    <br>
+			<div id="WorkRegistrationResult">
+		    	<button type="button" onclick="WorkRegistrationRadio(); hideShow('WorkRegistrationForm');"> Next </button> 
+		    </div>
+		</div>
+		<div id="petForm" style="display:none">
+			<p> 
+				Do you have a pet?
+			</p>
+		    <input type="radio" name="pet" value="0">Yes 
+		    <br> 
+		    <input type="radio" name="pet" value="1">No 
+		    <br>
+			<div id="petResult">
+		    	<button type="button" onclick="petRadio(); hideShow('petForm');"> Next </button> 
+		    </div>
+		</div>
+		<div id="activeSeekingForm" style="display:none">
+			<p> 
+				Are you activetly seeking empolyment?
+			</p>
+		    <input type="radio" name="activeSeeking" value="0">Yes 
+		    <br> 
+		    <input type="radio" name="activeSeeking" value="1" checked >No 
+		    <br>
+			<div id="activeSeekingResult">
+		    	<button type="button" onclick="activeSeekingRadio(); hideShow('activeSeekingForm');"> Next </button> 
+		    </div>
+		</div>
+		<div id="minimunWageForm" style="display:none">
+			<p> 
+				If you are currently unemployed,
+				did you earn at least a minimum amount in wages before you were unemployed?
+			</p>
+		    <input type="radio" name="minimunWage" value="0">Yes 
+		    <br> 
+		    <input type="radio" name="minimunWage" value="1">No 
+		    <br>
+		    <input type="radio" name="minimunWage" value="2" checked >Does not apply
+		    <br>
+			<div id="minimunWageResult">
+		    	<button type="button" onclick="minimunWageRadio(); hideShow('minimunWageForm');"> Next </button> 
+		    </div>
+		</div>
+		<div id="otherChildForm" style="display:none">
+			<p> 
+				Do you have a child under 18 living with you who is not your own child?
+			</p>
+		    <input type="radio" name="otherChild" value="0">Yes 
+		    <br> 
+		    <input type="radio" name="otherChild" value="1">No 
+		    <br>
+			<div id="otherChildResult">
+		    	<button type="button" onclick="otherChildRadio(); hideShow('otherChildForm');"> Next </button> 
+		    </div>
+		</div>
+		<div id="otherChildRelationForm" style="display:none">
+			<p> 
+				To this child are you one of the following qualified relatives:
+				<br>
+				(either biological or adoptive):
+				<br>
+				-grandfather or grandmother (extends to great-great-great),
+				<br> 
+				-brother or sister (including half), 
+				<br>
+				-uncle or aunt (extends to great-great), 
+				<br>
+				-stepbrother, stepsister, 
+				<br>
+				-first cousin, including first cousin once removed, 
+				<br>
+				-and nephew or niece (extends to great-great), 
+				<br>
+				or the legal spouse of the above-listed relatives.
+				<br>
+			</p>
+		    <input type="radio" name="otherChildRelation" value="0">Yes 
+		    <br> 
+		    <input type="radio" name="otherChildRelation" value="1" checked>No 
+		    <br>
+			<div id="otherChildRelationResult">
+		    	<button type="button" onclick="otherChildRelationRadio(); hideShow('otherChildRelationForm');"> Next </button> 
+		    </div>
+		</div>
+		<div id="kidcitizenForm" style="display:none">
+			<p>
+				Is this kid a: 
+			</p>
+		    <select id="kidcitizen">
+				<option value="0">-- Select --</option>
+				<option value="1">U.S. Citizen</option>
+				<option value="2">Qualified alien</option>
+				<option value="3">Non-citizen national</option>
+				<option selected="selected" value="4" id="4"> None of the above</option>
+
+			</select>
+			<div id="kidcitizenResult">
+				<button type="button" onclick="hideShow('kidcitizenForm');GetSelectedTextCitizen()">Next</button>
+			</div>
+		</div>
+		<div id="legalCustodyForm" style="display:none">
+			<p> 
+				Do you have legal custody or guardianship of this child living with you?			
+			</p>
+		    <input type="radio" name="legalCustody" value="0">Yes 
+		    <br> 
+		    <input type="radio" name="legalCustody" value="1" checked>No 
+		    <br>
+			<div id="legalCustodyResult">
+		    	<button type="button" onclick="legalCustodyRadio(); hideShow('legalCustodyForm');"> Next </button> 
+		    </div>
+		</div>
+		<div id="kidEarningForm" style="display:none">
+			<p> 
+				Does this child have a job/earn money?		
+			</p>
+		    <input type="radio" name="kidEarning" value="0">Yes 
+		    <br> 
+		    <input type="radio" name="kidEarning" value="1" checked>No 
+		    <br>
+			<div id="kidEarningResult">
+		    	<button type="button" onclick="kidEarningRadio(); hideShow('kidEarningForm');"> Next </button> 
+		    </div>
+		</div>
+		<div id="monthlyEarningsForm" style="display:none">
+			<p> 
+				Does this child earn less than $222 a month?		
+			</p>
+		    <input type="radio" name="monthlyEarnings" value="0">Yes 
+		    <br> 
+		    <input type="radio" name="monthlyEarnings" value="1" checked>No 
+		    <br>
+			<div id="monthlyEarningsResult">
+		    	<button type="button" onclick="monthlyEarningsRadio(); hideShow('monthlyEarningsForm');"> Next </button> 
+		    </div>
+		</div>
+		<div id="immunityForm" style="display:none">
+			<p> 
+				Do you have proof of immunity or immunization against vaccine-preventable disease for this child?		
+			</p>
+		    <input type="radio" name="immunity" value="0">Yes 
+		    <br> 
+		    <input type="radio" name="immunity" value="1" checked>No 
+		    <br>
+			<div id="immunityResult">
+		    	<button type="button" onclick="immunityRadio(); hideShow('immunityForm');"> Next </button> 
+		    </div>
+		</div>
+		<div id="SubmitForm" style="display:none">
+			<p> 
+				Are you ready to submit this form?
+			</p>
+			<div id="Submit">
+		    	<button type="button" onclick="hideShow('SubmitForm'); hideShow('resultsPage'); SSI(); LaCap(); FITAP(); CARES(); SNAP(); PetFoodStamps(); LWC(); KCSP()"> Submit </button> 
+		    </div>
+		</div>
+		<div id="annualIncomeForm" style="display:none">
+			<p> 
+				Does your family have an annual income of less than 150% of the federal poverty threshold, in accordance with the qualified relative's family size? ( Income from all sources must be included)		
+			</p>
+		    <input type="radio" name="annualIncome" value="0">Yes 
+		    <br> 
+		    <input type="radio" name="annualIncome" value="1" checked>No 
+		    <br>
+			<div id="annualIncomeResult">
+		    	<button type="button" onclick="annualIncomeRadio(); hideShow('annualIncomeForm');"> Next </button> 
+		    </div>
+		</div>
+		<div id="SSNumForm" style="display:none">
+			<p> 
+				Does this child have a social security number or would you be willing to apply for a social security number for this child?	
+			</p>
+		    <input type="radio" name="SSNum" value="0">Yes 
+		    <br> 
+		    <input type="radio" name="SSNum" value="1" checked>No 
+		    <br>
+			<div id="SSNumResult">
+		    	<button type="button" onclick="SSNumRadio(); hideShow('SSNumForm');"> Next </button> 
+		    </div>
+		</div>
+		<div id="otherStateRightsForm" style="display:none">
+			<p> 
+				Are you willing to assign to the state rights to child support from any other person and cooperate with Child Support Enforcement Services in obtaining child support for the child?
+			</p>
+		    <input type="radio" name="otherStateRights" value="0">Yes 
+		    <br> 
+		    <input type="radio" name="otherStateRights" value="1">No 
+		    <br>
+			<div id="otherStateRightsResult">
+		    	<button type="button" onclick="otherStateRightsRadio(); hideShow('otherStateRightsForm');"> Next </button> 
+		    </div>
+		</div>
+		<div id="parentsForm" style="display:none">
+			<p> 
+				Do the parent(s) of the child live in your home?
+			</p>
+		    <input type="radio" name="parents" value="0" checked>Yes 
+		    <br> 
+		    <input type="radio" name="parents" value="1">No 
+		    <br>
+			<div id="parentsResult">
+		    	<button type="button" onclick="parentsRadio(); hideShow('parentsForm');"> Next </button> 
+		    </div>
+		</div>
+		<div id= "resultsPage"  style="display:none">
+			<h1>
+				These are all the services you are eligible for:
+			</h1>
+			<div id= "LaCapForm" style="display:none">
+				<h2>
+					Louisiana Combined Application Project
+				</h2>
+				<p>
+					LaCAP is a food assistance program for Louisiana residents who are at least 60 years of age and receive Supplemental Security Income (SSI). It is a simplified version of SNAP. If you are eligible for LaCAP, you will receive a Louisiana Purchase Card and SNAP benefits will be automatically deposited into your account every month. There are three standard allotment amounts in LaCAP. Depending on shelter costs, LaCAP participants will receive $35, $82, or $173. LaCAP cases are certified for 36 months.
+				</p>
+				<a href="http://www.dss.state.la.us/page/93">Visit the website for more information</a>
+			</div>
+			<div id= "SNAPForm" style="display:none">
+				<h2>
+					The Supplemental Nutrition Assistance Program
+				</h2>
+				<p>
+					The Supplemental Nutrition Assistance Program (SNAP) provides monthly benefits that help eligible low-income households buy the food they need for good health. For most households, SNAP funds account for only a portion of their food budgets; they must also use their own funds to buy enough food to last throughout the month.
+				</p>
+				<a href="http://www.dss.state.la.us/page/93">Visit the website for more information</a>
+			</div>
+			<div id= "CARESForm" style="display:none">
+				<h2>
+					The Coronavirus Aid, Relief, and Economic Security
+				</h2>
+				<p>
+					(CARES) Act, provides for direct cash transfers to each adult and expanded unemployment benefits. The highlights of the new law include:
+					<br>
+					cash payments of up to $1,200 (plus $500 for each child age 16 or under) for each qualifying adult
+					<br>
+					an additional $600 per week on top of any state-provided unemployment benefits through July 31
+					<br>
+					up to 13 weeks of unemployment benefits in addition to what your state provides, up to 39 weeks; and
+					<br>
+					unemployment benefits for self-employed and gig workers.	
+				</p>
+				<a href="hhttps://www.nolo.com/legal-encyclopedia/collecting-unemployment-benefits-louisiana.html">Visit the website for more information</a>
+			</div>
+			<div id= "LWCForm" style="display:none">
+				<h2>
+					 Louisiana Workforce Commission 
+				</h2>
+				<p>
+					In Louisiana, the Louisiana Workforce Commission (LWC) handles unemployment benefits and determines eligibility on a case-by-case basis. Applicants must meet the following three eligibility requirements in order to collect unemployment benefits in Louisiana:
+
+					<br>
+					You must have earned at least a minimum amount in wages before you were unemployed.cash payments of up to $1,200 (plus $500 for each child age 16 or under) for each qualifying adult
+					<br>
+					You must be unemployed through no fault of your own, as defined by Louisiana law.
+					<br>
+					You must be able and available to work, and you must be actively seeking employment.
+					<br>
+					If you are eligible to receive unemployment, your weekly benefit rate (WBR) will be 4% of your average quarterly earnings during the base period, multiplied by 1.2075. Your weekly benefit rate is subject to a minimum amount of $10 and a maximum amount of $247. (The minimum and maximum amounts change on a regular basis, so be sure to check your notice from the LWC for the current amount).
+					You may receive benefits for a maximum of 26 weeks. In times of very high unemployment, additional weeks of benefits may be available.
+				</p>
+				<a href="hhttps://www.nolo.com/legal-encyclopedia/collecting-unemployment-benefits-louisiana.html">Visit the website for more information</a>
+			</div>
+			<div id= "PetsForm" style="display:none">
+				<h2>
+					PetKeen
+				</h2>
+				<p>
+					One not-for-profit organization, Pet Food Stamps, aims to redress this balance by providing free pet food deliveries for six months. The group first verifies the household income and determines their pet food needs. Eligible members receive free deliveries of food for six months. This means that owners can continue to care for their pets in the way they would like and use their SNAP food stamps to feed themselves. 
+				</p>
+				<a href="https://petkeen.com/what-are-pet-food-stamps/">Visit the website for more information</a>
+			</div>
+			<div id= "SSIForm" style="display:none">
+				<h2>
+					Supplemental Security Income
+				</h2>
+				<p>
+					Supplemental Security Income is a federal program funded by U.S. Treasury general funds. The U.S. Social Security Administration (SSA) administers the program, but SSI is not paid for by Social Security taxes. SSI provides financial help to disabled adults and children who have limited income and assets.	
+				</p>
+				<a href="https://www.benefits.gov/benefit/4412">Visit the website for more information</a>
+			</div>
+			<div id= "FITAPForm" style="display:none">
+				<h2>
+					Family Independence Temporary Assistance
+				</h2>
+				<p>
+					The Family Independence Temporary Assistance Program (FITAP) provides cash assistance to families with children when the financial resources of the family are insufficient to meet subsistence needs.
+					The goal of FITAP is to decrease the long-term dependency on welfare assistance by promoting job preparation and work. Public assistance is no longer a lifetime benefit but an opportunity to become independent after a financial crisis.	<br> <b> Must Participate in the STEP Program along with the FITAP program </b>		
+				</p>
+				<a href="http://www.dss.state.la.us/page/fitap">Visit the website for more information</a>
+			</div>
+			<div id= "KCSPForm" style="display:none">
+				<h2>
+					Kinship Care Subsidy Program
+				</h2>
+				<p>
+					KCSP provides cash assistance of $222 per month for each eligible child who resides with a qualified relative other than a parent.			
+				</p>
+				<a href="http://www.dss.state.la.us/page/138">Visit the website for more information</a>
+			</div>
 		</div>
 	
 	</body>

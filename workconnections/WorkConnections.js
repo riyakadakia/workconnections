@@ -7,11 +7,11 @@ function GetSelectedText(){
 
 function GetSelectedText1(){
 	var e = document.getElementById("reasonUnemployed");
-	var reasonUmemployedResult = e.options[e.selectedIndex].value;
-	console.log(reasonUmemployedResult);
-    hideShow('limitedForm');
+	var reasonUnemployedResult = e.options[e.selectedIndex].value;
+	console.log(reasonUnemployedResult);
     hideShow('reasonUnemployedForm');
-	return reasonUmemployedResult; 
+    hideShow('limitedForm');
+	return reasonUnemployedResult; 
 }
 function GetSelectedText2(){
     var e = document.getElementById("kidRelation");
@@ -36,7 +36,6 @@ function GetSelectedText3(){
     document.getElementById("citizenResult").value = citizenResult;
     return citizenResult; 
 }
-
 
 function hideShow(id)
 {
@@ -68,12 +67,12 @@ window.onclick = function(event) {
 function displayRadioValue() { 
 	var ele = document.getElementsByName("kidsForm"); 
   	var kidsResult = document.querySelector('input[name="kids"]:checked').value
-    	if(ele[0].checked){
+    	if(kidsResult == "0"){
     		console.log("kidsResult: yes");
     		hideShow('kidHousingForm');
     		hideShow('kidsForm');
     	}
-    	else if(ele[1].checked){
+    	else if(kidsResult == "1"){
     		console.log("kidsResult: no");
     		hideShow('kidsForm');
             hideShow('liveAloneForm');
@@ -82,12 +81,12 @@ function displayRadioValue() {
 function displayRadioValue2() { 
 	var ele = document.getElementsByName("multipleKidsForm"); 
     var multipleKidsResult = document.querySelector('input[name="multipleKids"]:checked').value
-    	if(ele[0].checked){
+    	if(multipleKidsResult == "0"){
     		console.log("multipleKids: yes");
     		hideShow('kidAgeForm');
     		hideShow('multipleKidsForm');
     	}
-    	else if(ele[1].checked){
+    	else if(multipleKidsResult == "1"){
     		console.log("multipleKids: no");
     		hideShow('multipleKidsForm');
     		hideShow('skidAgeForm');
@@ -213,7 +212,6 @@ function GetSelectedText4()
     document.getElementById("disabledResult").value = disabledResult;
     return disabledResult;
 }
-
 function liveAloneRadio()
 {
     var ele = document.getElementsByName("liveAloneForm"); 
@@ -221,7 +219,7 @@ function liveAloneRadio()
     console.log("LAResult: ", LAResult);
     if (LAResult == "0")
     {
-        //TODO
+        hideShow('spouseForm')
     }
     else
     {
@@ -249,14 +247,7 @@ function WfoodSepRadio()
     var ele = document.getElementsByName("WfoodSepForm"); 
     var WfoodSepResult = document.querySelector('input[name="WfoodSep"]:checked').value
     console.log("WfoodSepResult: ", WfoodSepResult);
-    if (WfoodSepResult == "0")
-    {
-        hideShow('spouseForm');
-    }
-    else
-    {
-        hideShow('spouseForm');
-    }
+    hideShow('spouseForm');
 
 }
 function spouseRadio()
@@ -270,24 +261,230 @@ function spouseRadio()
     }
     else
     {
-        //TODO
+        hideShow('familyCitizenForm');
     }
 
+}
+function familyCitizenRadio()
+{
+    var ele = document.getElementsByName("familyCitizenForm"); 
+    var EnumerationResult = document.querySelector('input[name="familyCitizen"]:checked').value
+    console.log("familyCitizenResult: ", familyCitizenResult);
+    hideShow('EnumerationForm');
+}
+function EnumerationRadio()
+{
+    var ele = document.getElementsByName("EnumerationForm"); 
+    var EnumerationResult = document.querySelector('input[name="Enumeration"]:checked').value
+    console.log("EnumerationResult: ", EnumerationResult);
+    hideShow("WorkRegistrationForm");
 }
 function spouseLiveRadio()
 {
     var ele = document.getElementsByName("spouseLiveForm"); 
     var spouseLiveResult = document.querySelector('input[name="spouseLive"]:checked').value
     console.log("spouseLiveResult: ", spouseLiveResult);
-    if (spouseLiveResult == "0")
+    hideShow('familyCitizenForm');
+
+}
+function WorkRegistrationRadio()
+{
+    var ele = document.getElementsByName("WorkRegistrationForm"); 
+    var WorkRegistrationResult = document.querySelector('input[name="WorkRegistration"]:checked').value
+    console.log("WorkRegistrationResult: ", WorkRegistrationResult);
+    hideShow('petForm');
+}
+function ableWorkRadio()
+{
+    var ele = document.getElementsByName("ableWorkForm"); 
+    var ableWorkResult = document.querySelector('input[name="ableWork"]:checked').value
+    console.log("ableWorkResult: ", ableWorkResult);
+    if (ableWorkResult == "0")
     {
-        //TODO
+        hideShow('activeSeekingForm');
     }
     else
     {
-        //TODO
+        hideShow('minimunWageForm')
     }
+}
+function activeSeekingRadio()
+{
+    var ele = document.getElementsByName("activeSeekingForm"); 
+    var activeSeekingResult = document.querySelector('input[name="activeSeeking"]:checked').value
+    console.log("activeSeekingResult: ", activeSeekingResult);
+    hideShow('minimunWageForm')
+}
+function minimunWageRadio()
+{
+    var ele = document.getElementsByName("minimunWageForm"); 
+    var minimunWageResult = document.querySelector('input[name="minimunWage"]:checked').value
+    console.log("minimunWageResult: ", minimunWageResult);
+    hideShow('otherChildForm')
+}
+function otherChildRelationRadio()
+{
+    var ele = document.getElementsByName("otherChildRelationForm"); 
+    var otherChildRelationResult = document.querySelector('input[name="otherChildRelation"]:checked').value
+    console.log("otherChildRelationResult: ", otherChildRelationResult);
+    if (otherChildRelationResult == "0")
+    {
+        hideShow('kidcitizenForm')
+    }
+    else
+    {
+        hideShow('SubmitForm')
+    }
+}
+function GetSelectedTextCitizen()
+{
+    var e = document.getElementById("kidcitizen");
+    var kidcitizenResult = e.options[e.selectedIndex].value;
+    console.log("kidcitizenResult", kidcitizenResult); 
+    document.getElementById("kidcitizenResult").value = kidcitizenResult;
+    if (kidcitizenResult != "4")
+    {
+        hideShow('legalCustodyForm')
+    }
+    else
+    {
+        hideShow('SubmitForm')
+    }
+}
+function legalCustodyRadio()
+{
+    var ele = document.getElementsByName("legalCustodyForm"); 
+    var legalCustodyResult = document.querySelector('input[name="legalCustody"]:checked').value
+    console.log("legalCustodyResult: ", legalCustodyResult);
+    if (legalCustodyResult == "0")
+    {
+        hideShow('kidEarningForm')
+    }
+    else
+    {
+        hideShow('SubmitForm')
+    }
+}
+function kidEarningRadio()
+{
+    var ele = document.getElementsByName("kidEarningForm"); 
+    var kidEarningResult = document.querySelector('input[name="kidEarning"]:checked').value
+    console.log("kidEarningResult: ", kidEarningResult);
+    if (kidEarningResult == "0")
+    {
+        hideShow('monthlyEarningsForm')
+    }
+    else
+    {
+        hideShow('immunityForm')
+    }
+}
+function immunityRadio()
+{
+    var ele = document.getElementsByName("immunityForm"); 
+    var immunityResult = document.querySelector('input[name="immunity"]:checked').value
+    console.log("immunityResult: ", immunityResult);
+    if (immunityResult == "0")
+    {
+        hideShow('annualIncomeForm')
+    }
+    else
+    {
+        hideShow('SubmitForm')
+    }
+}
+function monthlyEarningsRadio()
+{
+    var ele = document.getElementsByName("monthlyEarningsForm"); 
+    var monthlyEarningsResult = document.querySelector('input[name="monthlyEarnings"]:checked').value
+    console.log("monthlyEarningsResult: ", monthlyEarningsResult);
+    if (monthlyEarningsResult == "0")
+    {
+        hideShow('immunityForm')
+    }
+    else
+    {
+        hideShow('SubmitForm')
+    }
+}
+function annualIncomeRadio()
+{
+    var ele = document.getElementsByName("annualIncomeForm"); 
+    var annualIncomeResult = document.querySelector('input[name="annualIncome"]:checked').value
+    console.log("annualIncomeResult: ", annualIncomeResult);
+    if (annualIncomeResult == "0")
+    {
+        hideShow('otherStateRightsForm')
+    }
+    else
+    {
+        hideShow('SubmitForm')
+    }
+}
+function otherStateRightsRadio()
+{
+    var ele = document.getElementsByName("otherStateRightsForm"); 
+    var otherStateRightsResult = document.querySelector('input[name="otherStateRights"]:checked').value
+    console.log("otherStateRightsResult: ", otherStateRightsResult);
+    if (otherStateRightsResult == "0")
+    {
+        hideShow('SSNumForm')
+    }
+    else
+    {
+        hideShow('SubmitForm')
+    }
+}
+function SSNumRadio()
+{
+    var ele = document.getElementsByName("SSNumForm"); 
+    var SSNumResult = document.querySelector('input[name="SSNum"]:checked').value
+    console.log("SSNumResult: ", SSNumResult);
+    if (SSNumResult == "0")
+    {
+        hideShow('parentsForm')
+    }
+    else
+    {
+        hideShow('SubmitForm')
+    }
+}
+function parentsRadio()
+{
+    var ele = document.getElementsByName("parentsForm"); 
+    var parentsResult = document.querySelector('input[name="parents"]:checked').value
+    console.log("parentsResult: ", parentsResult);
+    hideShow('SubmitForm')
+}
+function otherChildRadio()
+{
+    var ele = document.getElementsByName("otherChildForm"); 
+    var otherChildResult = document.querySelector('input[name="otherChild"]:checked').value
+    console.log("otherChildResult: ", otherChildResult);
+    if (otherChildResult == "0")
+    {
+        hideShow('otherChildRelationForm')
+    }
+    else
+    {
+        hideShow('SubmitForm')
+    }
+}
 
+function petRadio()
+{
+    var ele = document.getElementsByName("petForm"); 
+    var petResult = document.querySelector('input[name="pet"]:checked').value
+    console.log("petResult: ", petResult);
+    hideShow('ableWorkForm');
+}
+function KCSP()
+{
+    parentsResult = document.querySelector('input[name="parents"]:checked').value;
+    if (parentsResult == "1")
+    {
+        hideShow('KCSPForm');
+    }
 }
 function SSI()
 {
@@ -301,11 +498,66 @@ function SSI()
     {
         if(limitedResult == "0" && citizenResult != "4")
         {
-            //TODO Print
+            hideShow('SSIForm');
         }
     }
 
 
+}
+function PetFoodStamps()
+{
+    console.log("PetFoodStamps is called")
+    petResult = document.querySelector('input[name="pet"]:checked').value;
+    if (petResult == "0")
+    {
+        console.log("In the PetFoodStamps function")
+        hideShow('PetsForm');
+    }
+}
+function SNAP()
+{
+    console.log("In the SNAP function");
+    EnumerationResult = document.querySelector('input[name="Enumeration"]:checked').value;
+    familyCitizenResult = document.querySelector('input[name="familyCitizen"]:checked').value;
+    WorkRegistrationResult = document.querySelector('input[name="WorkRegistration"]:checked').value;
+    if (EnumerationResult == "0" && familyCitizenResult == "0")
+    {
+        if (WorkRegistrationResult == "0")
+        {
+            hideShow('SNAPForm');
+        }
+    }
+}
+function LWC()
+{
+    console.log("LWC is called")
+    ableWorkResult = document.querySelector('input[name="ableWork"]:checked').value;
+    activeSeekingResult = document.querySelector('input[name="activeSeeking"]:checked').value;
+    minimunWageResult = document.querySelector('input[name="minimunWage"]:checked').value;
+    reasonUnemployedResult = document.getElementById("reasonUnemployed").value;
+
+    if (reasonUnemployedResult == "2" || reasonUnemployedResult == "3" || reasonUnemployedResult == "4" || reasonUnemployedResult == "5")
+    {
+        if (minimunWageResult == "0" || minimunWageResult == "2")
+        {
+            if (ableWorkResult == "0")
+            {
+                if (activeSeekingResult == "0")
+                {
+                    hideShow('LWCForm');
+                }
+            }
+        }
+    }
+}
+function CARES()
+{
+    console.log("In the Cares function");
+    reasonUnemployedResult = document.getElementById("reasonUnemployed").value;
+    if (reasonUnemployedResult == "3" || reasonUnemployedResult == "4")
+    {
+        hideShow('CARESForm')
+    }
 }
 function FITAP()
 {
@@ -339,7 +591,7 @@ function FITAP()
                 {
                     if (drugResult == "0")
                     {
-                        //TODO Print
+                        hideShow('FITAPForm');
                     }
                 }
 
@@ -351,7 +603,6 @@ function LaCap()
 {
     WfoodSepResult = "1"
     foodSepResult = "1"  
-    kidHousingResult = "1"
     console.log("LaCap is called")
     citizenResult = document.getElementById("citizenResult").value;
     ageResult = document.getElementById("ageResult").value;
@@ -384,13 +635,13 @@ function LaCap()
                                 if (spouseLiveResult == "1")
                                 {
                                      console.log("inside the ifs of LaCap")
-                                    //Print
+                                    hideShow('LaCapForm');
                                 }
                             }
                             else
                             {
-                                 console.log("inside the ifs of LaCap")
-                                //Print
+                                console.log("inside the ifs of LaCap")
+                                hideShow('LaCapForm');
                             }
                         }
 
@@ -404,13 +655,13 @@ function LaCap()
                                 if (spouseLiveResult == "1")
                                 {
                                      console.log("inside the ifs of LaCap")
-                                    //Print
+                                     hideShow('LaCapForm');
                                 }
                             }
                             else
                             {
                                  console.log("inside the ifs of LaCap")
-                                //Print
+                                 hideShow('LaCapForm');
                             }
                         }
                     }
@@ -422,13 +673,13 @@ function LaCap()
                         if (spouseLiveResult == "1")
                         {
                              console.log("inside the ifs of LaCap")
-                            //Print
+                             hideShow('LaCapForm');
                         }
                     }
                     else
                     {
                          console.log("inside the ifs of LaCap")
-                        //Print
+                         hideShow('LaCapForm');
                     }
                 }
 
@@ -440,13 +691,13 @@ function LaCap()
                     if (spouseLiveResult == "1")
                     {
                          console.log("inside the ifs of LaCap")
-                        //Print
+                        hideShow('LaCapForm');
                     }
                 }
                 else
                 {
                      console.log("inside the ifs of LaCap")
-                    //Print
+                     hideShow('LaCapForm');
                 }
             }
                
