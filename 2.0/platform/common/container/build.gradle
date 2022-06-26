@@ -1,0 +1,19 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+
+version=0.1
+
+repositories {
+	maven {
+		url "https://mvnrepository.com"
+	}
+}
+
+dependencies {
+  implementation project(':utils')
+  implementation project(':configuration')
+  implementation 'org.apache.logging.log4j:log4j-api:2.17.2'
+  implementation 'org.apache.logging.log4j:log4j-core:2.17.2'
+  implementation spec.product.ext.servletApi
+}
