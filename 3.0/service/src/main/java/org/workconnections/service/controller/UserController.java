@@ -30,12 +30,12 @@ public class UserController {
 		return String.format("Hello %s!", name);
 	}
 
-	@GetMapping("")
+	@GetMapping("/getAllUsers")
 	public List<User> getAllUsers() {
 		return userRepository.findAll();
 	}
 	
-	@PostMapping("")
+	@PostMapping("/createUser")
 	public User createUser(@RequestBody User user) {
 		return userRepository.save(user);
 	}
