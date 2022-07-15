@@ -17,6 +17,11 @@ import org.workconnections.service.repository.QuestionRepository;
 @RestController
 @RequestMapping("/question")
 
+// if answer_next_id != NULL, get answer to current question from user collection and
+// compare user's answer to options and decide what is next question.
+// else 
+
+
 public class QuestionController {
 
 	Logger log = LoggerFactory.getLogger(UserController.class);
