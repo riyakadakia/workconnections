@@ -40,9 +40,24 @@ public class QuestionController {
 		return questionRepository.save(question);
 	}
 	
-	@GetMapping("/findByQuestionId")
-	public Question findByQuestionId(@RequestParam("questionId") String questionId) {
+	@PostMapping("/updateQuestion")
+	public Question updateQuestion(@RequestBody Question question) {
+		return questionRepository.save(question);
+	}
+
+	@GetMapping("/findById")
+	public Question findById(@RequestParam("questionId") String questionId) {
 		return questionRepository.findByQuestionId(questionId);
+	}
+
+	@GetMapping("/existsById")
+	public boolean existsById(@RequestParam("questionId") String questionId) {
+		return questionRepository.existsById(questionId);
+	}
+
+	@GetMapping("/deleteById")
+	public void deleteById(@RequestParam("questionId") String questionId) {
+		questionRepository.deleteById(questionId);
 	}
 
 }

@@ -1,6 +1,7 @@
 package org.workconnections.service.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,6 +41,27 @@ public class UserController {
 		return userRepository.save(user);
 	}
 
+	@PostMapping("/updateUser")
+	public User updateUser(@RequestBody User user) {
+		return userRepository.save(user);
+	}
+	
+	@GetMapping("/findById")
+	public User findById(@RequestParam("userId") String userId) {
+		Optional<User> resultOp = userRepository.findById(userId);
+		return (User) resultOp.get();
+	}
+	
+	@GetMapping("/existsById")
+	public boolean existsById(@RequestParam("userId") String userId) {
+		return userRepository.existsById(userId);
+	}
+
+	@GetMapping("/deleteById")
+	public void deleteById(@RequestParam("userId") String userId) {
+		userRepository.deleteById(userId);
+	}
+	 
 	@GetMapping("/findByName")
 	public User findByName(@RequestParam("name") String name) {
 		return userRepository.findByName(name);
