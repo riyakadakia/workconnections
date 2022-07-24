@@ -13,3 +13,4 @@ wc.tar.gz
 3.0/service/logs/wrkconn-service.log
 3.0/scripts.tar.gz
 3.0/service/logs/wrkconn-service.log
+*.log
