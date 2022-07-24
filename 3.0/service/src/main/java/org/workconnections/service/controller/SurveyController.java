@@ -35,17 +35,17 @@ public class SurveyController {
 	
 
 	@GetMapping("/getAllSurveys")
-	public List<Survey> getAllQuestions() {
+	public List<Survey> getAllSurveys() {
 		return surveyRepository.findAll();
 	}
 	
 	@PostMapping("/createSurvey")
-	public Survey createQuestion(@RequestBody Survey survey) {
+	public Survey createSurvey(@RequestBody Survey survey) {
 		return surveyRepository.save(survey);
 	}
 	
 	@PostMapping("/updateSurvey")
-	public Survey updateQuestion(@RequestBody Survey survey) {
+	public Survey updateSurvey(@RequestBody Survey survey) {
 		return surveyRepository.save(survey);
 	}
 
