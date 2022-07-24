@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.workconnections.service.entity.Question;
-import org.workconnections.service.repository.QuestionRepository;
+import org.workconnections.service.entity.Survey;
+import org.workconnections.service.repository.SurveyRepository;
 
 @RestController
-@RequestMapping("/question")
+@RequestMapping("/survey")
 
 //find what question is on, search survey collection for question number in value part of array.
 // Use index to find the next value in the array and give that as the next question.
@@ -25,43 +25,43 @@ public class SurveyController {
 	Logger log = LoggerFactory.getLogger(UserController.class);
 	
 	@Autowired
-	QuestionRepository questionRepository; 
+	SurveyRepository surveyRepository; 
 			
-	@GetMapping("/hi")
+	@GetMapping("/helloSurvey")
 	public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
 		log.info("hello method called with " + name);
 		return String.format("Hello %s!", name);
 	}
 	
 
-	@GetMapping("/getAllQuestions")
-	public List<Question> getAllQuestions() {
-		return questionRepository.findAll();
+	@GetMapping("/getAllSurveys")
+	public List<Survey> getAllQuestions() {
+		return surveyRepository.findAll();
 	}
 	
-	@PostMapping("/createQuestion")
-	public Question createQuestion(@RequestBody Question question) {
-		return questionRepository.save(question);
+	@PostMapping("/createSurvey")
+	public Survey createQuestion(@RequestBody Survey survey) {
+		return surveyRepository.save(survey);
 	}
 	
-	@PostMapping("/updateQuestion")
-	public Question updateQuestion(@RequestBody Question question) {
-		return questionRepository.save(question);
+	@PostMapping("/updateSurvey")
+	public Survey updateQuestion(@RequestBody Survey survey) {
+		return surveyRepository.save(survey);
 	}
 
 	@GetMapping("/findById")
-	public Question findById(@RequestParam("questionId") String questionId) {
-		return questionRepository.findByQuestionId(questionId);
+	public Survey findById(@RequestParam("surveyId") String surveyId) {
+		return surveyRepository.findBySurveyId(surveyId);
 	}
 
 	@GetMapping("/existsById")
-	public boolean existsById(@RequestParam("questionId") String questionId) {
-		return questionRepository.existsById(questionId);
+	public boolean existsById(@RequestParam("surveyId") String surveyId) {
+		return surveyRepository.existsById(surveyId);
 	}
 
 	@GetMapping("/deleteById")
-	public void deleteById(@RequestParam("questionId") String questionId) {
-		questionRepository.deleteById(questionId);
+	public void deleteById(@RequestParam("surveyId") String surveyId) {
+		surveyRepository.deleteById(surveyId);
 	}
 
 }
