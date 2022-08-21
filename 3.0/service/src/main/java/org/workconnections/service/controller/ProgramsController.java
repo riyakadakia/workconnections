@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.workconnections.service.entity.Programs;
+import org.workconnections.service.entity.Program;
 import org.workconnections.service.repository.ProgramsRepository;
 
 @RestController
@@ -25,22 +25,30 @@ public class ProgramsController {
 	ProgramsRepository programsRepository; 
 			
 	@GetMapping("/getAllPrograms")
-	public List<Programs> getAllPrograms() {
+	public List<Program> getAllPrograms() {
 		return programsRepository.findAll();
 	}
 	
+	// XXX: "Currently listing 2,139 services"
+	@GetMapping ("/getTotalProgramsCount")
+	public Integer getTotalProgramsCount() {
+		Integer totalProgramsCount = 0;
+		
+		return totalProgramsCount;
+	}
+	
 	@PostMapping("/createProgram")
-	public Programs createProgram(@RequestBody Programs program) {
+	public Program createProgram(@RequestBody Program program) {
 		return programsRepository.save(program);
 	}
 	
 	@PostMapping("/updateProgram")
-	public Programs updateProgram(@RequestBody Programs program) {
+	public Program updateProgram(@RequestBody Program program) {
 		return programsRepository.save(program);
 	}
 
 	@GetMapping("/findById")
-	public Programs findById(@RequestParam("programId") int programId) {
+	public Program findById(@RequestParam("programId") int programId) {
 		return programsRepository.findById(programId);
 	}
 

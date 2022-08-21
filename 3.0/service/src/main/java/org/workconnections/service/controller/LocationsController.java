@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.workconnections.service.entity.Locations;
+import org.workconnections.service.entity.Location;
 import org.workconnections.service.repository.LocationsRepository;
 
 @RestController
@@ -25,22 +25,22 @@ public class LocationsController {
 	LocationsRepository locationsRepository; 
 
 	@GetMapping("/getAllLocations")
-	public List<Locations> getAllLocations() {
+	public List<Location> getAllLocations() {
 		return locationsRepository.findAll();
 	}
 	
 	@PostMapping("/createLocation")
-	public Locations createLocation(@RequestBody Locations location) {
+	public Location createLocation(@RequestBody Location location) {
 		return locationsRepository.save(location);
 	}
 	
 	@PostMapping("/updateLocation")
-	public Locations updateLocation(@RequestBody Locations location) {
+	public Location updateLocation(@RequestBody Location location) {
 		return locationsRepository.save(location);
 	}
 
 	@GetMapping("/findById")
-	public Locations findById(@RequestParam("locationId") int locationId) {
+	public Location findById(@RequestParam("locationId") int locationId) {
 		return locationsRepository.findById(locationId);
 	}
 

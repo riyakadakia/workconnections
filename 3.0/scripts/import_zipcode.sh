@@ -1,0 +1,1 @@
+mongoimport --type=csv --headerline --useArrayIndexFields --uri 'mongodb+srv://riyakadakia:arv!zdu1nun1bvx1RWK@cluster0.vmx216w.mongodb.net/wrkconndb' --collection zipcode --file=$HOME/Downloads/WorkConnections\ -\ zipcode.csv

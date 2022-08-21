@@ -5,15 +5,15 @@ import java.util.List;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.workconnections.service.entity.Locations;
+import org.workconnections.service.entity.Location;
 
 @Repository
-public interface LocationsRepository extends MongoRepository<Locations, String> {
+public interface LocationsRepository extends MongoRepository<Location, String> {
 	
-	public List<Locations> findAll();
+	public List<Location> findAll();
 	@SuppressWarnings("unchecked")
-	public Locations save(@RequestParam("location") Locations location);
-	public Locations findById(@RequestParam("locationId") int locationId);
+	public Location save(@RequestParam("location") Location location);
+	public Location findById(@RequestParam("locationId") int locationId);
 	public boolean existsById(@RequestParam("locationId") int locationId);
 	public void deleteById(@RequestParam("locationId") int locationId);
 	

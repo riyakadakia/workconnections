@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.workconnections.service.entity.Zipcodes;
+import org.workconnections.service.entity.Zipcode;
 import org.workconnections.service.repository.ZipcodesRepository;
 
 @RestController
@@ -24,22 +24,22 @@ public class ZipcodesController {
 	ZipcodesRepository zipcodesRepository; 
 
 	@GetMapping("/getAllZipcodes")
-	public List<Zipcodes> getAllZipcodes() {
+	public List<Zipcode> getAllZipcodes() {
 		return zipcodesRepository.findAll();
 	}
 	
 	@PostMapping("/createZipcode")
-	public Zipcodes createZipcode(@RequestBody Zipcodes zipcode) {
+	public Zipcode createZipcode(@RequestBody Zipcode zipcode) {
 		return zipcodesRepository.save(zipcode);
 	}
 	
 	@PostMapping("/updateZipcode")
-	public Zipcodes updateZipcode(@RequestBody Zipcodes zipcode) {
+	public Zipcode updateZipcode(@RequestBody Zipcode zipcode) {
 		return zipcodesRepository.save(zipcode);
 	}
 
 	@GetMapping("/findById")
-	public Zipcodes findById(@RequestParam("zipcodeId") int zipcodeId) {
+	public Zipcode findById(@RequestParam("zipcodeId") int zipcodeId) {
 		return zipcodesRepository.findById(zipcodeId);
 	}
 

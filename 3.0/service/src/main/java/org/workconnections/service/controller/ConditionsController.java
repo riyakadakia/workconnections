@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.workconnections.service.entity.Conditions;
+import org.workconnections.service.entity.Condition;
 import org.workconnections.service.repository.ConditionsRepository;
 
 @RestController
@@ -25,22 +25,22 @@ public class ConditionsController {
 	ConditionsRepository conditionsRepository; 
 
 	@GetMapping("/getAllConditions")
-	public List<Conditions> getAllConditions() {
+	public List<Condition> getAllConditions() {
 		return conditionsRepository.findAll();
 	}
 	
 	@PostMapping("/createCondition")
-	public Conditions createCondition(@RequestBody Conditions condition) {
+	public Condition createCondition(@RequestBody Condition condition) {
 		return conditionsRepository.save(condition);
 	}
 	
 	@PostMapping("/updateCondition")
-	public Conditions updateCondition(@RequestBody Conditions condition) {
+	public Condition updateCondition(@RequestBody Condition condition) {
 		return conditionsRepository.save(condition);
 	}
 
 	@GetMapping("/findById")
-	public Conditions findById(@RequestParam("conditionId") int conditionId) {
+	public Condition findById(@RequestParam("conditionId") int conditionId) {
 		return conditionsRepository.findById(conditionId);
 	}
 

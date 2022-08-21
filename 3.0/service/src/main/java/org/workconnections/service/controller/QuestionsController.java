@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.workconnections.service.entity.Questions;
+import org.workconnections.service.entity.Question;
 import org.workconnections.service.repository.QuestionsRepository;
 
 @RestController
@@ -25,22 +25,22 @@ public class QuestionsController {
 	QuestionsRepository questionsRepository; 
 
 	@GetMapping("/getAllQuestions")
-	public List<Questions> getAllQuestions() {
+	public List<Question> getAllQuestions() {
 		return questionsRepository.findAll();
 	}
 	
 	@PostMapping("/createQuestion")
-	public Questions createQuestion(@RequestBody Questions question) {
+	public Question createQuestion(@RequestBody Question question) {
 		return questionsRepository.save(question);
 	}
 	
 	@PostMapping("/updateQuestion")
-	public Questions updateQuestion(@RequestBody Questions question) {
+	public Question updateQuestion(@RequestBody Question question) {
 		return questionsRepository.save(question);
 	}
 
 	@GetMapping("/findById")
-	public Questions findById(@RequestParam("questionId") int questionId) {
+	public Question findById(@RequestParam("questionId") int questionId) {
 		return questionsRepository.findById(questionId);
 	}
 

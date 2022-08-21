@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.workconnections.service.entity.Surveys;
+import org.workconnections.service.entity.Question;
+import org.workconnections.service.entity.Survey;
 import org.workconnections.service.repository.SurveysRepository;
 
 @RestController
@@ -25,23 +26,39 @@ public class SurveysController {
 	SurveysRepository surveysRepository; 
 			
 	@GetMapping("/getAllSurveys")
-	public List<Surveys> getAllSurveys() {
+	public List<Survey> getAllSurveys() {
 		return surveysRepository.findAll();
 	}
 	
 	@PostMapping("/createSurvey")
-	public Surveys createSurvey(@RequestBody Surveys survey) {
+	public Survey createSurvey(@RequestBody Survey survey) {
 		return surveysRepository.save(survey);
 	}
 	
 	@PostMapping("/updateSurvey")
-	public Surveys updateSurvey(@RequestBody Surveys survey) {
+	public Survey updateSurvey(@RequestBody Survey survey) {
 		return surveysRepository.save(survey);
 	}
 
 	@GetMapping("/findById")
-	public Surveys findById(@RequestParam("surveyId") int surveyId) {
+	public Survey findById(@RequestParam("surveyId") int surveyId) {
 		return surveysRepository.findById(surveyId);
+	}
+	
+	// XXX: Create a new session
+	@GetMapping("/createSession")
+	public String createSession() {
+		String sessionId = new String();
+		
+		return sessionId;		
+	}
+	
+	// XXX: Return the next question in the sequence
+	@GetMapping("/getNextQuestion")
+	public Question getNextQuestion(String sessionId, Integer surveyId, Integer lastQuestionId, Integer lastAnswerIndex) {
+		Question nextQuestion = new Question();
+		
+		return nextQuestion;
 	}
 
 	@GetMapping("/existsById")
