@@ -19,7 +19,7 @@ import org.workconnections.service.repository.ProgramsRepository;
 
 public class ProgramsController {
 
-	Logger log = LoggerFactory.getLogger(UserController.class);
+	Logger log = LoggerFactory.getLogger(ProgramsController.class);
 	
 	@Autowired
 	ProgramsRepository programsRepository; 
