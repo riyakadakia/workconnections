@@ -17,55 +17,55 @@ public class Questions {
 	private String nextid[];
 
 	
-	public int getQuestionId() throws Exception {
-		int questionId = -1;
+	public Integer getId() throws Exception {
+		Integer questionId = Integer.valueOf(-1);
 		if (this.id != null) {
 			questionId = Integer.valueOf(this.id);
 		}
 		return questionId;
 	}
 	
-	public void setQuestionId(int id) {
+	public void setId(Integer id) {
 		this.id = String.valueOf(id);
 	}
 	
-	public String getQuestionName() {
+	public String getName() {
 		return this.name;
 	}
 
-	public void setQuestionName(String questionName) {
+	public void setName(String questionName) {
 		this.name = questionName;
 	}
 
-	public String getQuestionText() {
+	public String getText() {
 		return text;
 	}
 
-	public void setQuestionText(String text) {
+	public void setText(String text) {
 		this.text = text;
 	}
 
-	public String getQuestionHint() {
+	public String getHint() {
 		return hint;
 	}
 
-	public void setQuestionHint(String hint) {
+	public void setHint(String hint) {
 		this.hint = hint;
 	}
 
-	public String getQuestionType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setQuestionType(String type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 
-	public String getQuestionFormat() {
+	public String getFormat() {
 		return format;
 	}
 
-	public void setQuestionFormat(String format) {
+	public void setFormat(String format) {
 		this.format = format;
 	}
 
@@ -77,11 +77,11 @@ public class Questions {
 		this.answer = answer;
 	}
 
-	public int[] getAnswerNextid() {
-		int answerNextId[];
-		answerNextId = new int[8];
+	public Integer[] getNextid() {
+		Integer answerNextId[];
+		answerNextId = new Integer[8];
 		for (int i=0; i<8; i++) {
-			answerNextId[i] = -1;
+			answerNextId[i] = Integer.valueOf(-1);
 		}
 		
 		if (nextid != null && nextid.length > 0 && nextid.length < 9) {
@@ -89,18 +89,24 @@ public class Questions {
 				if (this.nextid[i] != null && !this.nextid[i].isEmpty()) {
 					answerNextId[i] = Integer.valueOf(this.nextid[i]);
 				} else {
-					answerNextId[i] = -1;
+					answerNextId[i] = Integer.valueOf(-1);
 				}
 			}
 		}
 		return answerNextId;
 	}
 
-	public void setAnswerNextid(int answerNextId[]) {
+	public void setNextid(Integer answerNextId[]) {
 		String nextid[] = new String[8];
-		for (int i=0; i<9; i++) {
-			nextid[i] = String.valueOf(answerNextId[i]);
-		} 
+		for (int i=0; i<8; i++) {
+			nextid[i] = String.valueOf(-1);
+		}
+		
+		if (answerNextId != null && answerNextId.length > 0 && answerNextId.length < 9) {
+			for (int i=0; i<9; i++) {
+				nextid[i] = String.valueOf(answerNextId[i]);
+			} 
+		}
 		this.nextid = nextid;
 	}
 
