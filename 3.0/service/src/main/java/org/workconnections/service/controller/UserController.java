@@ -1,7 +1,6 @@
 package org.workconnections.service.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +15,7 @@ import org.workconnections.service.entity.User;
 import org.workconnections.service.repository.UserRepository;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 
 public class UserController {
 
@@ -25,12 +24,6 @@ public class UserController {
 	@Autowired
 	UserRepository userRepository; 
 			
-	@GetMapping("/hello")
-	public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
-		log.info("hello method called with " + name);
-		return String.format("Hello %s!", name);
-	}
-
 	@GetMapping("/getAllUsers")
 	public List<User> getAllUsers() {
 		return userRepository.findAll();
@@ -47,18 +40,17 @@ public class UserController {
 	}
 	
 	@GetMapping("/findById")
-	public User findById(@RequestParam("userId") String userId) {
-		Optional<User> resultOp = userRepository.findById(userId);
-		return (User) resultOp.get();
+	public User findById(@RequestParam("userId") int userId) {
+		return userRepository.findById(userId);
 	}
 	
 	@GetMapping("/existsById")
-	public boolean existsById(@RequestParam("userId") String userId) {
+	public boolean existsById(@RequestParam("userId") int userId) {
 		return userRepository.existsById(userId);
 	}
 
 	@GetMapping("/deleteById")
-	public void deleteById(@RequestParam("userId") String userId) {
+	public void deleteById(@RequestParam("userId") int userId) {
 		userRepository.deleteById(userId);
 	}
 	 
@@ -67,9 +59,10 @@ public class UserController {
 		return userRepository.findByName(name);
 	}
 	
-	@GetMapping("/findByNameAndUserId")
-	public User findByNameAndUserId(@RequestParam("name") String name, @RequestParam("userId") String userId) {
+/*	@GetMapping("/findByNameAndUserId")
+	public User findByNameAndUserId(@RequestParam("name") String name, @RequestParam("userId") int userId) {
 		return userRepository.findByNameAndUserId(name, userId);
 	}
+	*/
 
 }
