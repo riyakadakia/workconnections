@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.workconnections.service.entity.User;
 
 @Repository
-public interface UserRepository extends MongoRepository<User, String> {
+public interface UsersRepository extends MongoRepository<User, String> {
 	
 	public List<User> findAll();
 	@SuppressWarnings("unchecked")

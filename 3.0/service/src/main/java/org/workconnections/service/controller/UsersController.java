@@ -13,17 +13,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.workconnections.service.entity.User;
-import org.workconnections.service.repository.UserRepository;
+import org.workconnections.service.repository.UsersRepository;
 
 @RestController
 @RequestMapping("/users")
 
-public class UserController {
+public class UsersController {
 
-	Logger log = LoggerFactory.getLogger(UserController.class);
+	Logger log = LoggerFactory.getLogger(UsersController.class);
 	
 	@Autowired
-	UserRepository userRepository; 
+	UsersRepository userRepository; 
 			
 	@GetMapping("/getAllUsers")
 	public List<User> getAllUsers() {
