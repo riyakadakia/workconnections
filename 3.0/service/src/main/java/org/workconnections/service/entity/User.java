@@ -15,17 +15,12 @@ public class User {
 	private String email;
 	private String phone;
 	
-
-	public Integer getId() throws Exception {
-		Integer userId = Integer.valueOf(-1);
-		if (this.id != null) {
-			userId = Integer.valueOf(this.id);
-		}
-		return userId;
+	public String getId() {
+		return id;
 	}
 	
-	public void setId(Integer id) {
-		this.id = String.valueOf(id);
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 	public String getName() {

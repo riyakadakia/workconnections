@@ -1,6 +1,7 @@
 package org.workconnections.service.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
@@ -13,9 +14,9 @@ public interface UserRepository extends MongoRepository<User, String> {
 	public List<User> findAll();
 	@SuppressWarnings("unchecked")
 	public User save(@RequestParam("user") User user);
-	public User findById(@RequestParam("userId") int userId);
-	public boolean existsById(@RequestParam("userId") int userId);
-	public void deleteById(@RequestParam("userId") int userId);
+	public Optional<User> findById(@RequestParam("userId") String userId);
+	public boolean existsById(@RequestParam("userId") String userId);
+	public void deleteById(@RequestParam("userId") String userId);
 	public User findByName(@RequestParam("name") String name);
 //	public User findByNameAndUserId(@RequestParam("name") String name, @RequestParam("userId") int userId);
 	

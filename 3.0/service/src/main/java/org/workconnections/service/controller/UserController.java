@@ -1,6 +1,7 @@
 package org.workconnections.service.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,17 +41,19 @@ public class UserController {
 	}
 	
 	@GetMapping("/findById")
-	public User findById(@RequestParam("userId") int userId) {
-		return userRepository.findById(userId);
+	public User findById(@RequestParam("userId") String userId) {
+		Optional<User> userResponse = userRepository.findById(userId);
+		User user = userResponse.get();
+		return user;
 	}
 	
 	@GetMapping("/existsById")
-	public boolean existsById(@RequestParam("userId") int userId) {
+	public boolean existsById(@RequestParam("userId") String userId) {
 		return userRepository.existsById(userId);
 	}
 
 	@GetMapping("/deleteById")
-	public void deleteById(@RequestParam("userId") int userId) {
+	public void deleteById(@RequestParam("userId") String userId) {
 		userRepository.deleteById(userId);
 	}
 	 
