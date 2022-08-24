@@ -1,4 +1,4 @@
-package org.workconnections.service;
+package org.workconnections.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
