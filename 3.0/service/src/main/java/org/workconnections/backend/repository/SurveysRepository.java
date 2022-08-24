@@ -1,11 +1,11 @@
-package org.workconnections.service.repository;
+package org.workconnections.backend.repository;
 
 import java.util.List;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.workconnections.service.entity.Survey;
+import org.workconnections.backend.entity.Survey;
 
 @Repository
 public interface SurveysRepository extends MongoRepository<Survey, String> {
