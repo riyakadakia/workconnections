@@ -1,4 +1,4 @@
-package org.workconnections.service.entity;
+package org.workconnections.backend.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -7,24 +7,24 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Program {
 	
 	@Id
-	private String id;
+	private Integer id;
 	private String name;
 	private String description;
 	private String url;
 	private String eligibility;
 	private String type;
-	private String locationid;
+	private Integer locationid;
 	
 	public Integer getId() throws Exception {
 		Integer programId = Integer.valueOf(-1);
 		if (this.id != null) {
-			programId = Integer.valueOf(this.id);
+			programId = this.id;
 		}
 		return programId;
 	}
 	
 	public void setId(Integer id) {
-		this.id = String.valueOf(id);
+		this.id = id;
 	}
 
 	public String getName() {
@@ -70,14 +70,14 @@ public class Program {
 	public Integer getLocationid() {
 		Integer locationIdInt = Integer.valueOf(-1);
 		if (this.locationid != null) {
-			locationIdInt = Integer.valueOf(this.locationid);
+			locationIdInt = this.locationid;
 		}
 		return locationIdInt;
 
 	}
 
 	public void setLocationid(Integer locationIdInt) {
-		this.locationid = String.valueOf(locationIdInt);
+		this.locationid = locationIdInt;
 	}
 
 	

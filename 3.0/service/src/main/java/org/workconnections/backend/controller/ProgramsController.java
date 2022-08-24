@@ -1,18 +1,20 @@
-package org.workconnections.service.controller;
+package org.workconnections.backend.controller;
 
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.workconnections.service.entity.Program;
-import org.workconnections.service.repository.ProgramsRepository;
+import org.workconnections.backend.entity.Program;
+import org.workconnections.backend.repository.ProgramsRepository;
 
 @RestController
 @RequestMapping("/programs")
@@ -32,24 +34,48 @@ public class ProgramsController {
 	// XXX: "Currently listing 2,139 services"
 	@GetMapping ("/getTotalProgramsCount")
 	public Integer getTotalProgramsCount() {
-		Integer totalProgramsCount = 0;
+		Integer totalProgramsCount = Integer.valueOf(2139);
 		
 		return totalProgramsCount;
 	}
 	
 	@PostMapping("/createProgram")
-	public Program createProgram(@RequestBody Program program) {
-		return programsRepository.save(program);
+	public ResponseEntity<?> createProgram(@RequestBody Program program) {
+		program = programsRepository.save(program);
+		if (program != null) {
+			try {
+				return new ResponseEntity<Integer>(program.getId(), HttpStatus.OK);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return new ResponseEntity<>(null, HttpStatus.OK);
 	}
 	
 	@PostMapping("/updateProgram")
-	public Program updateProgram(@RequestBody Program program) {
-		return programsRepository.save(program);
+	public ResponseEntity<?> updateProgram(@RequestBody Program program) {
+		Program programData;
+		try {
+			programData = programsRepository.findById(program.getId());		
+			if (programData != null) {
+				program = programsRepository.save(program);
+				if (program != null) {
+					return new ResponseEntity<Integer>(program.getId(), HttpStatus.OK);
+				}
+			}
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		return new ResponseEntity<>(null, HttpStatus.OK);
 	}
 
 	@GetMapping("/findById")
-	public Program findById(@RequestParam("programId") int programId) {
-		return programsRepository.findById(programId);
+	public ResponseEntity<?> findById(@RequestParam("programId") Integer programId) {
+		Program program = programsRepository.findById(programId);
+		if (program != null) {
+			return new ResponseEntity<Program>(program, HttpStatus.OK);
+		}
+		return new ResponseEntity<>(null, HttpStatus.OK);
 	}
 
 	@GetMapping("/existsById")
