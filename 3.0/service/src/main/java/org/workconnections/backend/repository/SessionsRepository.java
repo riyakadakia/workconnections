@@ -1,4 +1,4 @@
-package org.workconnections.service.repository;
+package org.workconnections.backend.repository;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.workconnections.service.entity.Session;
+import org.workconnections.backend.entity.Session;
 
 @Repository
 public interface SessionsRepository extends MongoRepository<Session, String> {
