@@ -1,4 +1,4 @@
-package org.workconnections.service.entity;
+package org.workconnections.backend.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Question {
 	
 	@Id
-	private String id;
+	private Integer id;
 	private String name;
 	private String text;
 	private String hint;
@@ -20,13 +20,13 @@ public class Question {
 	public Integer getId() throws Exception {
 		Integer questionId = Integer.valueOf(-1);
 		if (this.id != null) {
-			questionId = Integer.valueOf(this.id);
+			questionId = this.id;
 		}
 		return questionId;
 	}
 	
 	public void setId(Integer id) {
-		this.id = String.valueOf(id);
+		this.id = id;
 	}
 	
 	public String getName() {
