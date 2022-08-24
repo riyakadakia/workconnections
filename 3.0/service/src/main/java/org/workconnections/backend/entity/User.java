@@ -1,4 +1,4 @@
-package org.workconnections.service.entity;
+package org.workconnections.backend.entity;
 
 import java.util.Date;
 
