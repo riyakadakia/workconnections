@@ -34,7 +34,7 @@ public class SessionsController {
 	}
 	
 	@PostMapping("/createSession")
-	public ResponseEntity<?>  createSession(@RequestBody Session session) {
+	public ResponseEntity<?> createSession(@RequestBody Session session) {
 		session = sessionsRepository.save(session);
 		if (session != null) {
 			return new ResponseEntity<String>(session.getId(), HttpStatus.OK);
