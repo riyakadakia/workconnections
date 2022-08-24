@@ -1,4 +1,4 @@
-package org.workconnections.service.entity;
+package org.workconnections.backend.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -7,10 +7,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Zipcode {
 
 	@Id
-	private String id;
-	private String zip;
-	private String lat;
-	private String lng;
+	private Integer id;
+	private Integer zip;
+	private Double lat;
+	private Double lng;
 	private String city;
 	private String state_id;
 	private String state_name;
@@ -28,51 +28,51 @@ public class Zipcode {
 	private String timezone;
 	
 	public Integer getId() throws Exception {
-		Integer zipcodesId = Integer.valueOf(-1);
-		if (this.id != null) {
-			zipcodesId = Integer.valueOf(this.id);
-		}
-		return zipcodesId;
+		return this.id;
 	}
 	
 	public void setId(Integer id) {
-		this.id = String.valueOf(id);
+		Integer idInt = Integer.valueOf(-1);
+		if (id != null) {
+			idInt = id;			
+		}
+		this.id = idInt;
 	}
 	
 	public Integer getZip() {
-		Integer zipcode = Integer.valueOf(-1);
-		if (zip != null && !zip.isEmpty()) {
-			zipcode = Integer.valueOf(zip);			
-		}
-		return zipcode;
+		return this.zip;
 	}
 	
 	public void setZip(Integer zipcode) {
-		this.zip = String.valueOf(zipcode);
+		Integer zipcodeInt = Integer.valueOf(-1);
+		if (zipcode != null) {
+			zipcodeInt = zipcode;			
+		}
+		this.zip = zipcodeInt;
 	}
 	
 	public Double getLat() {
-		Double latd = Double.valueOf(-1);
-		if (lat != null && lat.length() > 0 && !lat.isEmpty()) {
-			latd = Double.valueOf(lat);
-		}
-		return latd;
+		return this.lat;
 	}
 	
 	public void setLat(Double latd) {
-		this.lat = String.valueOf(latd);
+		Double latD = Double.valueOf(-1);
+		if (latd != null) {
+			latD = latd;			
+		}
+		this.lat = latD;
 	}
 	
 	public Double getLng() {
-		Double lngd = Double.valueOf(-1);
-		if (lng != null && lng.length() > 0 && !lng.isEmpty()) {
-			lngd = Double.valueOf(lng);
-		}
-		return lngd;
+		return lng;
 	}
 	
 	public void setLng(Double lngd) {
-		this.lng = String.valueOf(lngd);
+		Double lngD = Double.valueOf(-1);
+		if (lngd != null) {
+			lngD = lngd;			
+		}
+		this.lng = lngD;
 	}
 	
 	public String getCity() {
