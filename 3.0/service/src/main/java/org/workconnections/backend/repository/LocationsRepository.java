@@ -1,11 +1,11 @@
-package org.workconnections.service.repository;
+package org.workconnections.backend.repository;
 
 import java.util.List;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.workconnections.service.entity.Location;
+import org.workconnections.backend.entity.Location;
 
 @Repository
 public interface LocationsRepository extends MongoRepository<Location, String> {
