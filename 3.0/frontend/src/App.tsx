@@ -12,28 +12,21 @@ import { About } from './Pages/About';
 import { Home } from './Pages/Home';
 
 function App() {
-  /*const navigate = useNavigate();*/
   return (
     <div className="App">
-      <div className='App-header'>
-        <Button type='primary' size='large' shape='round' onClick={(event) => navigateToPage()}>Get started</Button>
-      </div>
+      <header className="App-header">
+        <Router>
+          <Routes>
+            <Route path="/about" element={<About />} />
+            <Route path="/" element={<Home />} />
+          </Routes>
+        </Router>
+
+      </header>
     </div>
   );
 }
 
+
+
 export default App;
-
-function navigateToPage() {
-  <>
-    console.log('inside navigateToPage function');
-    <Link to="/">Home</Link>
-    <Router>
-      <Routes>
-          <Route path="/about" element={<About/>} />
-          <Route path="/" element={<Home/>} />
-      </Routes>
-    </Router>
-  </>
-
-}
