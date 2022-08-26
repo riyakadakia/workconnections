@@ -8,7 +8,7 @@ import {
   Link,
   Route
 } from "react-router-dom";
-import { About } from './Pages/About';
+import { Survey } from './Survey';
 import { Home } from './Pages/Home';
 
 function App() {
@@ -17,14 +17,14 @@ function App() {
       <header className="App-header">
         <Router>
           <Routes>
-            <Route path="/about" element={<About />} />
+            <Route path="/survey" element={<Survey/>} />
             <Route path="/" element={<Home />} />
           </Routes>
         </Router>
 
       </header>
     </div>
-  );
+  ); 
 }
 
 
