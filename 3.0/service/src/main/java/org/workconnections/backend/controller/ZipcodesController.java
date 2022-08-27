@@ -70,13 +70,22 @@ public class ZipcodesController {
 	}
 
 	@GetMapping("/existsById")
-	public boolean existsById(@RequestParam("zipcodeId") int zipcodeId) {
+	public boolean existsById(@RequestParam("zipcodeId") Integer zipcodeId) {
 		return zipcodesRepository.existsById(zipcodeId);
 	}
 
 	@GetMapping("/deleteById")
-	public void deleteById(@RequestParam("zipcodeId") int zipcodeId) {
+	public void deleteById(@RequestParam("zipcodeId") Integer zipcodeId) {
 		zipcodesRepository.deleteById(zipcodeId);
+	}
+	
+	@GetMapping("/findByZip")
+	public ResponseEntity<?> findByZip(@RequestParam("zip") Integer zip) {
+		Zipcode zipcode = zipcodesRepository.findByZip(zip);
+		if (zipcode != null) {
+			return new ResponseEntity<Zipcode>(zipcode, HttpStatus.OK);
+		}
+		return new ResponseEntity<>(null, HttpStatus.OK);
 	}
 
 }

@@ -14,8 +14,9 @@ public interface ZipcodesRepository extends MongoRepository<Zipcode, String> {
 	public List<Zipcode> findAll();
 	@SuppressWarnings("unchecked")
 	public Zipcode save(@RequestParam("zipcode") Zipcode zipcode);
-	public Zipcode findById(@RequestParam("zipcodeId") int zipcodeId);
-	public boolean existsById(@RequestParam("zipcodeId") int zipcodeId);
-	public void deleteById(@RequestParam("zipcodeId") int zipcodeId);
+	public Zipcode findById(@RequestParam("zipcodeId") Integer zipcodeId);
+	public boolean existsById(@RequestParam("zipcodeId") Integer zipcodeId);
+	public void deleteById(@RequestParam("zipcodeId") Integer zipcodeId);
+	public Zipcode findByZip(@RequestParam("zip") Integer zip);
 	
 }
