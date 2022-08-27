@@ -2,18 +2,14 @@ import {
     BrowserRouter as Router,
     Link
   } from "react-router-dom";
+import { Button } from 'antd';
 
 export function Home() {
     return (
       <div>
-      <h2>Home</h2>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/about">About</Link>
-          </li>
-        </ul>
-      </nav>
+      <h2>Find what services you are eligible for in less than 5 minutes</h2>
+      <Button type='primary' href="/survey" size='large' shape='round'>Start</Button>
+
       </div>
     ) 
 }
