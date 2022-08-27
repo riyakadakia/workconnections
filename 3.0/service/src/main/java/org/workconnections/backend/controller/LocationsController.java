@@ -79,5 +79,14 @@ public class LocationsController {
 	public void deleteById(@RequestParam("locationId") int locationId) {
 		locationsRepository.deleteById(locationId);
 	}
-
+	
+	@GetMapping("/findByNameAndType")
+	public ResponseEntity<?> findByNameAndType(@RequestParam("name") String name, @RequestParam("type") String type) {
+		Location location = locationsRepository.findByNameAndType(name, type);
+		if (location != null) {
+			return new ResponseEntity<Location>(location, HttpStatus.OK);
+		}
+		return new ResponseEntity<>(null, HttpStatus.OK);
+	}
+	
 }

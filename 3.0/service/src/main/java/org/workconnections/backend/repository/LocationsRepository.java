@@ -16,5 +16,6 @@ public interface LocationsRepository extends MongoRepository<Location, String> {
 	public Location findById(@RequestParam("locationId") int locationId);
 	public boolean existsById(@RequestParam("locationId") int locationId);
 	public void deleteById(@RequestParam("locationId") int locationId);
+	public Location findByNameAndType(@RequestParam("name") String name, @RequestParam("type") String type);
 	
 }
