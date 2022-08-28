@@ -85,13 +85,25 @@ public class QuestionsController {
 	}
 
 	@GetMapping("/getNextQuestion")
-	public ResponseEntity<?> getNextQuestion(Integer surveyId, Integer lastQuestionId, Integer lastAnswerIndex) {
-		Question nextQuestion = questionsService.getNextQuestion(surveyId, lastQuestionId, lastAnswerIndex);
+	public ResponseEntity<?> getNextQuestion(Integer surveyId, Integer lastQuestionId, Integer lastAnswerIndex, String lastAnswerInput) {
+		Question nextQuestion = questionsService.getNextQuestion(surveyId, lastQuestionId, lastAnswerIndex, lastAnswerInput);
 		if (nextQuestion == null) {
 			return new ResponseEntity<>(null, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<Question>(nextQuestion, HttpStatus.OK);
 		}
+	}
+	
+	@GetMapping("/getSurveyIdFromZip")
+	public ResponseEntity<?> getSurveyIdFromZip(Integer zip) {
+		Integer surveyId = null;
+		
+		if (zip == null) {
+			return new ResponseEntity<>(null, HttpStatus.OK);
+		} else {
+			surveyId = questionsService.getSurveyIdFromZip(zip);
+			return new ResponseEntity<Integer>(surveyId, HttpStatus.OK);
+		} 
 	}
 
 }

@@ -79,12 +79,12 @@ public class Question {
 
 	public Integer[] getNextid() {
 		Integer answerNextId[];
-		answerNextId = new Integer[8];
-		for (int i=0; i<8; i++) {
+		answerNextId = new Integer[9];
+		for (int i=0; i<9; i++) {
 			answerNextId[i] = Integer.valueOf(-1);
 		}
 		
-		if (nextid != null && nextid.length > 0 && nextid.length < 9) {
+		if (nextid != null && nextid.length > 0 && nextid.length < 10) {
 			for (int i=0; i<nextid.length; i++) {
 				if (this.nextid[i] != null && !this.nextid[i].isEmpty()) {
 					answerNextId[i] = Integer.valueOf(this.nextid[i]);
@@ -97,12 +97,12 @@ public class Question {
 	}
 
 	public void setNextid(Integer answerNextId[]) {
-		String nextid[] = new String[8];
-		for (int i=0; i<8; i++) {
+		String nextid[] = new String[9];
+		for (int i=0; i<9; i++) {
 			nextid[i] = String.valueOf(-1);
 		}
 		
-		if (answerNextId != null && answerNextId.length > 0 && answerNextId.length < 9) {
+		if (answerNextId != null && answerNextId.length > 0 && answerNextId.length < 10) {
 			for (int i=0; i<9; i++) {
 				nextid[i] = String.valueOf(answerNextId[i]);
 			} 
