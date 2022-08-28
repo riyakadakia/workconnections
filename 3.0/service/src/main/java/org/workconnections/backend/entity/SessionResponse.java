@@ -3,22 +3,31 @@ package org.workconnections.backend.entity;
 
 public class SessionResponse {
 
-	private String questionId;
-	private String answerIds[];
+	private Integer questionId;
+	private Integer answerIds[];
+	private String answerInput;
 	
-	public String getQuestionId() {
+	public Integer getQuestionId() {
 		return questionId;
 	}
 	
-	public void setQuestionId(String questionId) {
+	public void setQuestionId(Integer questionId) {
 		this.questionId = questionId;
 	}
 
-	public String[] getAnswerIds() {
+	public Integer[] getAnswerIds() {
 		return answerIds;
 	}
 
-	public void setAnswerIds(String answerIds[]) {
+	public void setAnswerIds(Integer answerIds[]) {
 		this.answerIds = answerIds;
+	}
+
+	public String getAnswerInput() {
+		return answerInput;
+	}
+
+	public void setAnswerInput(String answerInput) {
+		this.answerInput = answerInput;
 	}
 }
