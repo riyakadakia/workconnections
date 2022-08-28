@@ -31,10 +31,14 @@ public class ProgramsController {
 		return programsRepository.findAll();
 	}
 	
-	// XXX: "Currently listing 2,139 services"
 	@GetMapping ("/getTotalProgramsCount")
 	public Integer getTotalProgramsCount() {
-		Integer totalProgramsCount = Integer.valueOf(2139);
+		Integer totalProgramsCount = Integer.valueOf(0);
+		
+		List<Program> programs = getAllPrograms();
+		if (programs != null && !programs.isEmpty()) {
+			totalProgramsCount = Integer.valueOf(programs.size());
+		}
 		
 		return totalProgramsCount;
 	}
