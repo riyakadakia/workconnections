@@ -13,8 +13,8 @@ public interface QuestionsRepository extends MongoRepository<Question, String> {
 	public List<Question> findAll();
 	@SuppressWarnings("unchecked")
 	public Question save(@RequestParam("question") Question question);
-	public Question findById(@RequestParam("questionId") int questionId);
-	public boolean existsById(@RequestParam("questionId") int questionId);
-	public void deleteById(@RequestParam("questionId") int questionId);
-	
+	public Question findById(@RequestParam("questionId") Integer questionId);
+	public boolean existsById(@RequestParam("questionId") Integer questionId);
+	public void deleteById(@RequestParam("questionId") Integer questionId);
+
 }
