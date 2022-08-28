@@ -94,16 +94,4 @@ public class QuestionsController {
 		}
 	}
 	
-	@GetMapping("/getSurveyIdFromZip")
-	public ResponseEntity<?> getSurveyIdFromZip(Integer zip) {
-		Integer surveyId = null;
-		
-		if (zip == null) {
-			return new ResponseEntity<>(null, HttpStatus.OK);
-		} else {
-			surveyId = questionsService.getSurveyIdFromZip(zip);
-			return new ResponseEntity<Integer>(surveyId, HttpStatus.OK);
-		} 
-	}
-
 }

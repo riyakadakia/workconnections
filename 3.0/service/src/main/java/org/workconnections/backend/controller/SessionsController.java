@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.workconnections.backend.entity.Session;
 import org.workconnections.backend.entity.SessionResponse;
 import org.workconnections.backend.repository.SessionsRepository;
+import org.workconnections.backend.service.QuestionsService;
 
 @RestController
 @RequestMapping("/sessions")
@@ -27,6 +28,9 @@ public class SessionsController {
 	
 	@Autowired
 	SessionsRepository sessionsRepository; 
+	
+	@Autowired
+	QuestionsService questionsService;
 			
 	@GetMapping("/getAllSessions")
 	public List<Session> getAllSessions() {
@@ -87,5 +91,47 @@ public class SessionsController {
 	public void deleteById(@RequestParam("sessionId") String sessionId) {
 		sessionsRepository.deleteById(sessionId);
 	}
+	
+	@GetMapping("/getSurveyIdFromZip")
+	public ResponseEntity<?> getSurveyIdFromZip(@RequestParam("sessionId") String sessionId, @RequestParam("zip") Integer zip) {
+		Integer surveyId = null;
+		
+		if (zip == null) {
+			return new ResponseEntity<>(null, HttpStatus.OK);
+		} else {
+			surveyId = questionsService.getSurveyIdFromZip(zip);
+			
+			if (surveyId != null) {
+				// Save the surveyId in this session
+				Optional<Session> sessionData = sessionsRepository.findById(sessionId);
+				if (sessionData.isPresent()) {
+					Session session = sessionData.get();
+					session.setSurveyId(surveyId);
+					session = sessionsRepository.save(session);
+					if (session != null) {
+						return new ResponseEntity<Integer>(surveyId, HttpStatus.OK);
+					}
+				}
+			}
+			return new ResponseEntity<>(null, HttpStatus.OK);
+		} 
+	}
+	
+	@GetMapping("/getEligibleProgramsCount")
+	public ResponseEntity<?> getEligibleProgramsCount(@RequestParam("sessionId") String sessionId) {
+
+		Optional<Session> sessionResponseData = sessionsRepository.findById(sessionId);
+		if (sessionResponseData.isPresent()) {
+			@SuppressWarnings("unused")
+			Session session = sessionResponseData.get();
+			
+			// XXX: Find eligible programs for this session
+			Integer numEligiblePrograms = Integer.valueOf(5);
+			return new ResponseEntity<Integer>(numEligiblePrograms, HttpStatus.OK);
+		}
+		
+		return new ResponseEntity<>(null, HttpStatus.OK);
+	}
+
 
 }

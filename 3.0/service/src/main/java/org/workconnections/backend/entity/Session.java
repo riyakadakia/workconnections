@@ -12,7 +12,7 @@ public class Session {
 	
 	@Id
 	private String id;
-	private String surveyId = null;
+	private Integer surveyId = null;
 	private String userId = null;
 	private Date created = new Date();
 	private Map<String, SessionResponse> responses = null; 
@@ -25,11 +25,11 @@ public class Session {
 		this.id = id;
 	}
 	
-	public String getSurveyId() {
+	public Integer getSurveyId() {
 		return surveyId;
 	}
 
-	public void setSurveyId(String surveyId) {
+	public void setSurveyId(Integer surveyId) {
 		this.surveyId = surveyId;
 	}
 
