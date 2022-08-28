@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.workconnections.backend.entity.Question;
+import org.workconnections.backend.entity.QuestionResponse;
 import org.workconnections.backend.repository.QuestionsRepository;
 import org.workconnections.backend.service.QuestionsService;
 
@@ -85,12 +86,28 @@ public class QuestionsController {
 	}
 
 	@GetMapping("/getNextQuestion")
-	public ResponseEntity<?> getNextQuestion(Integer surveyId, Integer lastQuestionId, Integer lastAnswerIndex, String lastAnswerInput) {
+	public ResponseEntity<?> getNextQuestion(@RequestParam("surveyId") Integer surveyId, 
+											 @RequestParam("lastQuestionId") Integer lastQuestionId, 
+											 @RequestParam("lastAnswerIndex") Integer lastAnswerIndex, 
+											 @RequestParam("lastAnswerInput") String lastAnswerInput) {
+		
 		Question nextQuestion = questionsService.getNextQuestion(surveyId, lastQuestionId, lastAnswerIndex, lastAnswerInput);
 		if (nextQuestion == null) {
 			return new ResponseEntity<>(null, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<Question>(nextQuestion, HttpStatus.OK);
+		}
+	}
+	
+	@GetMapping("/getQuestionResponse")	
+	public ResponseEntity<?> getQuestionResponse(@RequestParam("sessionId") String sessionId,
+												 @RequestParam("questionId") Integer questionId) {
+	
+		QuestionResponse questionResponse = questionsService.getQuestionResponse(sessionId, questionId);			
+		if (questionResponse == null) {
+			return new ResponseEntity<>(null, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<QuestionResponse>(questionResponse, HttpStatus.OK);
 		}
 	}
 	

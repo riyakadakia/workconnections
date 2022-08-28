@@ -1,11 +1,17 @@
 package org.workconnections.backend.service;
 
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.workconnections.backend.entity.Location;
 import org.workconnections.backend.entity.Question;
+import org.workconnections.backend.entity.QuestionResponse;
+import org.workconnections.backend.entity.Session;
+import org.workconnections.backend.entity.SessionResponse;
 import org.workconnections.backend.entity.Survey;
 import org.workconnections.backend.entity.Zipcode;
 import org.workconnections.backend.repository.LocationsRepository;
@@ -187,6 +193,37 @@ public class QuestionsService {
 		}
 		
 		return nextQuestion;
+	}
+	
+	/*
+	 * This method returns the question with id=questionId along with the answer to that question in this session
+	 * if sessionId != null and the answer was saved using /sessions/addToSession
+	 */
+	public QuestionResponse getQuestionResponse(@RequestParam("sessionId") String sessionId,
+												 @RequestParam("questionId") Integer questionId) {
+		
+		QuestionResponse questionResponse = null;
+		
+		Question question = questionsRepository.findById(questionId);
+		if (question != null) {
+			questionResponse = new QuestionResponse();
+			questionResponse.setQuestion(question);
+			
+			// Check to see if this question has an associated response in this session
+			if (sessionId != null) {
+				Optional<Session> sessionResponseData = sessionsRepository.findById(sessionId);
+				if (sessionResponseData.isPresent()) {
+					Session session = sessionResponseData.get();
+					if (session != null) {
+						SessionResponse sResponse = session.getResponse(questionId);
+						if (sResponse != null) {
+							questionResponse.setResponse(sResponse);
+						}
+					}
+				}
+			}		
+		}
+		return questionResponse;
 	}
 
 }

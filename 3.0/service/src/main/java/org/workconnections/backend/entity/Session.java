@@ -64,8 +64,22 @@ public class Session {
 		this.responses.put(questionId, response);
 	}
 	
-	public void deleteResponse(String questionId) {
-		//this.responses.remove(questionId);
+	public SessionResponse getResponse(Integer questionId) {
+		SessionResponse response = null;
+		if (this.responses != null) {
+			if (this.responses.get(questionId) != null) { 
+				response = this.responses.get(questionId);
+			}
+		}
+		return response;
+	}
+	
+	public void deleteResponse(Integer questionId) {
+		if (this.responses != null) {
+			if (this.responses.get(questionId) != null) { 
+				this.responses.remove(questionId);
+			}
+		}
 	}
 	
 }
