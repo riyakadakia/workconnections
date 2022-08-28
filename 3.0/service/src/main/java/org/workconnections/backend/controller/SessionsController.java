@@ -133,5 +133,20 @@ public class SessionsController {
 		return new ResponseEntity<>(null, HttpStatus.OK);
 	}
 
+	@PostMapping("/addUserId")
+	public ResponseEntity<?> addUserId(@RequestParam("sessionId") String sessionId, @RequestParam("userId") String userId) {
+		
+		if (sessionId != null && userId != null) {
+			Optional<Session> sessionResponseData = sessionsRepository.findById(sessionId);
+			if (sessionResponseData.isPresent()) {
+				Session session = sessionResponseData.get();
+				session.setUserId(userId);
+				session = sessionsRepository.save(session);
+				return new ResponseEntity<String>(session.getId(), HttpStatus.OK);
+			}
+		}
 
+		return new ResponseEntity<>(null, HttpStatus.OK);
+	}
+	
 }
