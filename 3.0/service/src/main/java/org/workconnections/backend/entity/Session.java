@@ -15,7 +15,7 @@ public class Session {
 	private Integer surveyId = null;
 	private String userId = null;
 	private Date created = new Date();
-	private Map<String, SessionResponse> responses = null; 
+	private Map<Integer, SessionResponse> responses = null; 
 
 	public String getId() {
 		return id;
@@ -49,17 +49,17 @@ public class Session {
 		this.created = created;
 	}
 
-	public Map<String, SessionResponse> getResponses() {
+	public Map<Integer, SessionResponse> getResponses() {
 		return responses;
 	}
 
-	public void setResponses(Map<String, SessionResponse> responses) {
+	public void setResponses(Map<Integer, SessionResponse> responses) {
 		this.responses = responses;
 	}
 	
-	public void addResponse(String questionId, SessionResponse response) {
+	public void addResponse(Integer questionId, SessionResponse response) {
 		if (this.responses == null) {
-			this.responses = new HashMap<String, SessionResponse>();
+			this.responses = new HashMap<Integer, SessionResponse>();
 		}
 		this.responses.put(questionId, response);
 	}
