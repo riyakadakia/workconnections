@@ -1,17 +1,17 @@
 import { Checkbox, Row, Card } from 'antd';
 import type { CheckboxValueType } from 'antd/es/checkbox/Group';
 import React from 'react';
+type Props = {
+    data: string[];
+    onChange: (checkedValues: CheckboxValueType[]) => void;
+}
 
-export function CheckBoxCard() {
-
-    const onChange = (checkedValues: CheckboxValueType[]) => {
-    console.log('checked = ', checkedValues);
-    };
+export const CheckBoxCard = ({data, onChange}: Props) => {
   
   const options = [
-    { label: 'Apple', value: 0},
-    { label: 'Pear', value: 1 },
-    { label: 'Orange', value: 2 },
+    { label: data[0], value: 0},
+    { label: data[1], value: 1 },
+    { label: data[2], value: 2 },
   ];
     return (
         <div>
