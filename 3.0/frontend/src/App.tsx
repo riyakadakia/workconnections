@@ -1,15 +1,7 @@
-import React from 'react';
-import './App.css';
-import { Button } from 'antd';
-import { useNavigate } from "react-router-dom";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Link,
-  Route
-} from "react-router-dom";
-import { Survey } from './Survey';
-import { Home } from './Pages/Home';
+import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Survey } from "./Survey";
+import { Home } from "./Pages/Home";
 
 function App() {
   return (
@@ -17,16 +9,13 @@ function App() {
       <header className="App-header">
         <Router>
           <Routes>
-            <Route path="/survey" element={<Survey/>} />
+            <Route path="/survey" element={<Survey />} />
             <Route path="/" element={<Home />} />
           </Routes>
         </Router>
-
       </header>
     </div>
-  ); 
+  );
 }
-
-
 
 export default App;
