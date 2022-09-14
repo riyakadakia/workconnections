@@ -24,8 +24,7 @@ const makeSurveyClient = () => {
   };
 
   const startNewSession = async () => {
-    // HACK: backend requires an empty object or it returns 400
-    const { data: sessionId } = await httpClient.post<string>("sessions/createSession", {});
+    const { data: sessionId } = await httpClient.post<string>("sessions/createSession");
 
     return sessionId;
   };
