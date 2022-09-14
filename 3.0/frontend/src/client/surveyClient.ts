@@ -4,6 +4,9 @@ import { config } from "../config";
 const makeSurveyClient = () => {
   const httpClient = new Axios({
     baseURL: config.serverUrl,
+    headers: {
+      "Content-Type": "application/json",
+    },
     validateStatus: (status) => status >= 200 && status < 300,
   });
 
@@ -20,8 +23,16 @@ const makeSurveyClient = () => {
     return servicesCount;
   };
 
+  const startNewSession = async () => {
+    // HACK: backend requires an empty object or it returns 400
+    const { data: sessionId } = await httpClient.post<string>("sessions/createSession", {});
+
+    return sessionId;
+  };
+
   return {
     getTotalProgramsCount,
+    startNewSession,
   };
 };
 
