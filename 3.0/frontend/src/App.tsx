@@ -7,11 +7,11 @@ import { Col, Row } from "antd";
 function App() {
   return (
     <Row className="App">
-      <Col>
+      <Col span={24}>
         <Router>
           <Routes>
-            <Route path="/survey" element={<Survey />} />
             <Route path="/" element={<Home />} />
+            <Route path="/survey" element={<Survey />} />
           </Routes>
         </Router>
       </Col>
