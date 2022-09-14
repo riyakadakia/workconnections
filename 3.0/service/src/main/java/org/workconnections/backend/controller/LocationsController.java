@@ -19,7 +19,7 @@ import org.workconnections.backend.repository.LocationsRepository;
 @RestController
 @RequestMapping("/locations")
 
-public class LocationsController {
+public class LocationsController extends BaseController {
 	
 	Logger log = LoggerFactory.getLogger(LocationsController.class);
 	

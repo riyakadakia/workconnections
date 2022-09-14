@@ -20,7 +20,7 @@ import org.workconnections.backend.service.QuestionsService;
 @RestController
 @RequestMapping("/surveys")
 
-public class SurveysController {
+public class SurveysController extends BaseController {
 
 	Logger log = LoggerFactory.getLogger(SurveysController.class);
 	

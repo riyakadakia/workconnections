@@ -22,7 +22,7 @@ import org.workconnections.backend.service.QuestionsService;
 @RestController
 @RequestMapping("/sessions")
 
-public class SessionsController {
+public class SessionsController extends BaseController {
 
 	Logger log = LoggerFactory.getLogger(SessionsController.class);
 	

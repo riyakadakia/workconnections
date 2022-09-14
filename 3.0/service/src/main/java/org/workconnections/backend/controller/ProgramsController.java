@@ -19,7 +19,7 @@ import org.workconnections.backend.repository.ProgramsRepository;
 @RestController
 @RequestMapping("/programs")
 
-public class ProgramsController {
+public class ProgramsController extends BaseController {
 
 	Logger log = LoggerFactory.getLogger(ProgramsController.class);
 	

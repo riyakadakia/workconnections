@@ -19,7 +19,7 @@ import org.workconnections.backend.repository.ZipcodesRepository;
 @RestController
 @RequestMapping("/zipcodes")
 
-public class ZipcodesController {
+public class ZipcodesController extends BaseController {
 	Logger log = LoggerFactory.getLogger(ZipcodesController.class);
 	
 	@Autowired
