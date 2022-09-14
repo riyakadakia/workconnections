@@ -1,5 +1,6 @@
 import axios from "axios";
 import { config } from "../config";
+import { Question } from "../types";
 
 const makeSurveyClient = () => {
   const httpClient = axios.create({
@@ -25,7 +26,22 @@ const makeSurveyClient = () => {
     return sessionId;
   };
 
+  // Not sure if this "getFirstQuestion" will survive as we evolve the API client, but it feels like an easy way to start
+  const getFirstQuestion = async () => {
+    const queryParams = new URLSearchParams({
+      surveyId: "-1",
+      lastQuestionId: "-1",
+      lastAnswerIndex: "-1",
+      lastAnswerInput: "",
+    });
+
+    const { data: firstQuestion } = await httpClient.get<Question>(`questions/getNextQuestion?${queryParams}`);
+
+    return firstQuestion;
+  };
+
   return {
+    getFirstQuestion,
     getTotalProgramsCount,
     startNewSession,
   };
