@@ -1,13 +1,9 @@
-import { Axios } from "axios";
+import axios from "axios";
 import { config } from "../config";
 
 const makeSurveyClient = () => {
-  const httpClient = new Axios({
+  const httpClient = axios.create({
     baseURL: config.serverUrl,
-    headers: {
-      "Content-Type": "application/json",
-    },
-    validateStatus: (status) => status >= 200 && status < 300,
   });
 
   // Fail if API doesn't return 2xx
