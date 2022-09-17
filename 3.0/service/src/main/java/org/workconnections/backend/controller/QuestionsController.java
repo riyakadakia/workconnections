@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,10 +19,9 @@ import org.workconnections.backend.repository.QuestionsRepository;
 import org.workconnections.backend.service.QuestionsService;
 
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/questions")
 
-public class QuestionsController {
+public class QuestionsController extends BaseController {
 
 	Logger log = LoggerFactory.getLogger(QuestionsController.class);
 	

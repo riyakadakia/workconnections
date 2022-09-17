@@ -1,32 +1,22 @@
-import React from 'react';
-import './App.css';
-import { Button } from 'antd';
-import { useNavigate } from "react-router-dom";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Link,
-  Route
-} from "react-router-dom";
-import { Survey } from './Survey';
-import { Home } from './Pages/Home';
+import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Survey } from "./Survey";
+import { Home } from "./Pages/Home";
+import { Col, Row } from "antd";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
+    <Row className="App">
+      <Col span={24}>
         <Router>
           <Routes>
-            <Route path="/survey" element={<Survey/>} />
             <Route path="/" element={<Home />} />
+            <Route path="/survey" element={<Survey />} />
           </Routes>
         </Router>
-
-      </header>
-    </div>
-  ); 
+      </Col>
+    </Row>
+  );
 }
-
-
 
 export default App;

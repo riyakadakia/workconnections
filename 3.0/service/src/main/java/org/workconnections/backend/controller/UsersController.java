@@ -20,7 +20,7 @@ import org.workconnections.backend.repository.UsersRepository;
 @RestController
 @RequestMapping("/users")
 
-public class UsersController {
+public class UsersController extends BaseController {
 
 	Logger log = LoggerFactory.getLogger(UsersController.class);
 	

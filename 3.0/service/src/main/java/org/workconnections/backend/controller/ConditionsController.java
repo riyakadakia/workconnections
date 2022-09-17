@@ -19,7 +19,7 @@ import org.workconnections.backend.repository.ConditionsRepository;
 @RestController
 @RequestMapping("/conditions")
 
-public class ConditionsController {
+public class ConditionsController extends BaseController {
 	
 	Logger log = LoggerFactory.getLogger(ConditionsController.class);
 	

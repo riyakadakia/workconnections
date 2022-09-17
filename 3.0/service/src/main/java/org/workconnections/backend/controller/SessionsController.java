@@ -22,7 +22,7 @@ import org.workconnections.backend.service.QuestionsService;
 @RestController
 @RequestMapping("/sessions")
 
-public class SessionsController {
+public class SessionsController extends BaseController {
 
 	Logger log = LoggerFactory.getLogger(SessionsController.class);
 	
@@ -38,12 +38,9 @@ public class SessionsController {
 	}
 	
 	@PostMapping("/createSession")
-	public ResponseEntity<?> createSession(@RequestBody Session session) {
-		session = sessionsRepository.save(session);
-		if (session != null) {
-			return new ResponseEntity<String>(session.getId(), HttpStatus.OK);
-		}
-		return new ResponseEntity<>(null, HttpStatus.OK);
+	public ResponseEntity<?> createSession() {
+		var session = sessionsRepository.save(new Session());
+		return new ResponseEntity<String>(session.getId(), HttpStatus.OK);
 	}
 
 	@PostMapping("/updateSession")
