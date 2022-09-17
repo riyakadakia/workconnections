@@ -39,11 +39,25 @@ const makeSurveyClient = () => {
 
     return firstQuestion;
   };
+  const getSecondQuestion = async (questionNumber: any) => {
+    const queryParams = new URLSearchParams({
+      surveyId: "-1",
+      lastQuestionId: questionNumber,
+      lastAnswerIndex: "0",
+      lastAnswerInput: "70801",
+    });
+  
 
+    const { data: secondQuestion } = await httpClient.get<Question>(`questions/getNextQuestion?${queryParams}`);
+
+    return secondQuestion;
+  };
+  
   return {
     getFirstQuestion,
     getTotalProgramsCount,
     startNewSession,
+    getSecondQuestion
   };
 };
 

@@ -1,4 +1,4 @@
-import { Button, Card, Col, Input, Row, Typography } from "antd";
+import { Button, Card, Col, Input, Row, Typography, Radio} from "antd";
 import { useState } from "react";
 import { Question } from "../types";
 import { Some } from "../utils/Some";
@@ -23,10 +23,11 @@ export const QuestionCard = ({ question, onNext }: Props) => {
         <Col span={24}>
           {/* TODO: support all question.types possible */}
           {question.type === "text_box" && <Input value={answer} onChange={(e) => setAnswer(e.target.value)} />}
+          {/*question.type === "radio_button" && <Radio value={answer} onChange={(e) => setAnswer(e.target.value)} />*/}
           {Some(validationError) && <Typography.Text type="danger">{validationError}</Typography.Text>}
         </Col>
       </Row>
-
+      
       <Button
         type="primary"
         onClick={() => {

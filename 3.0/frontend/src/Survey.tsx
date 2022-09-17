@@ -38,6 +38,10 @@ export function Survey() {
         setCurrentQuestion(question);
       }
 
+      if (previousQuestions.length === 1) {
+        const question = await surveyClient.getSecondQuestion(previousQuestions.length);
+        setCurrentQuestion(question);
+      }
       // TODO: implement what happens when previousQuestions.length > 0
       // It might need to call a differeny surveyClient function, passing in some parameters
       // It must still update currentQuestion
