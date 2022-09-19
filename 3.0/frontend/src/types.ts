@@ -2,7 +2,7 @@ export type Question = {
   id: string;
   name: string;
   hint: string;
-  type: "text_box";
+  type: "text_box" | "radio_button" | "drop_down" | "check_box" | "button";
   format: "number";
   answer: string[];
   nextid: number[];
