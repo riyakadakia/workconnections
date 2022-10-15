@@ -11,5 +11,5 @@ export type Question = {
 
 export type QuestionAndAnswer = {
   question: Question;
-  answer: unknown;
+  answer: string[];
 };

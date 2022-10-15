@@ -46,18 +46,17 @@ const makeSurveyClient = () => {
       lastAnswerIndex: "0",
       lastAnswerInput: "70801",
     });
-  
 
     const { data: secondQuestion } = await httpClient.get<Question>(`questions/getNextQuestion?${queryParams}`);
 
     return secondQuestion;
   };
-  
+
   return {
     getFirstQuestion,
     getTotalProgramsCount,
     startNewSession,
-    getSecondQuestion
+    getSecondQuestion,
   };
 };
 
