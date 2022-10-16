@@ -26,7 +26,7 @@ const makeSurveyClient = () => {
     return sessionId;
   };
 
-  // Not sure if this "getFirstQuestion" will survive as we evolve the API client, but it feels like an easy way to start
+  // TODO: Fix the params of this const
   const getFirstQuestion = async () => {
     const queryParams = new URLSearchParams({
       surveyId: "-1",
@@ -39,6 +39,8 @@ const makeSurveyClient = () => {
 
     return firstQuestion;
   };
+
+  // TODO: Fix the params of this const
   const getSecondQuestion = async (questionNumber: any) => {
     const queryParams = new URLSearchParams({
       surveyId: "-1",
@@ -52,11 +54,26 @@ const makeSurveyClient = () => {
     return secondQuestion;
   };
 
+  // TODO: Fix the params of this const
+  const getNextQuestion = async (questionNumber: any) => {
+    const queryParams = new URLSearchParams({
+      surveyId: "-1",
+      lastQuestionId: questionNumber,
+      lastAnswerIndex: "0",
+      lastAnswerInput: "70801",
+    });
+
+    const { data: nextQuestion } = await httpClient.get<Question>(`questions/getNextQuestion?${queryParams}`);
+
+    return nextQuestion;
+  };
+
   return {
     getFirstQuestion,
     getTotalProgramsCount,
     startNewSession,
     getSecondQuestion,
+    getNextQuestion,
   };
 };
 
