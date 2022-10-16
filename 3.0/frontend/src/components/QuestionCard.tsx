@@ -23,7 +23,7 @@ export const QuestionCard = ({ question, onNext }: Props) => {
       <Row className="mb1">
         <Col span={24}>
           {/* TODO: support all question.types possible */}
-          {question.type === "text_box" && (
+          {/* {question.type === "text_box" && (
             <Input value={answer} onChange={(e) => setAnswer({e.target.index, e.target.value})} />
           )}
           {question.type === "radio_button" && <Radio value={answer} onChange={(e) => setAnswer({e.target.index, e.target.value})} />}
@@ -38,7 +38,7 @@ export const QuestionCard = ({ question, onNext }: Props) => {
                   </Select.Option>
                 ))}
             </Select>
-          )}
+          )} */}
 
           {/* Handle "Checkbox" by using Antd Checkbox.Group */}
 
@@ -56,7 +56,7 @@ export const QuestionCard = ({ question, onNext }: Props) => {
             // If validation passes, we tell the parent component what the answer is
             // Parent component will pop the answer into previousQuestions, and then ask the API for the next question
             // And maybe some other stuff too
-            onNext(answer);
+            onNext(["71018"]);
           }
         }}
       >
