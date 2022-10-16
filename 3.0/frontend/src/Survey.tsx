@@ -47,7 +47,7 @@ export function Survey() {
       }
 
       if (previousQuestions.length === 1) {
-        const sid = await surveyClient.getSurveryIdFromZip(sessionId, previousQuestions[0].answer[0]);
+        const sid = await surveyClient.getSurveyIdFromZip(sessionId, previousQuestions[0].answer[0]);
         setSurveyId(sid);
         const question = await surveyClient.getSecondQuestion(previousQuestions.length, previousQuestions[0].answer[0]);
         setCurrentQuestion(question);
