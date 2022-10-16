@@ -66,7 +66,10 @@ export function Survey() {
         const question = await surveyClient.getNextQuestion(
           previousQuestions.length,
           surveyId,
-          previousQuestions[previousQuestions.length - 1].answer[0],
+
+          // TODO: correctly figure out the index here
+          -1,
+
           previousQuestions[previousQuestions.length - 1].answer[0]
         );
         setCurrentQuestion(question);
