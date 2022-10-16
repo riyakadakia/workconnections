@@ -39,7 +39,7 @@ const makeSurveyClient = () => {
     return firstQuestion;
   };
 
-  const getSurveyIdFromZip = async (session: any, zipcode: any) => {
+  const getSurveyIdFromZip = async (session: string, zipcode: string) => {
     const queryParams = new URLSearchParams({
       sessionId: session,
       zip: zipcode,

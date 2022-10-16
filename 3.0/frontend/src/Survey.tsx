@@ -47,10 +47,19 @@ export function Survey() {
       }
 
       if (previousQuestions.length === 1) {
-        const sid = await surveyClient.getSurveyIdFromZip(sessionId, previousQuestions[0].answer[0]);
-        setSurveyId(sid);
-        const question = await surveyClient.getSecondQuestion(previousQuestions.length, previousQuestions[0].answer[0]);
-        setCurrentQuestion(question);
+        if (Some(sessionId)) {
+          const sid = await surveyClient.getSurveyIdFromZip(sessionId, previousQuestions[0].answer[0]);
+          setSurveyId(sid);
+
+          const question = await surveyClient.getSecondQuestion(
+            previousQuestions.length,
+            previousQuestions[0].answer[0]
+          );
+
+          setCurrentQuestion(question);
+        } else {
+          throw new Error("Somehow attempting to getSurveyIdFromZip but sessionId is null");
+        }
       }
 
       if (previousQuestions.length > 1) {
