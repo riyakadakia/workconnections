@@ -26,7 +26,6 @@ const makeSurveyClient = () => {
     return sessionId;
   };
 
-  // TODO: Fix the params of this const
   const getFirstQuestion = async () => {
     const queryParams = new URLSearchParams({
       surveyId: "-1",
@@ -40,13 +39,23 @@ const makeSurveyClient = () => {
     return firstQuestion;
   };
 
-  // TODO: Fix the params of this const
-  const getSecondQuestion = async (questionNumber: any) => {
+  const getSurveryIdFromZip = async (session: any, zipcode: any) => {
+    const queryParams = new URLSearchParams({
+      sessionId: session,
+      zip: zipcode,
+    });
+
+    const { data: getSurveryIdFromZip } = await httpClient.get<number>(`questions/getSurveryIdFromZip?${queryParams}`);
+
+    return getSurveryIdFromZip;
+  };
+
+  const getSecondQuestion = async (questionNumber: any, zipcode: any) => {
     const queryParams = new URLSearchParams({
       surveyId: "-1",
       lastQuestionId: questionNumber,
       lastAnswerIndex: "0",
-      lastAnswerInput: "70801",
+      lastAnswerInput: zipcode,
     });
 
     const { data: secondQuestion } = await httpClient.get<Question>(`questions/getNextQuestion?${queryParams}`);
@@ -74,6 +83,7 @@ const makeSurveyClient = () => {
     startNewSession,
     getSecondQuestion,
     getNextQuestion,
+    getSurveryIdFromZip,
   };
 };
 

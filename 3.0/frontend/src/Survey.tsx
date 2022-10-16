@@ -15,6 +15,7 @@ export function Survey() {
   // Let's ensure we have a valid sessionId as a query string parameter, and if not, probably just go to the home page
   const navigate = useNavigate();
   const sessionId = new URLSearchParams(window.location.search).get("sessionId");
+  const [surveyId, setSurveyId] = useState<number>(0);
 
   if (None(sessionId) || sessionId === "") {
     navigate("/");
@@ -45,10 +46,17 @@ export function Survey() {
         setCurrentQuestion(question);
       }
 
-      if (previousQuestions.length > 0) {
-        const question = await surveyClient.getSecondQuestion(previousQuestions.length);
+      if (previousQuestions.length === 1) {
+        const sid = await surveyClient.getSurveryIdFromZip(sessionId, previousQuestions[0].answer[0]);
+        setSurveyId(sid);
+        const question = await surveyClient.getSecondQuestion(previousQuestions.length, previousQuestions[0].answer[0]);
         setCurrentQuestion(question);
       }
+
+      /*if (previousQuestions.length > 1) {
+        const question = await surveyClient.getNextQuestion(previousQuestions.length, surveyId, previousQuestions[length-1].answer[0], previousQuestions[0].answer[0] );
+        setCurrentQuestion(question);
+      }*/
 
       // TODO: implement what happens when previousQuestions.length > 0
       // It might need to call a differeny surveyClient function, passing in some parameters
@@ -58,7 +66,7 @@ export function Survey() {
     };
 
     getNextQuestion();
-  }, [previousQuestions.length]);
+  }, [previousQuestions, previousQuestions.length, sessionId, surveyId]);
 
   return (
     <>
