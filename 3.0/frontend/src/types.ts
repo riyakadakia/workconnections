@@ -13,3 +13,8 @@ export type QuestionAndAnswer = {
   question: Question;
   answer: string[];
 };
+
+export type AnswerWithIndex = {
+  answerIndex: string;
+  answerText: string;
+};

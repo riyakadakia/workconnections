@@ -53,10 +53,15 @@ export function Survey() {
         setCurrentQuestion(question);
       }
 
-      /*if (previousQuestions.length > 1) {
-        const question = await surveyClient.getNextQuestion(previousQuestions.length, surveyId, previousQuestions[length-1].answer[0], previousQuestions[0].answer[0] );
+      if (previousQuestions.length > 1) {
+        const question = await surveyClient.getNextQuestion(
+          previousQuestions.length,
+          surveyId,
+          previousQuestions[previousQuestions.length - 1].answer[0],
+          previousQuestions[previousQuestions.length - 1].answer[0]
+        );
         setCurrentQuestion(question);
-      }*/
+      }
 
       // TODO: implement what happens when previousQuestions.length > 0
       // It might need to call a differeny surveyClient function, passing in some parameters

@@ -1,6 +1,6 @@
 import { Button, Card, Col, Input, Select, Row, Typography, Radio } from "antd";
 import { useState } from "react";
-import { Question } from "../types";
+import { AnswerWithIndex, Question } from "../types";
 import { Some } from "../utils/Some";
 
 type Props = {
@@ -12,9 +12,8 @@ type Props = {
 };
 
 export const QuestionCard = ({ question, onNext }: Props) => {
-  const [answer, setAnswer] = useState<string[]>([]);
+  const [answer, setAnswer] = useState<AnswerWithIndex>();
   const [validationError, setValidationError] = useState<string>();
-
   console.log(question);
 
   return (
@@ -24,15 +23,17 @@ export const QuestionCard = ({ question, onNext }: Props) => {
       <Row className="mb1">
         <Col span={24}>
           {/* TODO: support all question.types possible */}
-          {question.type === "text_box" && <Input value={answer} onChange={(e) => setAnswer([e.target.value])} />}
-          {question.type === "radio_button" && <Radio value={answer} onChange={(e) => setAnswer(e.target.value)} />}
+          {question.type === "text_box" && (
+            <Input value={answer} onChange={(e) => setAnswer({e.target.index, e.target.value})} />
+          )}
+          {question.type === "radio_button" && <Radio value={answer} onChange={(e) => setAnswer({e.target.index, e.target.value})} />}
 
           {question.type === "drop_down" && (
-            <Select style={{ width: "100%" }} onChange={(answer: string) => setAnswer([answer])}>
+            <Select style={{ width: "100%" }} onChange={(answer: string) => setAnswer({answer.answerIndex, answer.answerValue})}>
               {question.answer
                 .filter((answer) => answer !== "")
                 .map((answer) => (
-                  <Select.Option key={answer} value={answer}>
+                  <Select.Option key={answer} value={{answer.answerIndex, answer.answerValue}}>
                     {answer}
                   </Select.Option>
                 ))}
@@ -49,7 +50,7 @@ export const QuestionCard = ({ question, onNext }: Props) => {
         type="primary"
         onClick={() => {
           // TODO: how can we do better validation (like zipCode) at this step?
-          if (answer[0] === "") {
+          if (answer?.answerText === "") {
             setValidationError("Please enter a valid answer");
           } else {
             // If validation passes, we tell the parent component what the answer is

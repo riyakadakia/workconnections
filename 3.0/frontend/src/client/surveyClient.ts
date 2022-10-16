@@ -64,7 +64,7 @@ const makeSurveyClient = () => {
   };
 
   // TODO: Fix the params of this const
-  const getNextQuestion = async (questionNumber: any, sid: string, lai: string, lain: string) => {
+  const getNextQuestion = async (questionNumber: any, sid: any, lai: any, lain: string) => {
     const queryParams = new URLSearchParams({
       surveyId: sid,
       lastQuestionId: questionNumber,
