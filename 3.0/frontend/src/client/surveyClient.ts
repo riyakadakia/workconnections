@@ -50,10 +50,10 @@ const makeSurveyClient = () => {
     return getSurveyIdFromZip;
   };
 
-  const getSecondQuestion = async (questionNumber: any, zipcode: any) => {
+  const getSecondQuestion = async (questionNumber: number, zipcode: string) => {
     const queryParams = new URLSearchParams({
       surveyId: "-1",
-      lastQuestionId: questionNumber,
+      lastQuestionId: questionNumber.toString(),
       lastAnswerIndex: "0",
       lastAnswerInput: zipcode,
     });
