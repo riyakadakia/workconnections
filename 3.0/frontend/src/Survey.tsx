@@ -10,6 +10,8 @@ import { None } from "./utils/None";
 import { Some } from "./utils/Some";
 
 export function Survey() {
+  console.log("Rendering Survey()");
+
   // Let's ensure we have a valid sessionId as a query string parameter, and if not, probably just go to the home page
   const navigate = useNavigate();
   const sessionId = new URLSearchParams(window.location.search).get("sessionId");
@@ -31,17 +33,23 @@ export function Survey() {
   // That way, if we add (or remove) questions from previousQuestions array, we will call this effect again that
   // should make sure we're always displaying the right question on screen
   useEffect(() => {
+    console.log("previousQuestions.length: ", previousQuestions.length);
+
     const getNextQuestion = async () => {
+      // TODO: call "addToSession"
+      // TODO: Update eligible programs count
+
       // Depending on how many questions are in the previousQuestions we need to behave differently
       if (previousQuestions.length === 0) {
         const question = await surveyClient.getFirstQuestion();
         setCurrentQuestion(question);
       }
 
-      if (previousQuestions.length === 1) {
+      if (previousQuestions.length > 0) {
         const question = await surveyClient.getSecondQuestion(previousQuestions.length);
         setCurrentQuestion(question);
       }
+
       // TODO: implement what happens when previousQuestions.length > 0
       // It might need to call a differeny surveyClient function, passing in some parameters
       // It must still update currentQuestion

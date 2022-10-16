@@ -1,5 +1,4 @@
-import { Button, Card, Col, Input, Row, Typography, Radio } from "antd";
-//import DropDown from antd when you need it
+import { Button, Card, Col, Input, Select, Row, Typography, Radio } from "antd";
 import { useState } from "react";
 import { Question } from "../types";
 import { Some } from "../utils/Some";
@@ -9,12 +8,14 @@ type Props = {
 
   // TODO: will we need to modify this from "string" or does string support all possible input types
   // number, checkbox, dropdown etc...
-  onNext: (answer: string) => void;
+  onNext: (answer: string[]) => void;
 };
 
 export const QuestionCard = ({ question, onNext }: Props) => {
-  const [answer, setAnswer] = useState<string>("");
+  const [answer, setAnswer] = useState<string[]>([]);
   const [validationError, setValidationError] = useState<string>();
+
+  console.log(question);
 
   return (
     <Card style={{ minWidth: 450 }}>
@@ -23,9 +24,23 @@ export const QuestionCard = ({ question, onNext }: Props) => {
       <Row className="mb1">
         <Col span={24}>
           {/* TODO: support all question.types possible */}
-          {question.type === "text_box" && <Input value={answer} onChange={(e) => setAnswer(e.target.value)} />}
+          {question.type === "text_box" && <Input value={answer} onChange={(e) => setAnswer([e.target.value])} />}
           {question.type === "radio_button" && <Radio value={answer} onChange={(e) => setAnswer(e.target.value)} />}
-          {/*question.type === "drop_down" &&<Dropdown overlay={question.answer} onClick={e => e.preventDefault()}/>*/}
+
+          {question.type === "drop_down" && (
+            <Select style={{ width: "100%" }} onChange={(answer: string) => setAnswer([answer])}>
+              {question.answer
+                .filter((answer) => answer !== "")
+                .map((answer) => (
+                  <Select.Option key={answer} value={answer}>
+                    {answer}
+                  </Select.Option>
+                ))}
+            </Select>
+          )}
+
+          {/* Handle "Checkbox" by using Antd Checkbox.Group */}
+
           {Some(validationError) && <Typography.Text type="danger">{validationError}</Typography.Text>}
         </Col>
       </Row>
@@ -34,7 +49,7 @@ export const QuestionCard = ({ question, onNext }: Props) => {
         type="primary"
         onClick={() => {
           // TODO: how can we do better validation (like zipCode) at this step?
-          if (answer === "") {
+          if (answer[0] === "") {
             setValidationError("Please enter a valid answer");
           } else {
             // If validation passes, we tell the parent component what the answer is
