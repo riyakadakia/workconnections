@@ -55,11 +55,18 @@ public class SessionsController extends BaseController {
 		return new ResponseEntity<>(null, HttpStatus.OK);
 	}
 	
-	@PostMapping("/addToSession")
-	public ResponseEntity<?> addToSession(@RequestParam("sessionId") String sessionId, @RequestBody SessionResponse response) {
+	@GetMapping("/addToSession")
+	public ResponseEntity<?> addToSession(
+			@RequestParam("sessionId") String sessionId, 
+			@RequestParam("questionId") Integer questionId,
+			@RequestParam("answerIds") String answerIds,
+			@RequestParam("answerInput") String answerInput) {
 		Optional<Session> sessionData = sessionsRepository.findById(sessionId);
 		if (sessionData.isPresent()) {
 			Session session = sessionData.get();
+			Integer[] answerIdInts = questionsService.getLastAnswerIdInts(answerIds);
+			String answerInputStr = questionsService.parseAnswerInput(answerInput);
+			SessionResponse response = new SessionResponse(questionId, answerIdInts, answerInputStr);
 			session.addResponse(response.getQuestionId(), response);
 			session = sessionsRepository.save(session);
 			if (session != null) {

@@ -4,8 +4,14 @@ package org.workconnections.backend.entity;
 public class SessionResponse {
 
 	private Integer questionId;
-	private Integer answerIds[];
+	private Integer[] answerIds;
 	private String answerInput;
+	
+	public SessionResponse(Integer questionId, Integer[] answerIds, String answerInput) {
+		this.questionId = questionId;
+		this.answerIds = answerIds;
+		this.answerInput = answerInput;
+	}
 	
 	public Integer getQuestionId() {
 		return questionId;

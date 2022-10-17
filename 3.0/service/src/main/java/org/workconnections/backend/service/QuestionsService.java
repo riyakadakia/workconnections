@@ -40,6 +40,15 @@ public class QuestionsService {
 
 
 	Logger log = LoggerFactory.getLogger(QuestionsService.class);
+
+	
+	/* 
+	 * Parse answerInput. Remove unnecessary ""
+	 */
+	public String parseAnswerInput(String answerInput) {
+		String parsedAnswerInput = answerInput.replaceAll("\"", "");
+		return parsedAnswerInput;
+	}
 	
 	/*
 	 * This method returns the surveyId from the zipcode that the user entered in the first question
@@ -111,13 +120,11 @@ public class QuestionsService {
 	 * Returns an array of integers parsed from the string. If the string was empty, method 
 	 * returns an empty array.
 	 */
-	Integer[] getLastAnswerIdInts(String lastAnswerIds) {		
+	public Integer[] getLastAnswerIdInts(String lastAnswerIds) {		
 		if (lastAnswerIds != null) {
 			lastAnswerIds = lastAnswerIds.replaceAll("\"", "");
 			if (!lastAnswerIds.isEmpty()) {
-				System.out.println("lastAnswerIds: " + lastAnswerIds);
-				String[] ids = lastAnswerIds.split(",");
-				
+				String[] ids = lastAnswerIds.split(",");		
 				if (ids.length > 0) {
 					Integer[] parsedAnswerIds = new Integer[ids.length];
 					for (int i = 0; i < ids.length; i++) {
