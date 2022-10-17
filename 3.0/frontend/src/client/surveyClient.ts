@@ -64,12 +64,17 @@ const makeSurveyClient = () => {
   };
 
   // TODO: Fix the params of this const
-  const getNextQuestion = async (questionNumber: number, sid: number, lai: number, lain: string) => {
+  const getNextQuestion = async (
+    questionNumber: number,
+    surveyId: number,
+    lastAnswerIndex: number,
+    lastAnswerInput: string
+  ) => {
     const queryParams = new URLSearchParams({
-      surveyId: sid.toString(),
+      surveyId: surveyId.toString(),
       lastQuestionId: questionNumber.toString(),
-      lastAnswerIndex: lai.toString(),
-      lastAnswerInput: lain,
+      lastAnswerIndex: lastAnswerIndex.toString(),
+      lastAnswerInput,
     });
 
     const { data: nextQuestion } = await httpClient.get<Question>(`questions/getNextQuestion?${queryParams}`);
