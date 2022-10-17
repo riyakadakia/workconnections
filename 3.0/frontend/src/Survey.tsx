@@ -101,7 +101,8 @@ export function Survey() {
     };
 
     getNextQuestion();
-  }, [previousQuestions, previousQuestions.length, sessionId, surveyId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [previousQuestions.length]);
 
   return (
     <>
