@@ -50,12 +50,12 @@ const makeSurveyClient = () => {
     return surveyId;
   };
 
-  const getSecondQuestion = async (questionNumber: number, zipcode: string) => {
+  const getSecondQuestion = async (questionNumber: number, zip: string) => {
     const queryParams = new URLSearchParams({
       surveyId: "-1",
       lastQuestionId: questionNumber.toString(),
       lastAnswerIndex: "0",
-      lastAnswerInput: zipcode,
+      lastAnswerInput: zip,
     });
 
     const { data: secondQuestion } = await httpClient.get<Question>(`questions/getNextQuestion?${queryParams}`);
