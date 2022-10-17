@@ -48,8 +48,8 @@ export function Survey() {
 
       if (previousQuestions.length === 1) {
         if (Some(sessionId)) {
-          const sid = await surveyClient.getSurveyIdFromZip(sessionId, previousQuestions[0].answer[0]);
-          setSurveyId(sid);
+          const surveyId = await surveyClient.getSurveyIdFromZip(sessionId, previousQuestions[0].answer[0]);
+          setSurveyId(surveyId);
 
           const question = await surveyClient.getSecondQuestion(
             previousQuestions.length,
