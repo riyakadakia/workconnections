@@ -45,9 +45,9 @@ const makeSurveyClient = () => {
       zip,
     });
 
-    const { data: getSurveyIdFromZip } = await httpClient.get<number>(`sessions/getSurveyIdFromZip?${queryParams}`);
+    const { data: surveyId } = await httpClient.get<number>(`sessions/getSurveyIdFromZip?${queryParams}`);
 
-    return getSurveyIdFromZip;
+    return surveyId;
   };
 
   const getSecondQuestion = async (questionNumber: number, zipcode: string) => {
