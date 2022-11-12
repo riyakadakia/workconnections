@@ -122,7 +122,9 @@ public class QuestionsService {
 	 * Returns an array of integers parsed from the string. If the string was empty, method 
 	 * returns an empty array.
 	 */
-	public Integer[] getLastAnswerIdInts(String lastAnswerIds) {		
+	public Integer[] getLastAnswerIdInts(String lastAnswerIds) {	
+		log.info("getLastAnswerIdInts: " + lastAnswerIds);
+
 		if (lastAnswerIds != null) {
 			lastAnswerIds = lastAnswerIds.replaceAll("\"", "");
 			if (!lastAnswerIds.isEmpty()) {
@@ -132,10 +134,12 @@ public class QuestionsService {
 					for (int i = 0; i < ids.length; i++) {
 						parsedAnswerIds[i] = Integer.valueOf(ids[i]);
 					}
+					log.info("getLastAnswerIdInts: Returning " + parsedAnswerIds);
 					return parsedAnswerIds;
 				} 
 			}
-		} 
+		}
+		log.info("getLastAnswerIdInts: Returning null");
 		return null;
 	}
 	
