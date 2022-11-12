@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.workconnections.backend.entity.Session;
-import org.workconnections.backend.entity.SessionResponse;
 import org.workconnections.backend.repository.SessionsRepository;
 import org.workconnections.backend.service.QuestionsService;
+import org.workconnections.backend.service.SessionsService;
 
 @RestController
 @RequestMapping("/sessions")
@@ -32,6 +32,9 @@ public class SessionsController extends BaseController {
 	@Autowired
 	QuestionsService questionsService;
 			
+	@Autowired
+	SessionsService sessionsService;
+	
 	@GetMapping("/getAllSessions")
 	public List<Session> getAllSessions() {
 		return sessionsRepository.findAll();
@@ -61,19 +64,8 @@ public class SessionsController extends BaseController {
 			@RequestParam("questionId") Integer questionId,
 			@RequestParam("answerIds") String answerIds,
 			@RequestParam("answerInput") String answerInput) {
-		Optional<Session> sessionData = sessionsRepository.findById(sessionId);
-		if (sessionData.isPresent()) {
-			Session session = sessionData.get();
-			Integer[] answerIdInts = questionsService.getLastAnswerIdInts(answerIds);
-			String answerInputStr = questionsService.parseAnswerInput(answerInput);
-			SessionResponse response = new SessionResponse(questionId, answerIdInts, answerInputStr);
-			session.addResponse(response.getQuestionId(), response);
-			session = sessionsRepository.save(session);
-			if (session != null) {
-				return new ResponseEntity<String>(session.getId(), HttpStatus.OK);
-			}
-		}
-		return new ResponseEntity<>(null, HttpStatus.OK);
+
+		return sessionsService.addToSession(sessionId, questionId, answerIds, answerInput);
 	}	
 	
 	@GetMapping("/findById")

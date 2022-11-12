@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.workconnections.backend.entity.Location;
 import org.workconnections.backend.entity.Question;
 import org.workconnections.backend.entity.QuestionResponse;
@@ -37,6 +36,9 @@ public class QuestionsService {
 	
 	@Autowired
 	SessionsRepository sessionsRepository;
+	
+	@Autowired
+	SessionsService sessionsService;
 
 
 	Logger log = LoggerFactory.getLogger(QuestionsService.class);
@@ -169,7 +171,12 @@ public class QuestionsService {
 	 *         If non-0, check the nextid first. If that is not -1, that's the nextQuestionId
 	 *               else, nextid -1 use the default nextQuestion (from survey collection).
 	 */
-	public Question getNextQuestion(Integer surveyId, Integer lastQuestionId, String lastAnswerIds, String lastAnswerInput) {
+	public Question getNextQuestion(
+			String sessionId, 
+			Integer surveyId, 
+			Integer lastQuestionId, 
+			String lastAnswerIds, 
+			String lastAnswerInput) {
 		
 		Question nextQuestion = null;
 		
@@ -230,6 +237,9 @@ public class QuestionsService {
 			nextQuestion = getDefaultNextQuestion(surveyId, lastQuestionId);
 		}
 		
+		// Add the previous answer to the session
+		sessionsService.addToSession(sessionId, lastQuestionId, lastAnswerIds, lastAnswerInput);
+		
 		return nextQuestion;
 	}
 	
@@ -237,8 +247,7 @@ public class QuestionsService {
 	 * This method returns the question with id=questionId along with the answer to that question in this session
 	 * if sessionId != null and the answer was saved using /sessions/addToSession
 	 */
-	public QuestionResponse getQuestionResponse(@RequestParam("sessionId") String sessionId,
-												 @RequestParam("questionId") Integer questionId) {
+	public QuestionResponse getQuestionResponse(String sessionId, Integer questionId) {
 		
 		QuestionResponse questionResponse = null;
 		

@@ -86,12 +86,16 @@ public class QuestionsController extends BaseController {
 	}
 
 	@GetMapping("/getNextQuestion")
-	public ResponseEntity<?> getNextQuestion(@RequestParam("surveyId") Integer surveyId, 
-											 @RequestParam("lastQuestionId") Integer lastQuestionId, 
-											 @RequestParam("lastAnswerIds") String lastAnswerIds, 
-											 @RequestParam("lastAnswerInput") String lastAnswerInput) {
+	public ResponseEntity<?> getNextQuestion(
+									@RequestParam("sessionId") String sessionId,
+									@RequestParam("surveyId") Integer surveyId, 
+									@RequestParam("lastQuestionId") Integer lastQuestionId, 
+									@RequestParam("lastAnswerIds") String lastAnswerIds, 
+									@RequestParam("lastAnswerInput") String lastAnswerInput) {
 		
-		Question nextQuestion = questionsService.getNextQuestion(surveyId, lastQuestionId, lastAnswerIds, lastAnswerInput);
+		Question nextQuestion = questionsService.getNextQuestion(
+									sessionId, surveyId, lastQuestionId, 
+									lastAnswerIds, lastAnswerInput);
 		if (nextQuestion == null) {
 			return new ResponseEntity<>(null, HttpStatus.OK);
 		} else {
