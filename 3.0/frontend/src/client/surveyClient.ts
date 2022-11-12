@@ -39,23 +39,23 @@ const makeSurveyClient = () => {
     return firstQuestion;
   };
 
-  const getSurveyIdFromZip = async (session: any, zipcode: any) => {
+  const getSurveyIdFromZip = async (sessionId: string, zip: string) => {
     const queryParams = new URLSearchParams({
-      sessionId: session,
-      zip: zipcode,
+      sessionId,
+      zip,
     });
 
-    const { data: getSurveyIdFromZip } = await httpClient.get<number>(`sessions/getSurveyIdFromZip?${queryParams}`);
+    const { data: surveyId } = await httpClient.get<number>(`sessions/getSurveyIdFromZip?${queryParams}`);
 
-    return getSurveyIdFromZip;
+    return surveyId;
   };
 
-  const getSecondQuestion = async (questionNumber: any, zipcode: any) => {
+  const getSecondQuestion = async (questionNumber: number, zip: string) => {
     const queryParams = new URLSearchParams({
       surveyId: "-1",
-      lastQuestionId: questionNumber,
+      lastQuestionId: questionNumber.toString(),
       lastAnswerIndex: "0",
-      lastAnswerInput: zipcode,
+      lastAnswerInput: zip,
     });
 
     const { data: secondQuestion } = await httpClient.get<Question>(`questions/getNextQuestion?${queryParams}`);
@@ -64,12 +64,17 @@ const makeSurveyClient = () => {
   };
 
   // TODO: Fix the params of this const
-  const getNextQuestion = async (questionNumber: any, sid: any, lai: any, lain: string) => {
+  const getNextQuestion = async (
+    questionNumber: number,
+    surveyId: number,
+    lastAnswerIndex: number,
+    lastAnswerInput: string
+  ) => {
     const queryParams = new URLSearchParams({
-      surveyId: sid,
-      lastQuestionId: questionNumber,
-      lastAnswerIndex: lai,
-      lastAnswerInput: lain,
+      surveyId: surveyId.toString(),
+      lastQuestionId: questionNumber.toString(),
+      lastAnswerIndex: lastAnswerIndex.toString(),
+      lastAnswerInput,
     });
 
     const { data: nextQuestion } = await httpClient.get<Question>(`questions/getNextQuestion?${queryParams}`);
