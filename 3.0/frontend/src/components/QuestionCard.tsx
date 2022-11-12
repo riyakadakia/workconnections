@@ -1,4 +1,4 @@
-import { Button, Card, Col, Input, Select, Row, Typography, Radio } from "antd";
+import { Button, Card, Col, Input, Select, Row, Typography, Radio, Space } from "antd";
 import { useState } from "react";
 import { Question } from "../types";
 import { Some } from "../utils/Some";
@@ -24,7 +24,21 @@ export const QuestionCard = ({ question, onNext }: Props) => {
         <Col span={24}>
           {/* TODO: support all question.types possible */}
           {question.type === "text_box" && <Input value={answer} onChange={(e) => setAnswer([e.target.value])} />}
-          {question.type === "radio_button" && <Radio value={answer} onChange={(e) => setAnswer([e.target.value])} />}
+
+          {question.type === "radio_button" && (
+            // <Radio value={answer} onChange={(e) => setAnswer([e.target.value])} />
+            <Radio.Group style={{ width: "100%" }} onChange={(e) => setAnswer([e.target.value])}>
+              {question.answer
+                .filter((answer) => answer !== "")
+                .map((answer) => (
+                  <Space direction="vertical">
+                    <Radio key={answer} value={answer}>
+                      {answer}
+                    </Radio>
+                  </Space>
+                ))}
+            </Radio.Group>
+          )}
 
           {question.type === "drop_down" && (
             <Select style={{ width: "100%" }} onChange={(answer: string) => setAnswer([answer])}>

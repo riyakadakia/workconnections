@@ -65,18 +65,18 @@ export function Survey() {
       if (previousQuestions.length > 1) {
         const { question: lastQuestion, answer: lastAnswer } = previousQuestions[previousQuestions.length - 1];
 
-        // All other questions need us to pass a `lastAnswerIndex`. In the case of free text strings, this is expected to be 0
-        const getLastAnswerIndex = () => {
+        // All other questions need us to pass a `lastAnswerIds`. In the case of free text strings, this is expected to be 0
+        const getLastAnswerIds = () => {
           switch (lastQuestion.type) {
             case "text_box":
-              return 0;
+              return "0";
 
             case "drop_down":
             case "radio_button":
               // TODO: this method searches the possible answer[] provided by backend, and looks for the first result
               // This is because a drop_down (Select) can only ever pick 1 result
               // How will we deal with checkboxes, where multiple indices could be selected? Let's deal with that when we get to it!
-              return lastQuestion.answer.findIndex((_) => _ === lastAnswer[0]);
+              return lastQuestion.answer.findIndex((_) => _ === lastAnswer[0]).toString();
 
             case "button":
             case "check_box":
@@ -87,7 +87,7 @@ export function Survey() {
         const question = await surveyClient.getNextQuestion(
           previousQuestions.length,
           surveyId,
-          getLastAnswerIndex(),
+          getLastAnswerIds(),
           previousQuestions[previousQuestions.length - 1].answer[0]
         );
         setCurrentQuestion(question);

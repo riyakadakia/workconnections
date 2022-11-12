@@ -30,7 +30,7 @@ const makeSurveyClient = () => {
     const queryParams = new URLSearchParams({
       surveyId: "-1",
       lastQuestionId: "-1",
-      lastAnswerIndex: "-1",
+      lastAnswerIds: "-1",
       lastAnswerInput: "",
     });
 
@@ -54,7 +54,7 @@ const makeSurveyClient = () => {
     const queryParams = new URLSearchParams({
       surveyId: "-1",
       lastQuestionId: questionNumber.toString(),
-      lastAnswerIndex: "0",
+      lastAnswerIds: "0",
       lastAnswerInput: zip,
     });
 
@@ -67,13 +67,13 @@ const makeSurveyClient = () => {
   const getNextQuestion = async (
     questionNumber: number,
     surveyId: number,
-    lastAnswerIndex: number,
+    lastAnswerIds: string,
     lastAnswerInput: string
   ) => {
     const queryParams = new URLSearchParams({
       surveyId: surveyId.toString(),
       lastQuestionId: questionNumber.toString(),
-      lastAnswerIndex: lastAnswerIndex.toString(),
+      lastAnswerIds: lastAnswerIds,
       lastAnswerInput,
     });
 
