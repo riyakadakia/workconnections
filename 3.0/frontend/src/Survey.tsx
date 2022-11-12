@@ -52,6 +52,7 @@ export function Survey() {
           setSurveyId(surveyId);
 
           const question = await surveyClient.getSecondQuestion(
+            sessionId,
             previousQuestions.length,
             previousQuestions[0].answer[0]
           );
@@ -73,24 +74,27 @@ export function Survey() {
 
             case "drop_down":
             case "radio_button":
+            case "check_box":
               // TODO: this method searches the possible answer[] provided by backend, and looks for the first result
               // This is because a drop_down (Select) can only ever pick 1 result
               // How will we deal with checkboxes, where multiple indices could be selected? Let's deal with that when we get to it!
               return lastQuestion.answer.findIndex((_) => _ === lastAnswer[0]).toString();
 
             case "button":
-            case "check_box":
               throw new Error("Not implemented");
           }
         };
 
-        const question = await surveyClient.getNextQuestion(
-          previousQuestions.length,
-          surveyId,
-          getLastAnswerIds(),
-          previousQuestions[previousQuestions.length - 1].answer[0]
-        );
-        setCurrentQuestion(question);
+        if (Some(sessionId)) {
+          const question = await surveyClient.getNextQuestion(
+            sessionId,
+            previousQuestions.length,
+            surveyId,
+            getLastAnswerIds(),
+            previousQuestions[previousQuestions.length - 1].answer[0]
+          );
+          setCurrentQuestion(question);
+        }
       }
 
       // TODO: implement what happens when previousQuestions.length > 0

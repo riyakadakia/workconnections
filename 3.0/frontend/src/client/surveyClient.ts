@@ -50,8 +50,9 @@ const makeSurveyClient = () => {
     return surveyId;
   };
 
-  const getSecondQuestion = async (questionNumber: number, zip: string) => {
+  const getSecondQuestion = async (sessionId: string, questionNumber: number, zip: string) => {
     const queryParams = new URLSearchParams({
+      sessionId: sessionId,
       surveyId: "-1",
       lastQuestionId: questionNumber.toString(),
       lastAnswerIds: "0",
@@ -65,12 +66,14 @@ const makeSurveyClient = () => {
 
   // TODO: Fix the params of this const
   const getNextQuestion = async (
+    sessionId: string,
     questionNumber: number,
     surveyId: number,
     lastAnswerIds: string,
     lastAnswerInput: string
   ) => {
     const queryParams = new URLSearchParams({
+      sessionId: sessionId,
       surveyId: surveyId.toString(),
       lastQuestionId: questionNumber.toString(),
       lastAnswerIds: lastAnswerIds,

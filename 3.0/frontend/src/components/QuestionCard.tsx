@@ -1,4 +1,5 @@
-import { Button, Card, Col, Input, Select, Row, Typography, Radio, Space } from "antd";
+import { Button, Card, Col, Input, Select, Row, Typography, Radio, Space, Checkbox } from "antd";
+import { CheckboxValueType } from "antd/lib/checkbox/Group";
 import { useState } from "react";
 import { Question } from "../types";
 import { Some } from "../utils/Some";
@@ -50,6 +51,21 @@ export const QuestionCard = ({ question, onNext }: Props) => {
                   </Select.Option>
                 ))}
             </Select>
+          )}
+
+          {question.type === "check_box" && (
+            <Checkbox.Group
+              style={{ width: "100%" }}
+              onChange={(checkedValues: CheckboxValueType[]) => setAnswer([checkedValues.toString()])}
+            >
+              {question.answer
+                .filter((answer) => answer !== "")
+                .map((answer) => (
+                  <Checkbox key={answer} value={answer}>
+                    {answer}
+                  </Checkbox>
+                ))}
+            </Checkbox.Group>
           )}
 
           {/* Handle "Checkbox" by using Antd Checkbox.Group */}
