@@ -28,6 +28,7 @@ const makeSurveyClient = () => {
 
   const getFirstQuestion = async () => {
     const queryParams = new URLSearchParams({
+      sessionId: "",
       surveyId: "-1",
       lastQuestionId: "-1",
       lastAnswerIds: "-1",
