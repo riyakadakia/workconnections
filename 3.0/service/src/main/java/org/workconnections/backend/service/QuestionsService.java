@@ -183,6 +183,7 @@ public class QuestionsService {
 			String lastAnswerInput) {
 		
 		Question nextQuestion = null;
+		boolean firstQuestion = false;
 		
 		Integer[] lastAnswerIdInts = getLastAnswerIdInts(lastAnswerIds);
 		
@@ -192,6 +193,7 @@ public class QuestionsService {
 			
 			// (1) Call to get the first (zipcode) question. Don't know surveyId yet.
 			nextQuestion = questionsRepository.findById(1);
+			firstQuestion = true;
 			
 		} else if (surveyId != null && lastQuestionId != null && lastAnswerIdInts != null &&
 				   surveyId.intValue() == -1 && lastQuestionId.intValue() == 1 && lastAnswerIdInts.length == 1 &&
@@ -241,7 +243,7 @@ public class QuestionsService {
 			nextQuestion = getDefaultNextQuestion(surveyId, lastQuestionId);
 		}
 		
-		if (sessionId != null && !sessionId.isEmpty()) {
+		if (sessionId != null && !sessionId.isEmpty() && !firstQuestion) {
 			// Add the previous answer to the session
 			String lastAnswerInputStr = parseAnswerInput(lastAnswerInput);
 			sessionsService.addToSession(sessionId, surveyId, lastQuestionId, lastAnswerIdInts, lastAnswerInputStr);

@@ -3,10 +3,12 @@ package org.workconnections.backend.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.workconnections.backend.entity.Condition;
 import org.workconnections.backend.entity.Session;
 import org.workconnections.backend.repository.ConditionsRepository;
 
+@Service
 public class ConditionsService {
 	
 	@Autowired

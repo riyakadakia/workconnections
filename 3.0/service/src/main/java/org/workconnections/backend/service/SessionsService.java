@@ -11,14 +11,13 @@ import org.springframework.stereotype.Service;
 import org.workconnections.backend.entity.Session;
 import org.workconnections.backend.entity.SessionResponse;
 import org.workconnections.backend.repository.SessionsRepository;
-import org.workconnections.backend.service.ConditionsService;
 
 @Service
 public class SessionsService {
 	
 	@Autowired
 	SessionsRepository sessionsRepository;
-	
+
 	@Autowired
 	ConditionsService conditionsService;
 	
