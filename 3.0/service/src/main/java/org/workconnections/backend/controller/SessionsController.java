@@ -65,7 +65,10 @@ public class SessionsController extends BaseController {
 			@RequestParam("answerIds") String answerIds,
 			@RequestParam("answerInput") String answerInput) {
 
-		return sessionsService.addToSession(sessionId, questionId, answerIds, answerInput);
+		Integer[] answerIdInts = questionsService.getLastAnswerIdInts(answerIds);
+		String answerInputStr = questionsService.parseAnswerInput(answerInput);
+		
+		return sessionsService.addToSession(sessionId, questionId, answerIdInts, answerInputStr);
 	}	
 	
 	@GetMapping("/findById")

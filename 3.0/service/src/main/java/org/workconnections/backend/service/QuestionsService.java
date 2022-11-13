@@ -241,8 +241,11 @@ public class QuestionsService {
 			nextQuestion = getDefaultNextQuestion(surveyId, lastQuestionId);
 		}
 		
-		// Add the previous answer to the session
-		sessionsService.addToSession(sessionId, lastQuestionId, lastAnswerIds, lastAnswerInput);
+		if (sessionId != null && !sessionId.isEmpty()) {
+			// Add the previous answer to the session
+			String lastAnswerInputStr = parseAnswerInput(lastAnswerInput);
+			sessionsService.addToSession(sessionId, lastQuestionId, lastAnswerIdInts, lastAnswerInputStr);
+		}
 		
 		return nextQuestion;
 	}

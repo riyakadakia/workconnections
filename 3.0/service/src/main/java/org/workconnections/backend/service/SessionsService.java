@@ -18,22 +18,17 @@ public class SessionsService {
 	@Autowired
 	SessionsRepository sessionsRepository;
 	
-	@Autowired
-	QuestionsService questionsService;
-	
 	Logger log = LoggerFactory.getLogger(SessionsService.class);
 	
 	public ResponseEntity<?> addToSession(
 			String sessionId, 
 			Integer questionId,
-			String answerIds,
+			Integer[] answerIdInts,
 			String answerInput) {
 		Optional<Session> sessionData = sessionsRepository.findById(sessionId);
 		if (sessionData.isPresent()) {
 			Session session = sessionData.get();
-			Integer[] answerIdInts = questionsService.getLastAnswerIdInts(answerIds);
-			String answerInputStr = questionsService.parseAnswerInput(answerInput);
-			SessionResponse response = new SessionResponse(questionId, answerIdInts, answerInputStr);
+			SessionResponse response = new SessionResponse(questionId, answerIdInts, answerInput);
 			session.addResponse(response.getQuestionId(), response);
 			session = sessionsRepository.save(session);
 			if (session != null) {
