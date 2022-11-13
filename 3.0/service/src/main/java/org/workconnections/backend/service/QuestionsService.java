@@ -244,7 +244,7 @@ public class QuestionsService {
 		if (sessionId != null && !sessionId.isEmpty()) {
 			// Add the previous answer to the session
 			String lastAnswerInputStr = parseAnswerInput(lastAnswerInput);
-			sessionsService.addToSession(sessionId, lastQuestionId, lastAnswerIdInts, lastAnswerInputStr);
+			sessionsService.addToSession(sessionId, surveyId, lastQuestionId, lastAnswerIdInts, lastAnswerInputStr);
 		}
 		
 		return nextQuestion;

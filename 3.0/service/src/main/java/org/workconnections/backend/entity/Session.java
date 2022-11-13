@@ -9,22 +9,22 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 public class Session {
-	
+
 	@Id
 	private String id;
 	private Integer surveyId = null;
 	private String userId = null;
 	private Date created = new Date();
-	private Map<Integer, SessionResponse> responses = null; 
+	private Map<Integer, SessionResponse> responses = null;
 
 	public String getId() {
 		return id;
 	}
-	
+
 	public void setId(String id) {
 		this.id = id;
 	}
-	
+
 	public Integer getSurveyId() {
 		return surveyId;
 	}
@@ -56,30 +56,30 @@ public class Session {
 	public void setResponses(Map<Integer, SessionResponse> responses) {
 		this.responses = responses;
 	}
-	
+
 	public void addResponse(Integer questionId, SessionResponse response) {
 		if (this.responses == null) {
-			this.responses = new HashMap<Integer, SessionResponse>();
+			this.responses = new HashMap<>();
 		}
 		this.responses.put(questionId, response);
 	}
-	
+
 	public SessionResponse getResponse(Integer questionId) {
 		SessionResponse response = null;
 		if (this.responses != null) {
-			if (this.responses.get(questionId) != null) { 
+			if (this.responses.get(questionId) != null) {
 				response = this.responses.get(questionId);
 			}
 		}
 		return response;
 	}
-	
+
 	public void deleteResponse(Integer questionId) {
 		if (this.responses != null) {
-			if (this.responses.get(questionId) != null) { 
+			if (this.responses.get(questionId) != null) {
 				this.responses.remove(questionId);
 			}
 		}
 	}
-	
+
 }

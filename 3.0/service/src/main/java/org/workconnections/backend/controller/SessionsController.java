@@ -61,6 +61,7 @@ public class SessionsController extends BaseController {
 	@GetMapping("/addToSession")
 	public ResponseEntity<?> addToSession(
 			@RequestParam("sessionId") String sessionId, 
+			@RequestParam("surveyId") Integer surveyId,
 			@RequestParam("questionId") Integer questionId,
 			@RequestParam("answerIds") String answerIds,
 			@RequestParam("answerInput") String answerInput) {
@@ -68,7 +69,7 @@ public class SessionsController extends BaseController {
 		Integer[] answerIdInts = questionsService.getLastAnswerIdInts(answerIds);
 		String answerInputStr = questionsService.parseAnswerInput(answerInput);
 		
-		return sessionsService.addToSession(sessionId, questionId, answerIdInts, answerInputStr);
+		return sessionsService.addToSession(sessionId, surveyId, questionId, answerIdInts, answerInputStr);
 	}	
 	
 	@GetMapping("/findById")
