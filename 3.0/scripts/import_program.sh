@@ -1,1 +1,1 @@
-mongoimport --type=csv --headerline --useArrayIndexFields --uri 'mongodb+srv://riyakadakia:arv!zdu1nun1bvx1RWK@cluster0.vmx216w.mongodb.net/wrkconndb' --collection program --file=$HOME/Downloads/WorkConnections\ -\ program.csv
+mongoimport --type=csv --headerline --useArrayIndexFields --uri 'mongodb+srv://riyakadakia:arv!zdu1nun1bvx1RWK@cluster0.vmx216w.mongodb.net/wrkconndb' --collection program --file=../data/WorkConnections\ -\ program.csv
