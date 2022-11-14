@@ -1,11 +1,23 @@
 package org.workconnections.backend.service;
 
 import org.springframework.stereotype.Service;
+import org.workconnections.backend.entity.Program;
 import org.workconnections.backend.entity.Session;
 
 @Service
 public class ProgramsService {
 
+	/*
+	 * Returns program details from programIds
+	 */
+	public Program[] getProgramFromIds(Integer[] programIds) {
+		Program[] programArr = null;
+	
+		/* XXX */
+				
+		return programArr;
+	}
+	
 	/*
 	 * Process all programs for this session. Return a list of eligible program_ids.
 	 */

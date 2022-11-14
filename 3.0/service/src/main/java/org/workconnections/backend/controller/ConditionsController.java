@@ -1,6 +1,7 @@
 package org.workconnections.backend.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.workconnections.backend.entity.Condition;
+import org.workconnections.backend.entity.Session;
 import org.workconnections.backend.repository.ConditionsRepository;
+import org.workconnections.backend.repository.SessionsRepository;
+import org.workconnections.backend.service.ConditionsService;
 
 @RestController
 @RequestMapping("/conditions")
@@ -25,6 +29,12 @@ public class ConditionsController extends BaseController {
 	
 	@Autowired
 	ConditionsRepository conditionsRepository; 
+	
+	@Autowired
+	SessionsRepository sessionsRepository; 
+	
+	@Autowired
+	ConditionsService conditionsService;
 
 	@GetMapping("/getAllConditions")
 	public List<Condition> getAllConditions() {
@@ -85,4 +95,19 @@ public class ConditionsController extends BaseController {
 		conditionsRepository.deleteById(conditionId);
 	}
 
+	@GetMapping("/getAllMatchingConditions")
+	public ResponseEntity<?> getAllMatchingConditions(@RequestParam("sessionId") String sessionId) {
+		
+		Optional<Session> sessionResponseData = sessionsRepository.findById(sessionId);
+		if (sessionResponseData.isPresent()) {
+			Session session = sessionResponseData.get();
+			
+			Integer[] matchingConditionIds = conditionsService.processAllConditionsForThisSession(session);
+			if (matchingConditionIds != null) {
+				return new ResponseEntity<Integer[]>(matchingConditionIds, HttpStatus.OK);
+			}
+		}
+		
+		return new ResponseEntity<>(null, HttpStatus.OK);
+	}
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.workconnections.backend.entity.Program;
 import org.workconnections.backend.entity.Session;
 import org.workconnections.backend.repository.SessionsRepository;
 import org.workconnections.backend.service.QuestionsService;
@@ -122,12 +123,26 @@ public class SessionsController extends BaseController {
 
 		Optional<Session> sessionResponseData = sessionsRepository.findById(sessionId);
 		if (sessionResponseData.isPresent()) {
-			@SuppressWarnings("unused")
 			Session session = sessionResponseData.get();
-			
-			// XXX: Find eligible programs for this session
-			Integer numEligiblePrograms = Integer.valueOf(5);
-			return new ResponseEntity<Integer>(numEligiblePrograms, HttpStatus.OK);
+			Integer[] eligibleProgramsArr = sessionsService.getEligiblePrograms(session);
+			if (eligibleProgramsArr!=null && eligibleProgramsArr.length>0) {
+				return new ResponseEntity<Integer>(eligibleProgramsArr.length, HttpStatus.OK);
+			}
+		}
+		
+		return new ResponseEntity<>(null, HttpStatus.OK);
+	}
+	
+	@GetMapping("/getEligiblePrograms")
+	public ResponseEntity<?> getEligiblePrograms(@RequestParam("sessionId") String sessionId) {
+
+		Optional<Session> sessionResponseData = sessionsRepository.findById(sessionId);
+		if (sessionResponseData.isPresent()) {
+			Session session = sessionResponseData.get();
+			Integer[] eligibleProgramsArr = sessionsService.getEligiblePrograms(session);
+			if (eligibleProgramsArr!=null && eligibleProgramsArr.length>0) {
+				return new ResponseEntity<Program[]>(sessionsService.getProgramsFromIds(eligibleProgramsArr), HttpStatus.OK);
+			}
 		}
 		
 		return new ResponseEntity<>(null, HttpStatus.OK);

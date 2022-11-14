@@ -12,7 +12,7 @@ public class Condition {
 	private String description;
 	private String answer;
 
-	public Integer getId() throws Exception {
+	public Integer getId() {
 		Integer conditionId = Integer.valueOf(-1);
 		if (this.id != null) {
 			conditionId = Integer.valueOf(this.id);

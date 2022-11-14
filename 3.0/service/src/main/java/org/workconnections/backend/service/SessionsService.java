@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.workconnections.backend.entity.Program;
 import org.workconnections.backend.entity.Session;
 import org.workconnections.backend.entity.SessionResponse;
 import org.workconnections.backend.repository.SessionsRepository;
@@ -49,28 +50,33 @@ public class SessionsService {
 	/*
 	 * Return all programs_ids that this user is eligible for so far...
 	 */
-	public ResponseEntity<?> getEligiblePrograms(String sessionId) {
-		
-		Optional<Session> sessionData = sessionsRepository.findById(sessionId);		
-		if (sessionData.isPresent()) {
-			Session session = sessionData.get();		
+	public Integer[] getEligiblePrograms(Session session) {		
+		/*
+		 * Evaluate all conditions for this session. 
+		 * Return condition_ids that are true for this user.
+		 */	
+		Integer[] processedConditionsArr = conditionsService.processAllConditionsForThisSession(session);
+		if (processedConditionsArr != null && processedConditionsArr.length > 0) {		
 			/*
-			 * Evaluate all conditions for this session. 
-			 * Return condition_ids that are true for this user.
-			 */	
-			Integer[] processedConditionsArr = conditionsService.processAllConditionsForThisSession(session);
-			if (processedConditionsArr != null && processedConditionsArr.length > 0) {		
-				/*
-				 * Evaluate all programs for this session. 
-				 * Return program_ids that this user is eligible for.
-				 */				
-				Integer[] eligibleProgramsArr = programsService.processAllProgramsForThisSession(session, processedConditionsArr);
-				if (eligibleProgramsArr != null) {
-					return new ResponseEntity<Integer[]>(eligibleProgramsArr, HttpStatus.OK);
-				}
+			 * Evaluate all programs for this session. 
+			 * Return program_ids that this user is eligible for.
+			 */				
+			Integer[] eligibleProgramsArr = programsService.processAllProgramsForThisSession(session, processedConditionsArr);
+			if (eligibleProgramsArr != null) {
+				return eligibleProgramsArr;
 			}
 		}
-		return new ResponseEntity<>(null, HttpStatus.OK);	
+		return null;	
 	}
 
+	/* 
+	 * Returns Program details from program Ids 
+	 */
+	public Program[] getProgramsFromIds(Integer[] eligibleProgramsArr) {
+		Program[] programArr = null;
+		if (eligibleProgramsArr != null && eligibleProgramsArr.length > 0) {
+			programArr = programsService.getProgramFromIds(eligibleProgramsArr);
+		}
+		return programArr;
+	}
 }
