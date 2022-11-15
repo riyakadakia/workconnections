@@ -26,7 +26,7 @@ public class ConditionsService {
 	 */
 	public Integer[] processAllConditionsForThisSession(Session session) {
 	
-		log.info("------- processAllConditionsForThisSession called ---------");
+		//log.info("------- processAllConditionsForThisSession called ---------");
 		List<Integer> processedConditionsArr = new ArrayList<Integer>();
 		
 		// get all responses in the session
@@ -36,19 +36,19 @@ public class ConditionsService {
 			List<Condition> conditions = conditionsRepository.findAll();
 			if (conditions!= null && !conditions.isEmpty()) {
 				
-				log.info("Conditions #: " + conditions.size() + ", Session responses: " + responses.size());
+				//log.info("Conditions #: " + conditions.size() + ", Session responses: " + responses.size());
 				// iterate over each condition to see if a response associated with it exists 
 				// and if so whether it is true for this user
 				for (int i=0; i<conditions.size(); i++) {
 					Condition condition = conditions.get(i);
 					Integer questionId = condition.getQuestionid();
 					if (questionId != null && questionId > 0) {
-						log.info("Checking for condition: " + condition.getId() + ", questionId: " + condition.getQuestionid());
+						//log.info("Checking for condition: " + condition.getId() + ", questionId: " + condition.getQuestionid());
 
 						// check if the responses includes an answer to this question yet...
 						SessionResponse response = responses.get(questionId);
 						if (response != null) {
-							log.info("*** Found a response for the questionId: " + questionId);
+							//log.info("*** Found a response for the questionId: " + questionId);
 							// there is a response for this question by the user in the session
 							Integer[] answerIds = response.getAnswerIds();
 							String answerInput = response.getAnswerInput();
@@ -75,7 +75,7 @@ public class ConditionsService {
 								// ERROR
 							}
 							
-							log.info("Operator: " + conditionOperator + ", Answer: " + conditionAnswer);
+							//log.info("Operator: " + conditionOperator + ", Answer: " + conditionAnswer);
 							if (conditionOperator != "" && conditionAnswer != -1) {
 								Integer answerInputInt = -1;
 								switch(conditionOperator) {
@@ -112,7 +112,7 @@ public class ConditionsService {
 										// ERROR
 										break;
 								}
-								log.info("processedConditionsArr: " + processedConditionsArr);
+								//log.info("processedConditionsArr: " + processedConditionsArr);
 							}
 						}
 					}
