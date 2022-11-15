@@ -89,4 +89,12 @@ public class LocationsController extends BaseController {
 		return new ResponseEntity<>(null, HttpStatus.OK);
 	}
 	
+	@GetMapping("/findBySurveyId")
+	public ResponseEntity<?> findBySurveyId(@RequestParam("surveyId") Integer surveyId) {
+		Location location =  locationsRepository.findBySurveyid(surveyId);
+		if (location != null) {
+			return new ResponseEntity<Location>(location, HttpStatus.OK);
+		}
+		return new ResponseEntity<>(null, HttpStatus.OK);
+	}
 }
