@@ -16,5 +16,6 @@ public interface ProgramsRepository extends MongoRepository<Program, String> {
 	public Program findById(@RequestParam("programId") int programId);
 	public boolean existsById(@RequestParam("programId") int programId);
 	public void deleteById(@RequestParam("programId") int programId);
+	public List<Program> findByLocationid(@RequestParam("locationId") int locationId); 
 
 }

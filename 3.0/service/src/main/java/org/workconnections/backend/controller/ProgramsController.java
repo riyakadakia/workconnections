@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.workconnections.backend.entity.Program;
 import org.workconnections.backend.repository.ProgramsRepository;
+import org.workconnections.backend.service.ProgramsService;
 
 @RestController
 @RequestMapping("/programs")
@@ -25,6 +26,9 @@ public class ProgramsController extends BaseController {
 	
 	@Autowired
 	ProgramsRepository programsRepository; 
+	
+	@Autowired
+	ProgramsService programsService;
 			
 	@GetMapping("/getAllPrograms")
 	public List<Program> getAllPrograms() {
@@ -90,6 +94,11 @@ public class ProgramsController extends BaseController {
 	@GetMapping("/deleteById")
 	public void deleteById(@RequestParam("programId") int programId) {
 		programsRepository.deleteById(programId);
+	}
+
+	@GetMapping("/findByLocationId")
+	public List<Program> findByLocationId(@RequestParam("locationId") int locationId) {
+		return programsRepository.findByLocationid(locationId);
 	}
 
 }

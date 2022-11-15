@@ -15,7 +15,7 @@ public class Program {
 	private String type;
 	private Integer locationid;
 	
-	public Integer getId() throws Exception {
+	public Integer getId() {
 		Integer programId = Integer.valueOf(-1);
 		if (this.id != null) {
 			programId = this.id;
