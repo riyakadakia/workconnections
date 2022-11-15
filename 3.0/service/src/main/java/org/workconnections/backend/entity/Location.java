@@ -12,7 +12,7 @@ public class Location {
 	private String type;
 	private Integer surveyid;
 	
-	public Integer getId() throws Exception {
+	public Integer getId() {
 		Integer locationId = Integer.valueOf(-1);
 		if (this.id != null) {
 			locationId = this.id;
