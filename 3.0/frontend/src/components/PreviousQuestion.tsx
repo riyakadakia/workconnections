@@ -1,3 +1,4 @@
+import { Card } from "antd";
 import { QuestionAndAnswer } from "../types";
 
 type Props = {
@@ -7,9 +8,9 @@ type Props = {
 export const PreviousQuestion = ({ questionAndAnswer: { question, answer } }: Props) => {
   // TODO: make this pretty, and maybe clickable (if person wants to go back to edit previous questions)
   return (
-    <>
-      <h4>{question.text}</h4>
+    <Card className="mb2">
+      <h2>{question.text}</h2>
       <span>{answer.join(", ")}</span>
-    </>
+    </Card>
   );
 };

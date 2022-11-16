@@ -32,10 +32,8 @@ export const QuestionCard = ({ question, onNext }: Props) => {
               {question.answer
                 .filter((answer) => answer !== "")
                 .map((answer) => (
-                  <Space direction="vertical">
-                    <Radio key={answer} value={answer}>
-                      {answer}
-                    </Radio>
+                  <Space direction="vertical" key={answer}>
+                    <Radio value={answer}>{answer}</Radio>
                   </Space>
                 ))}
             </Radio.Group>
@@ -56,7 +54,9 @@ export const QuestionCard = ({ question, onNext }: Props) => {
           {question.type === "check_box" && (
             <Checkbox.Group
               style={{ width: "100%" }}
-              onChange={(checkedValues: CheckboxValueType[]) => setAnswer([checkedValues.toString()])}
+              onChange={(checkedValues: CheckboxValueType[]) =>
+                setAnswer(checkedValues.map((checkboxValue) => checkboxValue.toString()))
+              }
             >
               {question.answer
                 .filter((answer) => answer !== "")
