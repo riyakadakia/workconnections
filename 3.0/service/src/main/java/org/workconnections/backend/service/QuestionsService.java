@@ -108,6 +108,7 @@ public class QuestionsService {
 						Integer nextQuestionId = nextIdArray[lastAnswerIds[0]];
 						// (4) Go to the question collection, return the document for nextid.Y 
 						nextQuestion = questionsRepository.findById(nextQuestionId);
+						log.info("Returning question with questionId: " + nextQuestionId);
 					} else {
 						// There's no next question id specified for this answer choice. 
 					}
@@ -159,6 +160,7 @@ public class QuestionsService {
 			if (nextIdArray.length > lastQuestionId) {
 				Integer nextQuestionId = nextIdArray[lastQuestionId];
 				nextQuestion = questionsRepository.findById(nextQuestionId);
+				log.info("Returning question with questionId = " + nextQuestionId);
 			}
 		}		
 		return nextQuestion;
@@ -211,8 +213,7 @@ public class QuestionsService {
 					
 					// get surveyId from zip
 					Integer surveyIdInt = getSurveyIdFromZip(zipcodeInt);
-					if (surveyIdInt != null) {
-						
+					if (surveyIdInt != null) {						
 						// get default next question from surveyId and lastQuestionId
 						nextQuestion = getDefaultNextQuestion(surveyIdInt, lastQuestionId);
 					}

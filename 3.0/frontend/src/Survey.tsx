@@ -53,7 +53,7 @@ export function Survey() {
 
           const question = await surveyClient.getSecondQuestion(
             sessionId,
-            previousQuestions.length,
+            previousQuestions[previousQuestions.length - 1].question.id,
             previousQuestions[0].answer[0]
           );
 
@@ -106,7 +106,7 @@ export function Survey() {
         if (Some(sessionId)) {
           const question = await surveyClient.getNextQuestion(
             sessionId,
-            previousQuestions.length,
+            previousQuestions[previousQuestions.length - 1].question.id,
             surveyId,
             getLastAnswerIds(),
             getLastAnswerInputs()

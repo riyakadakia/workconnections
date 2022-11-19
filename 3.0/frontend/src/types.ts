@@ -1,5 +1,5 @@
 export type Question = {
-  id: string;
+  id: number;
   name: string;
   hint: string;
   type: "text_box" | "radio_button" | "drop_down" | "check_box" | "button";
