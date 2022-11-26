@@ -1,4 +1,4 @@
-import { Button, Card, Col, Input, Select, Row, Typography, Radio, Space, Checkbox } from "antd";
+import { Button, Card, Col, Input, Select, Row, Typography, Radio, Space, Checkbox, Form } from "antd";
 import { CheckboxValueType } from "antd/lib/checkbox/Group";
 import { useState } from "react";
 import { Question } from "../types";
@@ -15,6 +15,7 @@ type Props = {
 export const QuestionCard = ({ question, onNext }: Props) => {
   const [answer, setAnswer] = useState<string[]>([]);
   const [validationError, setValidationError] = useState<string>();
+  const [form] = Form.useForm();
   console.log(question);
 
   return (
@@ -27,7 +28,6 @@ export const QuestionCard = ({ question, onNext }: Props) => {
           {question.type === "text_box" && <Input value={answer} onChange={(e) => setAnswer([e.target.value])} />}
 
           {question.type === "radio_button" && (
-            // <Radio value={answer} onChange={(e) => setAnswer([e.target.value])} />
             <Radio.Group style={{ width: "100%" }} onChange={(e) => setAnswer([e.target.value])}>
               {question.answer
                 .filter((answer) => answer !== "")
@@ -68,28 +68,65 @@ export const QuestionCard = ({ question, onNext }: Props) => {
             </Checkbox.Group>
           )}
 
+          {question.type == "input_form" && (
+            <Form form={form} layout="vertical" autoComplete="off">
+              <Form.Item
+                name="email"
+                label="Email"
+                rules={[
+                  { type: "email", warningOnly: true },
+                  { type: "string", min: 6 },
+                ]}
+              >
+                <Input placeholder="amysmith@gmail.com" value={answer} onChange={(e) => setAnswer([e.target.value])} />
+              </Form.Item>
+              <Form.Item>
+                <Space>
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    onClick={() => {
+                      if (answer.length === 0 || answer[0] === "") {
+                        setValidationError("Please enter a valid answer");
+                      } else {
+                        // If validation passes, we tell the parent component what the answer is
+                        // Parent component will pop the answer into previousQuestions, and then ask the API for the next question
+                        // And maybe some other stuff too
+                        onNext(answer);
+                      }
+                    }}
+                  >
+                    Save email
+                  </Button>
+                  <Button htmlType="button">No, continue</Button>
+                </Space>
+              </Form.Item>
+            </Form>
+          )}
+
           {/* Handle "Checkbox" by using Antd Checkbox.Group */}
 
           {Some(validationError) && <Typography.Text type="danger">{validationError}</Typography.Text>}
         </Col>
       </Row>
 
-      <Button
-        type="primary"
-        onClick={() => {
-          // TODO: how can we do better validation (like zipCode) at this step?
-          if (answer.length === 0 || answer[0] === "") {
-            setValidationError("Please enter a valid answer");
-          } else {
-            // If validation passes, we tell the parent component what the answer is
-            // Parent component will pop the answer into previousQuestions, and then ask the API for the next question
-            // And maybe some other stuff too
-            onNext(answer);
-          }
-        }}
-      >
-        Next
-      </Button>
+      {question.type != "input_form" && (
+        <Button
+          type="primary"
+          onClick={() => {
+            if (answer.length === 0 || answer[0] === "") {
+              setValidationError("Please enter a valid answer");
+            } else {
+              // If validation passes, we tell the parent component what the answer is
+              // Parent component will pop the answer into previousQuestions, and then ask the API for the next question
+              // And maybe some other stuff too
+              onNext(answer);
+            }
+          }}
+        >
+          Next
+        </Button>
+      )}
     </Card>
   );
 };

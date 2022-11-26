@@ -86,6 +86,29 @@ const makeSurveyClient = () => {
     return nextQuestion;
   };
 
+  const createUser = async (name: string, email: string, phone: string) => {
+    const queryParams = new URLSearchParams({
+      name: name,
+      email: email,
+      phone: phone,
+    });
+
+    const { data: userid } = await httpClient.get<string>(`users/createUser?${queryParams}`);
+
+    return userid;
+  };
+
+  const addUserId = async (sessionId: string, userId: string) => {
+    const queryParams = new URLSearchParams({
+      sessionId: sessionId,
+      userId: userId,
+    });
+
+    const { data: sid } = await httpClient.get<string>(`sessions/addUserId?${queryParams}`);
+
+    return sid;
+  };
+
   return {
     getFirstQuestion,
     getTotalProgramsCount,
@@ -93,6 +116,8 @@ const makeSurveyClient = () => {
     getSecondQuestion,
     getNextQuestion,
     getSurveyIdFromZip,
+    createUser,
+    addUserId,
   };
 };
 

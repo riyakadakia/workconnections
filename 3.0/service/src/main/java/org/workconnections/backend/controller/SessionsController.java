@@ -148,9 +148,10 @@ public class SessionsController extends BaseController {
 		return new ResponseEntity<>(null, HttpStatus.OK);
 	}
 
-	@PostMapping("/addUserId")
-	public ResponseEntity<?> addUserId(@RequestParam("sessionId") String sessionId, @RequestParam("userId") String userId) {
-		
+	@GetMapping("/addUserId")
+	public ResponseEntity<?> addUserId(
+			@RequestParam("sessionId") String sessionId, 
+			@RequestParam("userId") String userId) {		
 		if (sessionId != null && userId != null) {
 			Optional<Session> sessionResponseData = sessionsRepository.findById(sessionId);
 			if (sessionResponseData.isPresent()) {
