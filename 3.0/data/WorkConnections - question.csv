@@ -45,3 +45,4 @@ _id,name,text,hint,type,format,answer.0,answer.1,answer.2,answer.3,answer.4,answ
 44,finished_benefitsFITAP,Has a parent/caretaker received benefits from Family Independence Temporary Assistance (FITAP) for 24 of the prior 60 months ?,ONLY IF YES TO FITAP IN Q7,radio_button,string,,Yes,No,,,,,,,,,,,,,,,
 45,minor_w_kid,"Do all minor unmarried parents and their children live with a parent, legal guardian, or in a adult-supervised arrangement?",,radio_button,string,,Yes,No,Not applicable,,,,,,,,,,,,,,
 46,save_answers,Would you like to be notified about new programs that you become eligible for?,,input_form,string,,,,,,,,,,,,,,,,,,
+47,show_results_page,Test,,show_results_page,string,,,,,,,,,,,,,,,,,,

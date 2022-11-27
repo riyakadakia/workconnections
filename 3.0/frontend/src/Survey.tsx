@@ -88,6 +88,9 @@ export function Survey() {
 
             case "button":
               throw new Error("Not implemented");
+
+            case "show_results_page":
+              return "0";
           }
         };
         const getLastAnswerInputs = async () => {
@@ -118,6 +121,9 @@ export function Survey() {
 
             case "button":
               throw new Error("Not implemented");
+
+            case "show_results_page":
+              return lastAnswer[0];
           }
         };
         if (Some(sessionId)) {
@@ -128,7 +134,12 @@ export function Survey() {
             getLastAnswerIds(),
             await getLastAnswerInputs()
           );
-          setCurrentQuestion(question);
+
+          if (question.type === "show_results_page") {
+            navigate(`/programs?sessionId=${sessionId}`);
+          } else {
+            setCurrentQuestion(question);
+          }
         }
       }
 

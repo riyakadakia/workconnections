@@ -1,6 +1,6 @@
 import axios from "axios";
 import { config } from "../config";
-import { Question } from "../types";
+import { Question, Program } from "../types";
 
 const makeSurveyClient = () => {
   const httpClient = axios.create({
@@ -109,6 +109,16 @@ const makeSurveyClient = () => {
     return sid;
   };
 
+  const getEligiblePrograms = async (sessionId: string) => {
+    const queryParams = new URLSearchParams({
+      sessionId: sessionId,
+    });
+
+    const { data: eligiblePrograms } = await httpClient.get<Program[]>(`sessions/getEligiblePrograms?${queryParams}`);
+
+    return eligiblePrograms;
+  };
+
   return {
     getFirstQuestion,
     getTotalProgramsCount,
@@ -118,6 +128,7 @@ const makeSurveyClient = () => {
     getSurveyIdFromZip,
     createUser,
     addUserId,
+    getEligiblePrograms,
   };
 };
 
