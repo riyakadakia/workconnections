@@ -1,3 +1,4 @@
+import { Button, Card, Typography } from "antd";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { surveyClient } from "../client/surveyClient";
@@ -5,7 +6,7 @@ import { ProgramCard } from "../components/ProgramCard";
 import { Program } from "../types";
 import { None } from "../utils/None";
 
-export function Programs() {
+export function EligiblePrograms() {
   const [eligiblePrograms, setEligiblePrograms] = useState<Program[]>([]);
 
   // This state will be used to tell if a new session start is underway
@@ -41,6 +42,16 @@ export function Programs() {
               <ProgramCard key={p.id} program={p} />
             ))}
         </div>
+      )}
+      {eligiblePrograms.length === 0 && (
+        <Card style={{ minWidth: 450 }}>
+          <Typography.Title level={3}>Sorry...</Typography.Title>
+          <div>We couldn't find a match just yet. We will contact you if we find a match in the near future.</div>
+          <div>If you would like to view the full list of services, click below:</div>
+          <Button type="primary" href="/allprograms" target="_blank">
+            Visit Website
+          </Button>
+        </Card>
       )}
     </>
   );

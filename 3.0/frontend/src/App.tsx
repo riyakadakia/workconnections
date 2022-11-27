@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Survey } from "./Survey";
 import { Home } from "./Pages/Home";
 import { Col, Row } from "antd";
-import { Programs } from "./Pages/Programs";
+import { EligiblePrograms } from "./Pages/EligiblePrograms";
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/survey" element={<Survey />} />
-            <Route path="/programs" element={<Programs />} />
+            <Route path="/programs" element={<EligiblePrograms />} />
           </Routes>
         </Router>
       </Col>
