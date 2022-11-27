@@ -165,4 +165,20 @@ public class SessionsController extends BaseController {
 		return new ResponseEntity<>(null, HttpStatus.OK);
 	}
 	
+	@GetMapping("/getAllProgramsBySessionId") 
+	public ResponseEntity<?> getAllProgramsBySessionId(@RequestParam("sessionId") String sessionId) {
+		
+		List<Program> programsList = null;
+		if (sessionId != null && !sessionId.isEmpty()) {
+			
+			programsList = sessionsService.getAllProgramsBySessionId(sessionId);
+			if (programsList != null && programsList.size() > 0) {
+				Program[] programsArr = new Program[programsList.size()];
+				return new ResponseEntity<Program[]>(programsList.toArray(programsArr), HttpStatus.OK);
+			}
+		}
+		return null;
+	}
+
+	
 }
