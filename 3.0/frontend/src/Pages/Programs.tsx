@@ -33,10 +33,15 @@ export function Programs() {
 
   return (
     <>
-      {eligiblePrograms.map((p) => (
-        <ProgramCard key={p.id} program={p} />
-      ))}
-      Foobar
+      {eligiblePrograms.length > 0 && (
+        <div>
+          {eligiblePrograms
+            .filter((p) => p != null)
+            .map((p) => (
+              <ProgramCard key={p.id} program={p} />
+            ))}
+        </div>
+      )}
     </>
   );
 }
