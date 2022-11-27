@@ -119,6 +119,16 @@ const makeSurveyClient = () => {
     return eligiblePrograms;
   };
 
+  const getAllPrograms = async (sessionId: string) => {
+    const queryParams = new URLSearchParams({
+      sessionId: sessionId,
+    });
+
+    const { data: allPrograms } = await httpClient.get<Program[]>(`sessions/getAllProgramsBySessionId?${queryParams}`);
+
+    return allPrograms;
+  };
+
   return {
     getFirstQuestion,
     getTotalProgramsCount,
@@ -129,6 +139,7 @@ const makeSurveyClient = () => {
     createUser,
     addUserId,
     getEligiblePrograms,
+    getAllPrograms,
   };
 };
 

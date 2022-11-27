@@ -6,9 +6,8 @@ import { ProgramCard } from "../components/ProgramCard";
 import { Program } from "../types";
 import { None } from "../utils/None";
 
-export function EligiblePrograms() {
-  const [eligiblePrograms, setEligiblePrograms] = useState<Program[]>([]);
-  const [allProgramsUrl, setAllProgramsUrl] = useState<string>("");
+export function AllPrograms() {
+  const [allPrograms, setAllPrograms] = useState<Program[]>([]);
 
   // This state will be used to tell if a new session start is underway
   const [isLoading, setIsLoading] = useState(false);
@@ -22,36 +21,38 @@ export function EligiblePrograms() {
   }
 
   useEffect(() => {
-    const getEligiblePrograms = async () => {
+    const getAllPrograms = async () => {
       if (sessionId != null) {
-        const eligiblePrograms = await surveyClient.getEligiblePrograms(sessionId);
-        setEligiblePrograms(eligiblePrograms);
-        setAllProgramsUrl("/allprograms?sessionId=" + sessionId);
+        const allPrograms = await surveyClient.getAllPrograms(sessionId);
+        setAllPrograms(allPrograms);
       } else {
         navigate("/");
       }
     };
-    getEligiblePrograms();
-  }, [eligiblePrograms.length]);
+    getAllPrograms();
+  }, [allPrograms.length]);
 
   return (
     <>
-      {eligiblePrograms.length > 0 && (
+      {allPrograms.length > 0 && (
         <div>
-          {eligiblePrograms
+          {allPrograms
             .filter((p) => p != null)
             .map((p) => (
               <ProgramCard key={p.id} program={p} />
             ))}
         </div>
       )}
-      {eligiblePrograms.length === 0 && (
+      {allPrograms.length === 0 && (
         <Card style={{ minWidth: 450 }}>
           <Typography.Title level={3}>Sorry...</Typography.Title>
-          <div>We couldn't find a match just yet. We will contact you if we find a match in the near future.</div>
-          <div>If you would like to view the full list of services, click below:</div>
-          <Button type="primary" href={allProgramsUrl} target="_blank">
-            Visit Website
+          <div>
+            We couldn't find any matching programs for your location just yet. We will contact you if we find a match in
+            the near future.
+          </div>
+          <div>If you would like to start over, click below:</div>
+          <Button type="primary" href="/">
+            Start over
           </Button>
         </Card>
       )}
