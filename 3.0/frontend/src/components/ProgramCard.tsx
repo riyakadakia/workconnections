@@ -9,12 +9,12 @@ export const ProgramCard = ({ program }: Props) => {
   console.log(program);
 
   return (
-    <Card style={{ minWidth: 450 }}>
+    <div className="sorryCard-style">
       <Typography.Title level={3}>{program.name}</Typography.Title>
       <div>{program.description}</div>
-      <Button type="primary" href={program.url} target="_blank">
+      <Button className="websiteButton-style" type="primary" href={program.url} target="_blank">
         Visit Website
       </Button>
-    </Card>
+    </div>
   );
 };

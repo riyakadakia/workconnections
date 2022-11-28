@@ -5,6 +5,7 @@ import { surveyClient } from "../client/surveyClient";
 import { ProgramCard } from "../components/ProgramCard";
 import { Program } from "../types";
 import { None } from "../utils/None";
+import "../Survey.css";
 
 export function AllPrograms() {
   const [allPrograms, setAllPrograms] = useState<Program[]>([]);
@@ -44,17 +45,14 @@ export function AllPrograms() {
         </div>
       )}
       {allPrograms.length === 0 && (
-        <Card style={{ minWidth: 450 }}>
-          <Typography.Title level={3}>Sorry...</Typography.Title>
-          <div>
-            We couldn't find any matching programs for your location just yet. We will contact you if we find a match in
-            the near future.
-          </div>
+        <div className="card-style">
+          We couldn't find any matching programs for your location just yet. We will contact you if we find a match in
+          the near future.
           <div>If you would like to start over, click below:</div>
-          <Button type="primary" href="/">
+          <Button className="button-style" href="/">
             Start over
           </Button>
-        </Card>
+        </div>
       )}
     </>
   );

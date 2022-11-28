@@ -3,6 +3,7 @@ import { CheckboxValueType } from "antd/lib/checkbox/Group";
 import { useState } from "react";
 import { Question } from "../types";
 import { Some } from "../utils/Some";
+import "../Survey.css";
 
 type Props = {
   question: Question;
@@ -19,13 +20,15 @@ export const QuestionCard = ({ question, onNext }: Props) => {
   console.log(question);
 
   return (
-    <Card style={{ minWidth: 450 }}>
+    <div className="card-style">
       <Typography.Title level={3}>{question.text}</Typography.Title>
 
       <Row className="mb1">
         <Col span={24}>
           {/* TODO: support all question.types possible */}
-          {question.type === "text_box" && <Input value={answer} onChange={(e) => setAnswer([e.target.value])} />}
+          {question.type === "text_box" && (
+            <Input placeholder="12345" value={answer} onChange={(e) => setAnswer([e.target.value])} />
+          )}
 
           {question.type === "radio_button" && (
             <Radio.Group style={{ width: "100%" }} onChange={(e) => setAnswer([e.target.value])}>
@@ -40,7 +43,7 @@ export const QuestionCard = ({ question, onNext }: Props) => {
           )}
 
           {question.type === "drop_down" && (
-            <Select style={{ width: "100%" }} onChange={(answer: string) => setAnswer([answer])}>
+            <Select style={{ width: "400px" }} onChange={(answer: string) => setAnswer([answer])}>
               {question.answer
                 .filter((answer) => answer !== "")
                 .map((answer) => (
@@ -83,7 +86,7 @@ export const QuestionCard = ({ question, onNext }: Props) => {
               <Form.Item>
                 <Space>
                   <Button
-                    type="primary"
+                    className="button-style"
                     htmlType="submit"
                     onClick={() => {
                       if (answer.length === 0 || answer[0] === "") {
@@ -98,7 +101,7 @@ export const QuestionCard = ({ question, onNext }: Props) => {
                   >
                     Save email
                   </Button>
-                  <Button htmlType="button">No, continue</Button>
+                  <div className="dontSaveButton"> No, continue </div>
                 </Space>
               </Form.Item>
             </Form>
@@ -112,7 +115,7 @@ export const QuestionCard = ({ question, onNext }: Props) => {
 
       {question.type != "input_form" && (
         <Button
-          type="primary"
+          className="button-style"
           onClick={() => {
             if (answer.length === 0 || answer[0] === "") {
               setValidationError("Please enter a valid answer");
@@ -127,6 +130,6 @@ export const QuestionCard = ({ question, onNext }: Props) => {
           Next
         </Button>
       )}
-    </Card>
+    </div>
   );
 };
