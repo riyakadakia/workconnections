@@ -11,17 +11,17 @@
   align-items: flex-start;
   padding: 24px;
   gap: 10px;
-
-
   height: min-content;
   position: relative;
   width: 100%;
   left: 0px;
   background: #FFFFFF;
   border: 1px solid #E0E0E0;
-
   box-shadow: 0px 7.03125px 14.0625px -3.375px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
+}
+#button-id {
+  padding-top: 16px !important;
 }
 .ant-row {
   width:100%;
@@ -36,35 +36,28 @@
   padding: 24px;
   gap: 10px;
   margin-bottom: 2em;
-
   height: min-content;
   position: relative;
   width: 100%;
   left: 20%;
   background: #FFFFFF;
   border: 1px solid #E0E0E0;
-
   box-shadow: 0px 7.03125px 14.0625px -3.375px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
 }
 .previousCard-style {
   box-sizing: border-box;
-  /*font-weight: 100;*/
-  line-height: 0em;
   font-size: small;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   padding: 24px;
-  gap: 24px;
-
   position: relative;
   width: 100%;
   left: 0px;
   background: #FFFFFF;
   margin-bottom: 20px;
   border: 1px solid #E0E0E0;
-
   box-shadow: 0px 7.03125px 14.0625px -3.375px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
 }
