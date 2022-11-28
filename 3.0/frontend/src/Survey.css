@@ -72,14 +72,10 @@
   border: 1px solid black;
   width: 100%;
   height: 20%;
-
   /* Primary/500 */
-
   background: white;
   border-radius: 8px;
-
   /* Inside auto layout */
-
   flex: none;
   order: 2;
   flex-grow: 0;
@@ -92,17 +88,12 @@
   padding: 16px 24px;
   gap: 4px;
   color: white;
-
   width: 100%;
   height: 20%;
-
   /* Primary/500 */
-
   background: #F72E69;
   border-radius: 8px;
-
   /* Inside auto layout */
-
   flex: none;
   order: 2;
   flex-grow: 0;
@@ -117,18 +108,13 @@
   color: white;
   text-align: center;
   vertical-align: middle;
-
   width: 100%;
   max-width: 50em;
   height: min-content;
-
   /* Primary/500 */
-
   background: #F72E69;
   border-radius: 8px;
-
   /* Inside auto layout */
-
   flex: none;
   order: 2;
   flex-grow: 0;
