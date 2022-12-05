@@ -1,3 +1,3 @@
 export const config = {
-  serverUrl: "http://workconnections.org:8080",
+  serverUrl: "http://localhost:8080",
 };
