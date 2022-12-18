@@ -9,7 +9,7 @@ import { AllPrograms } from "./Pages/AllPrograms";
 function App() {
   return (
     <Row className="App">
-      <Col span={24}>
+      <Col span={24} className="app-wrapper">
         <Router>
           <Routes>
             <Route path="/" element={<Home />} />
