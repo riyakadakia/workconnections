@@ -84,9 +84,9 @@ export const QuestionCard = ({ question, onNext }: Props) => {
                 {question.answer
                   .filter((answer) => answer !== "")
                   .map((answer) => (
-                    <Checkbox key={answer} value={answer}>
-                      {answer}
-                    </Checkbox>
+                    <div key={answer} style={{ textAlign: "left" }}>
+                      <Checkbox value={answer}>{answer}</Checkbox>
+                    </div>
                   ))}
               </Checkbox.Group>
             )}
