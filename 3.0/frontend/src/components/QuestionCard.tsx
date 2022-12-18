@@ -63,7 +63,7 @@ export const QuestionCard = ({ question, onNext }: Props) => {
             )}
 
             {question.type === "drop_down" && (
-              <Select style={{ width: "400px" }} onChange={(answer: string) => setAnswer([answer])}>
+              <Select style={{ width: "100%" }} onChange={(answer: string) => setAnswer([answer])}>
                 {question.answer
                   .filter((answer) => answer !== "")
                   .map((answer) => (
