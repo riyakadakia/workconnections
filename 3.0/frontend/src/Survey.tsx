@@ -174,6 +174,11 @@ export function Survey() {
 
   const contextValue = useMemo(() => ({ name: "Ant Design" }), []);
 
+  // When current question changes, always scroll to the bottom of the screen
+  useEffect(() => {
+    window.scrollTo(0, document.body.scrollHeight);
+  }, [currentQuestion]);
+
   return (
     <Context.Provider value={contextValue}>
       {contextHolder}
