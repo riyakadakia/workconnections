@@ -46,7 +46,12 @@ const makeSurveyClient = () => {
       zip,
     });
 
-    const { data: surveyId } = await httpClient.get<number>(`sessions/getSurveyIdFromZip?${queryParams}`);
+    const { data: surveyId } = await httpClient.get<number | string>(`sessions/getSurveyIdFromZip?${queryParams}`);
+
+    // A string here indicates a problem with the ZIP code provided
+    if (typeof surveyId === "string") {
+      throw new Error("Expected number, got string");
+    }
 
     return surveyId;
   };
