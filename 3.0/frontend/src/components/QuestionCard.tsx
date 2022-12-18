@@ -23,122 +23,126 @@ export const QuestionCard = ({ question, onNext }: Props) => {
     <div className="card-style">
       <div className="question-title-style">{question.text}</div>
 
-      <Row className="card-actions-style">
-        <Col span={24}>
-          {/* TODO: support all question.types possible */}
-          {question.type === "text_box" && (
-            <Input
-              className="input-box-style"
-              placeholder="Enter a number"
-              value={answer}
-              onChange={(e) => setAnswer([e.target.value])}
-            />
-          )}
+      <form
+        onSubmit={(event) => {
+          // This cancels the HTML default action, when you submit a form it will reload the page
+          event.preventDefault();
 
-          {question.type === "radio_button" && (
-            <Radio.Group style={{ width: "100%" }} onChange={(e) => setAnswer([e.target.value])}>
-              {question.answer
-                .filter((answer) => answer !== "")
-                .map((answer) => (
-                  <Space direction="vertical" key={answer}>
-                    <Radio value={answer}>{answer}</Radio>
-                  </Space>
-                ))}
-            </Radio.Group>
-          )}
+          if (answer.length === 0 || answer[0] === "") {
+            setValidationError("Please enter a valid answer");
+          } else {
+            // If validation passes, we tell the parent component what the answer is
+            // Parent component will pop the answer into previousQuestions, and then ask the API for the next question
+            // And maybe some other stuff too
+            onNext(answer);
+          }
+        }}
+      >
+        <Row className="card-actions-style">
+          <Col span={24}>
+            {/* TODO: support all question.types possible */}
+            {question.type === "text_box" && (
+              <Input
+                className="input-box-style"
+                placeholder="Enter a number"
+                value={answer}
+                onChange={(e) => setAnswer([e.target.value])}
+              />
+            )}
 
-          {question.type === "drop_down" && (
-            <Select style={{ width: "400px" }} onChange={(answer: string) => setAnswer([answer])}>
-              {question.answer
-                .filter((answer) => answer !== "")
-                .map((answer) => (
-                  <Select.Option key={answer} value={answer}>
-                    {answer}
-                  </Select.Option>
-                ))}
-            </Select>
-          )}
+            {question.type === "radio_button" && (
+              <Radio.Group style={{ width: "100%" }} onChange={(e) => setAnswer([e.target.value])}>
+                {question.answer
+                  .filter((answer) => answer !== "")
+                  .map((answer) => (
+                    <Space direction="vertical" key={answer}>
+                      <Radio value={answer}>{answer}</Radio>
+                    </Space>
+                  ))}
+              </Radio.Group>
+            )}
 
-          {question.type === "check_box" && (
-            <Checkbox.Group
-              style={{ width: "100%" }}
-              onChange={(checkedValues: CheckboxValueType[]) =>
-                setAnswer(checkedValues.map((checkboxValue) => checkboxValue.toString()))
-              }
-            >
-              {question.answer
-                .filter((answer) => answer !== "")
-                .map((answer) => (
-                  <Checkbox key={answer} value={answer}>
-                    {answer}
-                  </Checkbox>
-                ))}
-            </Checkbox.Group>
-          )}
+            {question.type === "drop_down" && (
+              <Select style={{ width: "400px" }} onChange={(answer: string) => setAnswer([answer])}>
+                {question.answer
+                  .filter((answer) => answer !== "")
+                  .map((answer) => (
+                    <Select.Option key={answer} value={answer}>
+                      {answer}
+                    </Select.Option>
+                  ))}
+              </Select>
+            )}
 
-          {question.type == "input_form" && (
-            <Form form={form} layout="vertical" autoComplete="off">
-              <Form.Item
-                name="email"
-                rules={[
-                  { type: "email", warningOnly: true },
-                  { type: "string", min: 6 },
-                ]}
+            {question.type === "check_box" && (
+              <Checkbox.Group
+                style={{ width: "100%" }}
+                onChange={(checkedValues: CheckboxValueType[]) =>
+                  setAnswer(checkedValues.map((checkboxValue) => checkboxValue.toString()))
+                }
               >
-                <Input
-                  className="input-box-style"
-                  placeholder="Enter a valid email address"
-                  value={answer}
-                  onChange={(e) => setAnswer([e.target.value])}
-                />
-              </Form.Item>
-              <Form.Item>
-                <Space>
-                  <Button
-                    className="button-style"
-                    htmlType="submit"
-                    onClick={() => {
-                      if (answer.length === 0 || answer[0] === "") {
-                        setValidationError("Please enter a valid answer");
-                      } else {
-                        // If validation passes, we tell the parent component what the answer is
-                        // Parent component will pop the answer into previousQuestions, and then ask the API for the next question
-                        // And maybe some other stuff too
-                        onNext(answer);
-                      }
-                    }}
-                  >
-                    Save email
-                  </Button>
-                  <div className="dontSaveButton"> No, continue </div>
-                </Space>
-              </Form.Item>
-            </Form>
-          )}
+                {question.answer
+                  .filter((answer) => answer !== "")
+                  .map((answer) => (
+                    <Checkbox key={answer} value={answer}>
+                      {answer}
+                    </Checkbox>
+                  ))}
+              </Checkbox.Group>
+            )}
 
-          {/* Handle "Checkbox" by using Antd Checkbox.Group */}
+            {question.type == "input_form" && (
+              <Form form={form} layout="vertical" autoComplete="off">
+                <Form.Item
+                  name="email"
+                  rules={[
+                    { type: "email", warningOnly: true },
+                    { type: "string", min: 6 },
+                  ]}
+                >
+                  <Input
+                    className="input-box-style"
+                    placeholder="Enter a valid email address"
+                    value={answer}
+                    onChange={(e) => setAnswer([e.target.value])}
+                  />
+                </Form.Item>
+                <Form.Item>
+                  <Space>
+                    <Button
+                      className="button-style"
+                      htmlType="submit"
+                      onClick={() => {
+                        if (answer.length === 0 || answer[0] === "") {
+                          setValidationError("Please enter a valid answer");
+                        } else {
+                          // If validation passes, we tell the parent component what the answer is
+                          // Parent component will pop the answer into previousQuestions, and then ask the API for the next question
+                          // And maybe some other stuff too
+                          onNext(answer);
+                        }
+                      }}
+                    >
+                      Save email
+                    </Button>
+                    <div className="dontSaveButton"> No, continue </div>
+                  </Space>
+                </Form.Item>
+              </Form>
+            )}
 
-          {Some(validationError) && <Typography.Text type="danger">{validationError}</Typography.Text>}
-        </Col>
-      </Row>
+            {/* Handle "Checkbox" by using Antd Checkbox.Group */}
 
-      {question.type != "input_form" && (
-        <Button
-          className="button-style"
-          onClick={() => {
-            if (answer.length === 0 || answer[0] === "") {
-              setValidationError("Please enter a valid answer");
-            } else {
-              // If validation passes, we tell the parent component what the answer is
-              // Parent component will pop the answer into previousQuestions, and then ask the API for the next question
-              // And maybe some other stuff too
-              onNext(answer);
-            }
-          }}
-        >
-          Next
-        </Button>
-      )}
+            {Some(validationError) && <Typography.Text type="danger">{validationError}</Typography.Text>}
+          </Col>
+        </Row>
+
+        {question.type != "input_form" && (
+          <Button htmlType="submit" className="button-style">
+            Next
+          </Button>
+        )}
+      </form>
     </div>
   );
 };
