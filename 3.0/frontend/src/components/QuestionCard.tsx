@@ -19,6 +19,37 @@ export const QuestionCard = ({ question, onNext }: Props) => {
   const [form] = Form.useForm();
   console.log(question);
 
+  if (question.type === "input_form") {
+    return (
+      <div className="card-style">
+        <div className="question-title-style">{question.text}</div>
+
+        <Form form={form} layout="vertical" autoComplete="off" onFinish={() => onNext(answer)}>
+          <Form.Item name="email" rules={[{ type: "email" }]}>
+            <Input
+              className="input-box-style"
+              placeholder="Enter a valid email address"
+              value={answer}
+              onChange={(e) => setAnswer([e.target.value])}
+            />
+          </Form.Item>
+
+          <Form.Item>
+            <Space>
+              <Button className="button-style" htmlType="submit">
+                Save email
+              </Button>
+
+              <Button type="default" onClick={() => onNext([])}>
+                No, continue
+              </Button>
+            </Space>
+          </Form.Item>
+        </Form>
+      </div>
+    );
+  }
+
   return (
     <div className="card-style">
       <div className="question-title-style">{question.text}</div>
@@ -91,57 +122,15 @@ export const QuestionCard = ({ question, onNext }: Props) => {
               </Checkbox.Group>
             )}
 
-            {question.type == "input_form" && (
-              <Form form={form} layout="vertical" autoComplete="off">
-                <Form.Item
-                  name="email"
-                  rules={[
-                    { type: "email", warningOnly: true },
-                    { type: "string", min: 6 },
-                  ]}
-                >
-                  <Input
-                    className="input-box-style"
-                    placeholder="Enter a valid email address"
-                    value={answer}
-                    onChange={(e) => setAnswer([e.target.value])}
-                  />
-                </Form.Item>
-                <Form.Item>
-                  <Space>
-                    <Button
-                      className="button-style"
-                      htmlType="submit"
-                      onClick={() => {
-                        if (answer.length === 0 || answer[0] === "") {
-                          setValidationError("Please enter a valid answer");
-                        } else {
-                          // If validation passes, we tell the parent component what the answer is
-                          // Parent component will pop the answer into previousQuestions, and then ask the API for the next question
-                          // And maybe some other stuff too
-                          onNext(answer);
-                        }
-                      }}
-                    >
-                      Save email
-                    </Button>
-                    <div className="dontSaveButton"> No, continue </div>
-                  </Space>
-                </Form.Item>
-              </Form>
-            )}
-
             {/* Handle "Checkbox" by using Antd Checkbox.Group */}
 
             {Some(validationError) && <Typography.Text type="danger">{validationError}</Typography.Text>}
           </Col>
         </Row>
 
-        {question.type != "input_form" && (
-          <Button htmlType="submit" className="button-style">
-            Next
-          </Button>
-        )}
+        <Button htmlType="submit" className="button-style">
+          Next
+        </Button>
       </form>
     </div>
   );
