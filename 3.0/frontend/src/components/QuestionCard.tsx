@@ -21,13 +21,18 @@ export const QuestionCard = ({ question, onNext }: Props) => {
 
   return (
     <div className="card-style">
-      <Typography.Title level={3}>{question.text}</Typography.Title>
+      <div className="question-title-style">{question.text}</div>
 
-      <Row className="mb1">
+      <Row className="card-actions-style">
         <Col span={24}>
           {/* TODO: support all question.types possible */}
           {question.type === "text_box" && (
-            <Input placeholder="12345" value={answer} onChange={(e) => setAnswer([e.target.value])} />
+            <Input
+              className="input-box-style"
+              placeholder="Enter a number"
+              value={answer}
+              onChange={(e) => setAnswer([e.target.value])}
+            />
           )}
 
           {question.type === "radio_button" && (
@@ -75,13 +80,17 @@ export const QuestionCard = ({ question, onNext }: Props) => {
             <Form form={form} layout="vertical" autoComplete="off">
               <Form.Item
                 name="email"
-                label="Email"
                 rules={[
                   { type: "email", warningOnly: true },
                   { type: "string", min: 6 },
                 ]}
               >
-                <Input placeholder="amysmith@gmail.com" value={answer} onChange={(e) => setAnswer([e.target.value])} />
+                <Input
+                  className="input-box-style"
+                  placeholder="Enter a valid email address"
+                  value={answer}
+                  onChange={(e) => setAnswer([e.target.value])}
+                />
               </Form.Item>
               <Form.Item>
                 <Space>
