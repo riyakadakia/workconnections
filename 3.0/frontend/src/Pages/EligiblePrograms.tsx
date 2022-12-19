@@ -1,4 +1,4 @@
-import { Button, Card, Typography } from "antd";
+import { Button } from "antd";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { surveyClient } from "../client/surveyClient";
@@ -10,9 +10,6 @@ import "../Survey.css";
 export function EligiblePrograms() {
   const [eligiblePrograms, setEligiblePrograms] = useState<Program[]>([]);
   const [allProgramsUrl, setAllProgramsUrl] = useState<string>("");
-
-  // This state will be used to tell if a new session start is underway
-  const [isLoading, setIsLoading] = useState(false);
 
   // We'll need to navigate to the survey page
   const navigate = useNavigate();
