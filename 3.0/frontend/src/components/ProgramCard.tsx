@@ -9,10 +9,10 @@ export const ProgramCard = ({ program }: Props) => {
   console.log(program);
 
   return (
-    <div className="sorryCard-style">
-      <Typography.Title level={3}>{program.name}</Typography.Title>
+    <div className="card-style">
+      <div className="question-title-style">{program.name}</div>
       <div>{program.description}</div>
-      <Button id="button-id" className="websiteButton-style" type="primary" href={program.url} target="_blank">
+      <Button id="program-card-button" className="program-card-button-style" href={program.url} target="_blank">
         Visit Website
       </Button>
     </div>

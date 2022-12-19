@@ -39,6 +39,10 @@ export function EligiblePrograms() {
     <>
       {eligiblePrograms.length > 0 && (
         <div>
+          <div id="summary-title-id" className="question-title-style">
+            Congratulations! Based on your answers, you may be eligible for {eligiblePrograms.length} programs. Click
+            the <b>Visit Website</b> button to learn more and to apply.
+          </div>
           {eligiblePrograms
             .filter((p) => p != null)
             .map((p) => (
@@ -47,12 +51,16 @@ export function EligiblePrograms() {
         </div>
       )}
       {eligiblePrograms.length === 0 && (
-        <div className="sorryCard-style">
-          <Typography.Title level={3}>Sorry...</Typography.Title>
-          <div>We couldn't find a match just yet. We will contact you if we find a match in the near future.</div>
-          <div>If you would like to view the full list of services, click below:</div>
-          <Button className="button-style" type="primary" href={allProgramsUrl} target="_blank">
-            Visit Website
+        <div className="card-style">
+          <h1>Sorry...</h1>
+          <div>
+            Based on your answers, we were not able to find an eligible program for you. If you provided your email
+            address, we will contact you if we find one in the future.
+          </div>
+          <br></br>
+          <div>To view a full list of programs, click below:</div>
+          <Button id="program-card-button" className="program-card-button-style" href={allProgramsUrl} target="_blank">
+            View All Programs
           </Button>
         </div>
       )}

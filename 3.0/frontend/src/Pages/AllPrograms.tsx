@@ -37,6 +37,10 @@ export function AllPrograms() {
     <>
       {allPrograms.length > 0 && (
         <div>
+          <div id="summary-title-id" className="question-title-style">
+            The following is the list of all programs that we are currently tracking. We update this list often so come
+            back often to find what programs you might be eligible for.
+          </div>
           {allPrograms
             .filter((p) => p != null)
             .map((p) => (
@@ -46,10 +50,10 @@ export function AllPrograms() {
       )}
       {allPrograms.length === 0 && (
         <div className="card-style">
-          We couldn't find any matching programs for your location just yet. We will contact you if we find a match in
-          the near future.
+          We couldn't find any matching programs for your location just yet. We will contact you if we find one in the
+          future.
           <div>If you would like to start over, click below:</div>
-          <Button className="button-style" href="/">
+          <Button id="program-card-button" className="program-card-button-style" href="/">
             Start over
           </Button>
         </div>

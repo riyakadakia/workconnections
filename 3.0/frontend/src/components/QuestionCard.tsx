@@ -40,7 +40,7 @@ export const QuestionCard = ({ question, onNext }: Props) => {
                 Save email
               </Button>
 
-              <Button type="default" onClick={() => onNext([])}>
+              <Button className="dontSaveButton" type="default" onClick={() => onNext([])}>
                 No, continue
               </Button>
             </Space>
