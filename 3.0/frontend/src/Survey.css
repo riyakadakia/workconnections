@@ -223,3 +223,7 @@
 #summary-title-id {
   margin-bottom: 15px;
 }
+
+.display-block {
+  display: block;
+}

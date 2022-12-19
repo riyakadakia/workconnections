@@ -73,8 +73,8 @@ export function Survey() {
             });
 
             notificationApi.error({
-              message: "Invalid ZIP code",
-              description: "The ZIP code you entered is invalid or not eligible for any services",
+              message: "Invalid zip code",
+              description: "The zip code you entered is either invalid or no programs are available for it",
             });
           }
         } else {
