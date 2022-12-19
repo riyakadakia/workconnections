@@ -1,5 +1,5 @@
-import { Row, Spin } from "antd";
-import { useEffect, useState } from "react";
+import { notification, Row, Spin } from "antd";
+import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { surveyClient } from "./client/surveyClient";
 import { PreviousQuestion } from "./components/PreviousQuestion";
@@ -9,6 +9,8 @@ import { Question, QuestionAndAnswer } from "./types";
 import { None } from "./utils/None";
 import { Some } from "./utils/Some";
 
+const Context = React.createContext({ name: "Default" });
+
 export function Survey() {
   console.log("Rendering Survey()");
 
@@ -17,6 +19,7 @@ export function Survey() {
   const sessionId = new URLSearchParams(window.location.search).get("sessionId");
   const [surveyId, setSurveyId] = useState<number>(0);
   const [userId, setUserId] = useState<string>("");
+  const [notificationApi, contextHolder] = notification.useNotification();
 
   if (None(sessionId) || sessionId === "") {
     navigate("/");
@@ -49,16 +52,31 @@ export function Survey() {
 
       if (previousQuestions.length === 1) {
         if (Some(sessionId)) {
-          const surveyId = await surveyClient.getSurveyIdFromZip(sessionId, previousQuestions[0].answer[0]);
-          setSurveyId(surveyId);
+          try {
+            const surveyId = await surveyClient.getSurveyIdFromZip(sessionId, previousQuestions[0].answer[0]);
+            setSurveyId(surveyId);
 
-          const question = await surveyClient.getSecondQuestion(
-            sessionId,
-            previousQuestions[previousQuestions.length - 1].question.id,
-            previousQuestions[0].answer[0]
-          );
+            const question = await surveyClient.getSecondQuestion(
+              sessionId,
+              previousQuestions[previousQuestions.length - 1].question.id,
+              previousQuestions[0].answer[0]
+            );
 
-          setCurrentQuestion(question);
+            setCurrentQuestion(question);
+          } catch (err) {
+            // This can indicate that a bad ZIP code was provided, and we should ask the user for a valid postcode
+            // Undo the previous answer
+            setPreviousQuestions((prevState) => {
+              prevState.pop();
+
+              return prevState;
+            });
+
+            notificationApi.error({
+              message: "Invalid ZIP code",
+              description: "The ZIP code you entered is invalid or not eligible for any services",
+            });
+          }
         } else {
           throw new Error("Somehow attempting to getSurveyIdFromZip but sessionId is null");
         }
@@ -152,10 +170,19 @@ export function Survey() {
 
     getNextQuestion();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [previousQuestions.length]);
+  }, [previousQuestions.length, setPreviousQuestions]);
+
+  const contextValue = useMemo(() => ({ name: "Ant Design" }), []);
+
+  // When current question changes, always scroll to the bottom of the screen
+  useEffect(() => {
+    window.scrollTo(0, document.body.scrollHeight);
+  }, [currentQuestion]);
 
   return (
-    <>
+    <Context.Provider value={contextValue}>
+      {contextHolder}
+
       {/* This will be the "Previous questions" bit from the design */}
       {previousQuestions.map((q) => (
         <PreviousQuestion key={q.question.id} questionAndAnswer={q} />
@@ -185,6 +212,6 @@ export function Survey() {
           <Spin size="large" />
         </Row>
       )}
-    </>
+    </Context.Provider>
   );
 }

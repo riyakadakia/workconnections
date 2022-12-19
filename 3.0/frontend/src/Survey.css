@@ -3,13 +3,16 @@
   background: #e9e8e8;
 }
 
+.app-wrapper {
+  width: 100%;
+  max-width: 520px;
+  padding: 20px;
+}
+
 .card-style {
-  margin-left: 20px;
-  margin-right: 20px;
   margin-bottom: 20px;
   box-sizing: border-box;
   font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
-  min-width: 300px;
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -74,8 +77,6 @@
 
 .previousCard-style {
   color:#222222;
-  margin-left: 20px;
-  margin-right: 20px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
