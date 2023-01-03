@@ -31,6 +31,10 @@ export function Home() {
     getServicesCount();
   }, []);
 
+  useEffect(() => {
+    document.title = "WorkConnections";
+  }, []);
+
   // This function will be called when we press Start Survey
   const startSurvey = async () => {
     // Using this isLoading state let's us make the button pretty & spin while we're waiting for the API call to finish
