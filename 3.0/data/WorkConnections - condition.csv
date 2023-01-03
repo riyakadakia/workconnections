@@ -1,37 +1,63 @@
 _id,questionid,description,answer
-1,6,age,gte 60
-2,18,live alone,answer.1
-3,19,buy and prepare food separately from others you live with = True,answer.1
-4,20,You would be willing to buy and prepare food separately from others you live with = True,answer.1
-5,21,Have a spouse,answer.2
-6,22,Spouse lives with you,answer.2
-7,8,Have kids,answer.2
-8,9,kids live with you,answer.2
-9,9,kids live with you,answer.1
-10,12,oldest kids age,lt 22
-11,40,Have you commited an Intentional Program Violation?,answer.2
-12,4,Are you a US citizen or Qualified Alien?,answer.1
-13,4,Are you a US citizen or Qualified Alien?,answer.2
-14,24,Does everyone in your household have a Social Security number or is willing to apply for a Social Security number?,answer.1
-15,26,Will you and all able-bodied adults in your household register for work and accept suitable employment?,answer.1
-16,41,Are you able to provide proof of your identity?,answer.1
-17,5,Are you disabled or blind?,answer.2
-18,5,Are you disabled or blind?,answer.3
-19,6,age,gte 65
-20,3,Do you have limited income and resources?,answer.1
-21,4,Are you a US citizen or Qualified Alien?,answer.3
-22,12,Enter your oldest kid's age?,lte 18
-23,14,Are you kid(s) enrolled in full time school or equivalent level of vocational of technical training?,answer.1
-24,9,Do your kid(s) live with you?,answer.1
-25,15,kids_medical_rights,answer.1
-26,42,Does your monthly income (earned and unearned) exceed the flat grant amount?,answer.1
-27,10,How are your kid(s) related to you?,answer.1
-28,10,How are your kid(s) related to you?,answer.2
-29,10,How are your kid(s) related to you?,answer.3
-30,16,Do your kids have immunity or immunization against vaccines?,answer.1
-31,17,"Would you or any applicants or recipients of age 18 or over cooperate in screening for the use of illegal drugs and if necessary drug testing, education and rehabilitation?",answer.2
-32,43,Would anyone in the family who is pregnant or has a child under the age of one be willing to attend parenting skills training?,answer.1
-33,43,Would anyone in the family who is pregnant or has a child under the age of one be willing to attend parenting skills training?,answer.3
-34,44,Has a parent/caretaker received benefits from Family Independence Temporary Assistance (FITAP) for 24 of the prior 60 months ?,answer.1
-35,45,"Do all minor unmarried parents and their children live with a parent, legal guardian, or in a adult-supervised arrangement?",answer.1
-36,45,"Do all minor unmarried parents and their children live with a parent, legal guardian, or in a adult-supervised arrangement?",answer.3
+2,2,Do you plan to stay in California?,answer.1
+3,4,Are you a US citizen or Qualified Alien?,answer.1
+4,4,Are you a US citizen or Qualified Alien?,answer.2
+5,4,Are you a US citizen or Qualified Alien?,answer.3
+6,4,Are you a US citizen or Qualified Alien?,answer.4
+7,5,Do you have children,answer.1
+8,6,Are you pregnant?,answer.1
+9,7,"Is either parent of your child not living at home, no longer living, or disabled?",answer.1
+10,8,Is the parent earning the most money working less than 100 hours a week?,answer.1
+11,9,Do you have a Social Security Number or have applied for one?,answer.1
+12,3,"Have less than $10,211 in cash, bank, accounts and other resources ($15,317 if disabled or 60 years or older)",answer.1
+13,10,Are you willing to give proof of immunizations for all children under the age of six?,answer.1
+14,11,Are you willing to follow child support rules if necessary?,answer.1
+15,12,Are you willing to participate in Welfare-to-Work activities?,answer.1
+16,15,Are you a refugee?,answer.1
+17,13,Are you disabled or blind?,answer.1
+18,13,Are you disabled or blind?,answer.2
+19,13,Are you disabled or blind?,answer.3
+20,16,"Do you have resources below $2,000 for an individual or $3,000 for a couple?",answer.1
+21,17,Do you recieve any of the following programs? Cal Works,answer.1
+22,17,General Relief,answer.2
+23,17,Supplemental Security Income/State Supplementary Payment,answer.3
+24,17,Social Security Disability Benefits,answer.4
+25,17,Railroad Retirement Benefit Annuities,answer.5
+26,17,Cash Assistance Program for Immigrants (CAPI).,answer.6
+27,18,household_size,eq 1
+28,25,Are you currently working?,answer.1
+29,19,Are you homeless?,answer.2
+30,14,age,gte 60
+31,21,What is the age of your spouse?,gte 60
+32,22,Is your spouse disabled?,answer.1
+33,5,Children == no,answer.2
+34,14,age,gte 19
+35,14,age,lte 64
+36,23,taxes,answer.1
+37,23,taxes,answer.3
+38,5,Children == yes,answer.1
+39,24,Children under 19 or in school full time?,answer.1
+40,26,Unemployed to do no fault of your own?,answer.1
+41,27,"Are you physically able to work, available for work, and ready and willing to accept work immediately?",answer.1
+42,28,Did you earn any wage in the last 18 months?,answer.1
+43,33,"Are you receiving or expected to receive care for at least 30 days after the month of admission in a Hospital, Skilled Nursing Facility, Intermediate Care Facility (ICF) or a Convalescent Home?",answer.1
+44,29,"Have lost wages due to the need to provide care for a seriously ill family member, help after the deployment of a family member or to bond with a new child?",answer.1
+45,30,Are you unable to do your regular or customary work?,answer.1
+46,31,Were you employed or actively looking for work at the time your family leave began?,answer.1
+47,32,Has it been less than 41 days since your family left began?,answer.1
+48,18,household_size,eq 2
+49,18,household_size,eq 3
+50,18,household_size,eq 4
+51,18,household_size,eq 5
+52,18,household_size,eq 6
+53,18,household_size,eq 7
+54,18,household_size,eq 8
+55,36,household_income,lte 2148
+56,36,household_income,lte 2904
+57,36,household_income,lte 3660
+58,36,household_income,lte 4418
+59,36,household_income,lte 5174
+60,36,household_income,lte 5930
+61,36,household_income,lte 6688
+62,36,household_income,lte 7444
+63,14,age,gte 65
