@@ -43,7 +43,7 @@ public class ConditionsService {
 					Condition condition = conditions.get(i);
 					Integer questionId = condition.getQuestionid();
 					if (questionId != null && questionId > 0) {
-						//log.info("Checking for condition: " + condition.getId() + ", questionId: " + condition.getQuestionid());
+						log.info("Checking for condition: " + condition.getId() + ", questionId: " + condition.getQuestionid());
 
 						// check if the responses includes an answer to this question yet...
 						SessionResponse response = responses.get(questionId);
@@ -71,18 +71,29 @@ public class ConditionsService {
 							} else if (condition.getAnswer().startsWith("lte")) {
 								conditionOperator = "lte";
 								conditionAnswer = Integer.valueOf(condition.getAnswer().substring(4).trim());								
+							} else if (condition.getAnswer().startsWith("eq")) {
+								conditionOperator = "eq";
+								conditionAnswer = Integer.valueOf(condition.getAnswer().substring(3).trim());	
 							} else {
 								// ERROR
 							}
 							
-							//log.info("Operator: " + conditionOperator + ", Answer: " + conditionAnswer);
+							log.info("Operator: " + conditionOperator + ", Answer: " + conditionAnswer);
 							if (conditionOperator != "" && conditionAnswer != -1) {
 								Integer answerInputInt = -1;
 								switch(conditionOperator) {
 									case "equals" :
-										if (answerIds[0] == conditionAnswer) {
+										for (int eqi=0; eqi<answerIds.length; eqi++) {
+											if (answerIds[eqi] == conditionAnswer) {
+												processedConditionsArr.add(condition.getId());
+											}
+										}			
+										break;
+									case "eq" :
+										answerInputInt = Integer.valueOf(answerInput);
+										if (answerInputInt == conditionAnswer) {
 											processedConditionsArr.add(condition.getId());
-										}
+										}										
 										break;
 									case "gt" :
 										answerInputInt = Integer.valueOf(answerInput);
@@ -112,7 +123,7 @@ public class ConditionsService {
 										// ERROR
 										break;
 								}
-								//log.info("processedConditionsArr: " + processedConditionsArr);
+								log.info("processedConditionsArr: " + processedConditionsArr);
 							}
 						}
 					}
