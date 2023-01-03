@@ -103,16 +103,16 @@ public class ProgramsService {
 			Matcher m = p.matcher(eligibilityCriteria);		
 			while (m.find()) {
 			    String fullMatch = m.group();
-			    //log.info("fullMatch: " + fullMatch);
+			    log.info("fullMatch: " + fullMatch);
 			    matches.add(fullMatch);
 			    Integer processedExprValue = processExpression(fullMatch.substring(1, fullMatch.length()-1), processedConditionsArr);
 			    eligibilityCriteria = eligibilityCriteria.replace(fullMatch, processedExprValue.toString());
-			    //log.info("Updated inputStr: " + eligibilityCriteria);
+			    log.info("Updated inputStr: " + eligibilityCriteria);
 			}
 		}
-		//log.info("Final processing of: " + eligibilityCriteria);
+		log.info("Final processing of: " + eligibilityCriteria);
 		Integer finalExpressionEval = processExpression(eligibilityCriteria, processedConditionsArr);
-		//log.info("finalExpressionEval: " + finalExpressionEval);
+		log.info("finalExpressionEval: " + finalExpressionEval);
 		
 		if (finalExpressionEval > 0) {
 			eligible = true;
@@ -129,23 +129,31 @@ public class ProgramsService {
 	 */
 	public Integer processExpression(String expression, Integer[] conditionsArr) {
 		Integer processedValue = -1;	
-		//log.info("Expression: " + expression);
+		log.info("Expression: " + expression);
 		if (expression.contains("OR")) {
 			String[] exprStrArr = expression.split("OR");
 			if (exprStrArr != null && exprStrArr.length > 0) {
 				Integer[] exprIntArr = new Integer[exprStrArr.length];
 				for (int i=0; i<exprStrArr.length; i++) {
-					//log.info("exprStrArr[" + i + "]: " + exprStrArr[i].trim());
+					log.info("exprStrArr[" + i + "]: " + exprStrArr[i].trim());
 					exprIntArr[i] = Integer.parseInt(exprStrArr[i].trim());
 				}
 				// OPERATOR = OR => if ANY component in exprIntArr matches a condition, processedValue = 1
 				processedValue = 0;
 				for (int i=0; i<exprIntArr.length; i++) {
-					for (int j=0; j<conditionsArr.length; j++) {
-						if (exprIntArr[i] == conditionsArr[j]) {
-							//log.info("Found an OR condition match, expr component: " + exprIntArr[i] + ", condition: " + conditionsArr[j]);
-							processedValue = 1;
-							break;
+					if (exprIntArr[i] == 0) {
+						log.info("Got a 0 exprInt value for index = " + i);
+						processedValue = 0;
+					} else if (exprIntArr[i] == 1) {
+						log.info("Got a 1 exprInt value for index = " + i);
+						processedValue = 1;						
+					} else {
+						for (int j=0; j<conditionsArr.length; j++) {
+							if (exprIntArr[i] == conditionsArr[j]) {
+								log.info("Found an OR condition match, expr component: " + exprIntArr[i] + ", condition: " + conditionsArr[j]);
+								processedValue = 1;
+								break;
+							}
 						}
 					}
 					if (processedValue == 1) {
@@ -158,22 +166,30 @@ public class ProgramsService {
 			if (exprStrArr != null && exprStrArr.length > 0) {
 				Integer[] exprIntArr = new Integer[exprStrArr.length];
 				for (int i=0; i<exprStrArr.length; i++) {
-					//log.info("exprStrArr[" + i + "]: " + exprStrArr[i].trim());
+					log.info("exprStrArr[" + i + "]: " + exprStrArr[i].trim());
 					exprIntArr[i] = Integer.parseInt(exprStrArr[i].trim());
 				}
 				// OPERATOR = AND => if ALL components in exprIntArr have a matching condition, processedValue = 1
 				processedValue = 1;
 				for (int i=0; i<exprIntArr.length; i++) {
 					boolean foundMatch = false;
-					for (int j=0; j<conditionsArr.length; j++) {
-						if (exprIntArr[i] == conditionsArr[j]) {
-							//log.info("Found an AND condition match, expr component: " + exprIntArr[i] + ", condition: " + conditionsArr[j]);
-							foundMatch = true;
-							break;
+					if (exprIntArr[i] == 0) {
+						log.info("Got a 0 exprInt value for index = " + i);
+						foundMatch = false;
+					} else if (exprIntArr[i] == 1) {
+						log.info("Got a 1 exprInt value for index = " + i);
+						foundMatch = true;						
+					} else {					
+						for (int j=0; j<conditionsArr.length; j++) {
+							if (exprIntArr[i] == conditionsArr[j]) {
+								log.info("Found an AND condition match, expr component: " + exprIntArr[i] + ", condition: " + conditionsArr[j]);
+								foundMatch = true;
+								break;
+							}
 						}
 					}
 					if (!foundMatch) {
-						//log.info("Did not find a match for expr component: " + exprIntArr[i]);
+						log.info("Did not find a match for expr component: " + exprIntArr[i]);
 						processedValue = 0;
 						break;
 					}
@@ -186,7 +202,7 @@ public class ProgramsService {
 			if (exprInt != null && exprInt > 0) {
 				for (int j=0; j<conditionsArr.length; j++) {
 					if (exprInt == conditionsArr[j]) {
-						//log.info("Found a condition match, expr: " + exprInt + ", condition: " + conditionsArr[j]);
+						log.info("Found a condition match, expr: " + exprInt + ", condition: " + conditionsArr[j]);
 						processedValue = 1;
 						break;
 					}
