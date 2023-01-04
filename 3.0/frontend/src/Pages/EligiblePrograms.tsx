@@ -36,9 +36,9 @@ export function EligiblePrograms() {
     <>
       {eligiblePrograms.length > 0 && (
         <div>
-          <div id="summary-title-id" className="question-title-style">
+          <div id="summary-title-id" className="program-title-style">
             Congratulations! Based on your answers, you may be eligible for {eligiblePrograms.length} programs. Click
-            the <b>Visit Website</b> button to learn more and to apply.
+            the {<span className="visit-website-style">Visit Website </span>}button to learn more and to apply.
           </div>
           {eligiblePrograms
             .filter((p) => p != null)
